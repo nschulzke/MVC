@@ -1,7 +1,4 @@
 <?php
-/**
- *  Functions
- */
 function getClass($controller)
 {
     return str_replace(' ', '', ucwords(str_replace('-', ' ', $controller)));
@@ -42,5 +39,4 @@ function call($controller, $action) {
 }
 
 call($controller, $action);
-
 ?>

@@ -5,14 +5,9 @@ require_once __DIR__ . '/config/GlobalConfig.php';
 $uri = str_replace(GlobalConfig::getAppPath(), '', $_SERVER["REQUEST_URI"]);
 $uri = explode( '/', $uri, 3 );
 
-if (isset($uri[2]))
-{
-    $params = $uri[2];
-}
-else
-{
-    $params = array();
-}
+// Set $controller and $action
+$controller = 'static-pages';
+$action = 'home';
 if (isset($uri[0]) && isset($uri[1]))
 {
     $controller = $uri[0];
@@ -23,10 +18,12 @@ else if (isset($uri[0]) && $uri[0] != NULL)
     $controller = 'static-pages';
     $action = $uri[0];
 }
-else
+
+// Set $params
+$params = array();
+if (isset($uri[2]))
 {
-    $controller = 'static-pages';
-    $action = 'home';
+    $params = explode('/', $uri[2]);
 }
 
 require_once __DIR__ . '/view/layout.php';
