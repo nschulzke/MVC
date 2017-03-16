@@ -1,11 +1,8 @@
 <?php
-require_once '../config/DBConfig.php'
+require_once __DIR__ . '/../config/DBConfig.php';
 
 class Connection {        
     private static $instance = NULL;
-    private static $dbname = DBConfig->getName();
-    private static $user = DBConfig->getUser();
-    private static $pass = DBConfig->getPass();
 
     private function __construct() {}
 
@@ -13,8 +10,10 @@ class Connection {
 
     public static function getInstance() {
         if (!isset(self::$instance)) {
-            $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-            self::$instance = new PDO('mysql:host=localhost;dbname=' + $dbname, $user, $password, $pdo_options);
+            $pdo[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+            $conn = 'mysql:host=' . DBConfig::getHost() . ';dbname=' . DBConfig::getName();
+            
+            self::$instance = new PDO($conn, DBConfig::getUser(), DBConfig::getPass(), $pdo_options);
         }
         return self::$instance;
     }

@@ -1,3 +1,3 @@
 <?php
-require_once('classes/Connection.php')
+require_once('classes/Connection.php');
 ?>
