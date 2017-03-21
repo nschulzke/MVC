@@ -60,8 +60,8 @@ class Route {
     public function __construct()
     {
         $this->uri = $_SERVER['REQUEST_URI'];
-        // Get the current URI
-        $uri = str_replace(GlobalConfig::getAppPath(true), '', $_SERVER['REQUEST_URI']);
+        // Get the current URI, clean it up to be ready
+        $uri = str_replace(GlobalConfig::getAppPath(true), '', $this->uri);
         $uri = preg_replace('#\?(.*)$#', '', $uri);
         // Explode it like so: ( $controller, $action, $params )
         $uri = explode( '/', $uri, 3 );
@@ -111,6 +111,11 @@ class Route {
     public function getParams()
     {
         return $this->params;
+    }
+    // Return the params
+    public function getURI()
+    {
+        return $this->uri;
     }
     // Call the controller and action
     public function get()
