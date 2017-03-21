@@ -1,29 +1,24 @@
 <?php
 $bar = new Navbar();
 $bar->addItem('Home', 'static-pages', 'home', '');
-$bar->addItem('About', 'static-page', 'about', 'about');
+$bar->addItem('About', 'static-pages', 'about', 'about');
 ?>
-<header class="navbar navbar-default">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span> 
-        </button>
-        <a class="navbar-brand" href="#"><?= GlobalConfig::getAppName() ?></a>
-    </div>
-    <nav id="main-navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
+<nav class="navbar navbar-toggleable-sm navbar-light bg-faded">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span> 
+    </button>
+    <a class="navbar-brand"><?= GlobalConfig::getAppName() ?></a>
+    <div id="main-navbar" class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
         <?php foreach ($bar->getItems() as $item):
             $active = $item->equals($route->getController(), $route->getAction());
         ?>
-            <li <?= $active ? 'class="active"' : '' ?>>
-                <a href="<?= $active ? '#' : $item->getURL() ?>">
+            <li class="nav-item<?= $active ? ' active' : '' ?>">
+                <a class="nav-link" href="<?= $active ? '#' : $item->getURL() ?>">
                     <?= $item->getName() ?>
                 </a>
             </li>
         <?php endforeach ?>
         </ul>
-    </nav>
-</header>
+    </div>
+</nav>

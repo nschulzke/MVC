@@ -19,7 +19,8 @@ $actionFoot = __DIR__ . '/' . $route->getController() . '/' . $route->getAction(
 $title = GlobalConfig::getAppName();
 $subtitle = ucfirst($route->getAction());
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <?php
         require_once $mainHead;
