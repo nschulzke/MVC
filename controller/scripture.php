@@ -15,7 +15,7 @@ class Scripture
         {
             $book = $_GET['book'];
             $chapter = $_GET['chapter'];
-            if ( isset($_GET['verses'] ) )
+            if ( isset($_GET['verses']) && $_GET['verses'] != '' )
                 $verses = explode(',', $_GET['verses']);
             else
                 $verses = null;

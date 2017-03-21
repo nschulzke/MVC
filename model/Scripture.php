@@ -10,9 +10,42 @@ use Doctrine\Common\Collections\Criteria;
 
 class MScripture
 {
+    private static $volumesRepo;
     private static $booksRepo;
     private static $chaptersRepo;
     private static $versesRepo;
+    
+    public static function getVolumesRepo()
+    {
+        global $entityManager;
+        if (!isset($volumesRepo))
+            self::$volumesRepo = $entityManager->getRepository('Volumes');
+        return self::$volumesRepo;
+    }
+    
+    public static function getBooksRepo()
+    {
+        global $entityManager;
+        if (!isset($booksRepo))
+            self::$booksRepo = $entityManager->getRepository('Books');
+        return self::$booksRepo;
+    }
+    
+    public static function getChaptersRepo()
+    {
+        global $entityManager;
+        if (!isset($chaptersRepo))
+            self::$chaptersRepo = $entityManager->getRepository('Chapters');
+        return self::$chaptersRepo;
+    }
+    
+    public static function getVersesRepo()
+    {
+        global $entityManager;
+        if (!isset($versesRepo))
+            self::$versesRepo = $entityManager->getRepository('Verses');
+        return self::$versesRepo;
+    }
     
     private $book;
     private $chapter;
@@ -20,6 +53,8 @@ class MScripture
     
     private function findBook($bookName)
     {
+        if (is_numeric($bookName))
+            return self::getBooksRepo()->find($bookName);
         $crit = Criteria::create();
         $crit->where(
             $crit->expr()->orX(
@@ -28,7 +63,7 @@ class MScripture
                 $crit->expr()->contains('bookShortTitle', $bookName)
             )
         );
-        $books = self::$booksRepo->matching($crit);
+        $books = self::getBooksRepo()->matching($crit);
         if ($books->count() > 0)
             return $books->get(0);
         else
@@ -37,20 +72,12 @@ class MScripture
     
     public function __construct($bookName, $chapterNum, $verseNums = null)
     {
-        global $entityManager;
-        if (!isset($booksRepo))
-            self::$booksRepo = $entityManager->getRepository('Books');
-        if (!isset($chaptersRepo))
-            self::$chaptersRepo = $entityManager->getRepository('Chapters');
-        if (!isset($versesRepo))
-            self::$versesRepo = $entityManager->getRepository('Verses');
-        
         $this->book = $this->findBook($bookName);
         
-        $this->chapter = self::$chaptersRepo->findOneBy(array( 'bookId' => $this->book->getId(), 'chapterNumber' => $chapterNum));
+        $this->chapter = self::getChaptersRepo()->findOneBy(array( 'bookId' => $this->book->getId(), 'chapterNumber' => $chapterNum));
         
         if ( is_numeric($verseNums) )
-            $this->verses = array( self::$versesRepo->findOneBy(array( 'chapterId' => $this->chapter->getId() , 'verseNumber' => $verseNums )) );
+            $this->verses = array( self::getVersesRepo()->findOneBy(array( 'chapterId' => $this->chapter->getId() , 'verseNumber' => $verseNums )) );
         else
         {
             for ( $i = 0; $i < sizeof($verseNums); $i++ )
@@ -63,8 +90,8 @@ class MScripture
                         $verseNums[] = $j;
                 }
             }
-            $verses = self::$versesRepo->findBy(array( 'chapterId' => $this->chapter->getId() ));
-            if ( isset($verseNums) )
+            $verses = self::getVersesRepo()->findBy(array( 'chapterId' => $this->chapter->getId() ));
+            if ( isset($verseNums) && sizeof($verseNums) > 0)
             {
                 if ( isset($verseNums['start']) && isset($verseNums['end']) )
                 {
