@@ -1,7 +1,7 @@
 $(function() {
-    /**
-     *  input[type=number] handling
-     */
+/**
+ *  Input field handling
+ */
     // Ensure that only '0-9', '.' and '-' are allowed, and restrict '.' and '-' to the right place
     $('input[type=number]').keypress(function(e) {
         var ch = String.fromCharCode(e.which);
@@ -11,7 +11,7 @@ $(function() {
         // Reject minus if it's not the first character, or it's positive-only
         var rejectMinus = $(this).val().length > 0    || $(this).hasClass('positive');
         
-        // Only allow 0-9, -, and .
+        // Only allow 0-9 - .
         if (ch.match(/[^0-9\-\.]/g))
             e.preventDefault();
         if (ch.match(/[\-]/g) && rejectMinus)
@@ -29,10 +29,38 @@ $(function() {
         if (max != undefined && parseInt($(this).val()) > max)
             $(this).val(max);
     })
+    // Ensure that only '0-9', '.' ',', and '-' are allowed
+    $('input[type=number-list]').keypress(function(e) {
+        var ch = String.fromCharCode(e.which);
+        
+        // Only allow 0-9 - . , space
+        if (ch.match(/[^0-9\-\.\, ]/g))
+            e.preventDefault();
+        if (ch.match(/[\.]/g) && $(this).hasClass('integer'))
+            e.preventDefault();
+    })
+    // Clean up input
+    $('input[type=number-list]').change(function() {
+        // Replace spaces between numbers with commas
+        $(this).val($(this).val().replace(/([0-9])[ ]+(?=[0-9])/g, '$1, '));
+        // Remove all other spaces
+        $(this).val($(this).val().replace(/[ ]*/g, ''));
+        // Replace duplicate characters
+        $(this).val($(this).val().replace(/([\,\.\-])\1+/g, '$1'));
+        // If positive, replace all dashes that aren't found between numbers
+        if ($(this).hasClass('positive'))
+            $(this).val($(this).val().replace(/[\-]([^0-9]|$)|([^0-9]|^)[\-]/g, '$1'));
+        // Replace
+        $(this).val($(this).val().replace(/([0-9]\-)[0-9]+\-([0-9])/g, '$1$2'));
+        // Remove commas not between numbers
+        $(this).val($(this).val().replace(/[,]([^0-9]|$)|([^0-9]|^)[,]/g, '$1'));
+        // Add spaces back after commas
+        $(this).val($(this).val().replace(/[,]/g, ', '));
+    })
     
-    /**
-     *  Modal handling
-     */
+/**
+ *  Modal handling
+ */
     $('#dynamic-modal').on('show.bs.modal', function (event) {    
         // Get the data from the button
         var button = $(event.relatedTarget);
@@ -55,7 +83,6 @@ $(function() {
                 url += getVars[i] + '=' + $('#' + getVars[i]).val() + '&';
             }
         }
-            console.log(url);
 
         // Set the HTML based on the button's data
         var modal = $(this);
