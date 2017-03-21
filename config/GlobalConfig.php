@@ -6,9 +6,12 @@ class GlobalConfig {
     
     private function __clone() {}
     
-    public static function getAppPath()
+    public static function getAppPath($finalSlash = false)
     {
-        return self::$APP_PATH;
+        if ($finalSlash)
+            return self::$APP_PATH . '/';
+        else
+            return self::$APP_PATH;
     }
 
 }

@@ -59,7 +59,7 @@ class Route {
     public function __construct()
     {
         // Get the current URI
-        $uri = str_replace(GlobalConfig::getAppPath(), '', $_SERVER["REQUEST_URI"]);
+        $uri = str_replace(GlobalConfig::getAppPath(true), '', $_SERVER["REQUEST_URI"]);
         // Explode it like so: ( $controller, $action, $params )
         $uri = explode( '/', $uri, 3 );
         // Set $params
