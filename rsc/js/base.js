@@ -8,4 +8,4 @@ $('#dynamic-modal').on('show.bs.modal', function (event) {
         console.log("success!");
         modal.find('#dynamic-modal-body').html(data);
     });
-})
+});
