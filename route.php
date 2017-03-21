@@ -44,7 +44,7 @@ class Route {
             }
             else
             {
-                self::call('error', 'html', array('code' => '404', 'msg' => 'Not found.'));
+                self::call('error', 'html', array('code' => '404', 'msg' => 'Cannot find: ' . $controller . ' ' . $action));
             }
         }
     }
@@ -54,12 +54,15 @@ class Route {
      */
     private $controller = '';
     private $action = '';
+    private $uri = '';
     private $params = array();
     // Constructs the route object from the current URI
     public function __construct()
     {
+        $this->uri = $_SERVER['REQUEST_URI'];
         // Get the current URI
         $uri = str_replace(GlobalConfig::getAppPath(true), '', $_SERVER['REQUEST_URI']);
+        $uri = preg_replace('#\?(.*)$#', '', $uri);
         // Explode it like so: ( $controller, $action, $params )
         $uri = explode( '/', $uri, 3 );
         // Set $params

@@ -2,6 +2,7 @@
 $bar = new Navbar();
 $bar->addItem('Home', 'static-pages', 'home', '');
 $bar->addItem('About', 'static-pages', 'about', 'about');
+$bar->addItem('Test', 'static-pages', 'test', 'test');
 ?>
 <nav class="navbar navbar-toggleable-sm navbar-light bg-faded">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">

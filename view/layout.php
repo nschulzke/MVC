@@ -4,6 +4,7 @@ $route = new Route();
 // Standard UI on every page
 $navbar = __DIR__ . '/navbar.php';
 $footer = __DIR__ . '/footer.php';
+$modal = __DIR__ . '/modal.php';
 
 // Style sheets and other information inside <head> tags
 $mainHead = __DIR__ . '/head.php';
@@ -41,6 +42,7 @@ $subtitle = ucfirst($route->getAction());
             
             <?php require_once $footer ?>
         </div>
+        <?php require_once $modal ?>
         <div id="scripts" class="hidden">
             <?php
             require_once $mainFoot;
