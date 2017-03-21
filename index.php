@@ -8,9 +8,13 @@ require_once __DIR__ . '/classes/Connection.php';
 require_once __DIR__ . '/classes/Navbar.php';
 require_once __DIR__ . '/classes/View.php';
 
+// Load models
+require_once __DIR__ . '/model/Scripture.php';
+
 // Load controllers
 require_once __DIR__ . "/controller/error.php";
 require_once __DIR__ . "/controller/static-pages.php";
+require_once __DIR__ . "/controller/scripture.php";
 
 // Load Route class
 require_once __DIR__ . '/route.php';
