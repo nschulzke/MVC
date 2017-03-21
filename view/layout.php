@@ -17,10 +17,14 @@ $route = new Route();
         ?>
     </head>
     <body>
-        <?php require_once __DIR__ . '/header.php'; ?>
-        
-        <?php $route->get(); ?>
-        
-        <?php require_once __DIR__ . '/footer.php'; ?>
+        <div class="container">
+            <header>
+            </header>
+            
+            <?php $route->get(); ?>
+            
+            <footer>
+            </footer>
+        </div>
     </body>
 </html>
