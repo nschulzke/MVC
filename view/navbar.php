@@ -13,7 +13,7 @@ $bar->addItem('Test', 'static-pages', 'test', 'test');
         <div id="main-navbar" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
             <?php foreach ($bar->getItems() as $item):
-                $active = $item->equals($route->getController(), $route->getAction());
+                $active = $item->equals($this->route->getController(), $this->route->getAction());
             ?>
                 <li class="nav-item<?= $active ? ' active' : '' ?>">
                     <a class="nav-link" href="<?= $active ? '#' : $item->getURL() ?>">

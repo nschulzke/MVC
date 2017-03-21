@@ -24,7 +24,7 @@ $('#dynamic-modal').on('show.bs.modal', function (event) {
         modal.find('#dynamic-modal-save-btn').show();
     
     // Run Ajax query
-    $.get(url, { layout: "none" }, function(data) {
+    $.get(url, { layout: 'none' }, function(data) {
         modal.find('#dynamic-modal-body').html(data);
     });
 });
