@@ -1,7 +1,7 @@
 <?php
 class GlobalConfig {
-    private static $APP_PATH = '/planner';
-    private static $APP_NAME = 'Planner';
+    private static $APP_PATH = '/framework';
+    private static $APP_NAME = 'Framework Demo';
     
     private function __construct() {}
     
