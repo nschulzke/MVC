@@ -1,20 +1,38 @@
 $(function() {
-    // Ensure that only 0-9 and - are allowed, truncate after a bad char
-    $('input[type=number].integer').change(function() {
-        var val = $(this).val().replace(/[^0-9^\-].*/, '');
-        $(this).val(val);
+    /**
+     *  input[type=number] handling
+     */
+    // Ensure that only '0-9', '.' and '-' are allowed, and restrict '.' and '-' to the right place
+    $('input[type=number]').keypress(function(e) {
+        var ch = String.fromCharCode(e.which);
+        
+        // Reject dot if we already have one, or if it's an integer
+        var rejectDot =   $(this).val().includes('.') || $(this).hasClass('integer');
+        // Reject minus if it's not the first character, or it's positive-only
+        var rejectMinus = $(this).val().length > 0    || $(this).hasClass('positive');
+        
+        // Only allow 0-9, -, and .
+        if (ch.match(/[^0-9\-\.]/g))
+            e.preventDefault();
+        if (ch.match(/[\-]/g) && rejectMinus)
+            e.preventDefault();
+        if (ch.match(/[\.]/g) && rejectDot)
+            e.preventDefault();
     })
-    
     // Make sure numbers stay within their min and max
     $('input[type=number]').change(function() {
         var min = $(this).attr('min');
         var max = $(this).attr('max');
+        
         if (min != undefined && parseInt($(this).val()) < min)
             $(this).val(min);
         if (max != undefined && parseInt($(this).val()) > max)
             $(this).val(max);
     })
     
+    /**
+     *  Modal handling
+     */
     $('#dynamic-modal').on('show.bs.modal', function (event) {    
         // Get the data from the button
         var button = $(event.relatedTarget);

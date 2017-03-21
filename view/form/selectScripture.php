@@ -17,8 +17,8 @@ $chaptersRepo = MScripture::getChaptersRepo();
             </optgroup>
             <?php endforeach; ?>
         </select>
-        <label for="chapter">Chapter:</label><input id="chapter" class="form-control integer" type="number" min="1"></input>
-        <label for="verse">Verses:</label><input id="verses" class="form-control"></input>
+        <label for="chapter">Chapter:</label><input id="chapter" class="form-control positive integer" type="number" min="1"></input>
+        <label for="verse">Verses:</label><input id="verses" class="form-control" type="number-range"></input>
     </div>
 </div>
 
