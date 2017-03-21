@@ -1,6 +1,6 @@
 <?php
 class GlobalConfig {
-    private static $APP_PATH = '/planner/';
+    private static $APP_PATH = '/planner';
     
     private function __construct() {}
     
