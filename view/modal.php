@@ -1,4 +1,4 @@
-<div id="dynamic-modal" class="modal fade" aria-hidden="true">
+<div id="dynamic-modal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
