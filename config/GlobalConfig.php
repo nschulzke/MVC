@@ -1,6 +1,7 @@
 <?php
 class GlobalConfig {
     private static $APP_PATH = '/planner';
+    private static $APP_NAME = 'Planner';
     
     private function __construct() {}
     
@@ -14,5 +15,9 @@ class GlobalConfig {
             return self::$APP_PATH;
     }
 
+    public static function getAppName()
+    {
+        return self::$APP_NAME;
+    }
 }
 ?>

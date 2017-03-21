@@ -5,6 +5,7 @@ require_once __DIR__ . '/config/GlobalConfig.php';
 
 // Load required classes
 require_once __DIR__ . '/classes/Connection.php';
+require_once __DIR__ . '/classes/Navbar.php';
 
 // Load controllers
 require_once __DIR__ . "/controller/error.php";
