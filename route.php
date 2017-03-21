@@ -44,7 +44,7 @@ class Route {
             }
             else
             {
-                self::call('error', 'html', array('code' => '404', 'msg' => 'Cannot find: ' . $controller . ' ' . $action));
+                self::call('error', 'html', array('code' => '404', 'msg' => 'File not found: /' . $controller . '/' . $action));
             }
         }
     }
