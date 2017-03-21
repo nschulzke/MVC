@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__ . '/../config/DBConfig.php';
-
 class Connection
 {
     private static $instance = NULL;

@@ -1,8 +1,5 @@
 <?php
-require_once __DIR__ . '/../route.php';
-
 $route = new Route();
-
 ?>
 <html>
     <head>
