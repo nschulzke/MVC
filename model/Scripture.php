@@ -8,7 +8,7 @@ foreach (glob(__DIR__ . "/../orm/entities/*.php") as $filename)
     
 use Doctrine\Common\Collections\Criteria;
 
-class Scripture
+class MScripture
 {
     private static $booksRepo;
     private static $chaptersRepo;
@@ -77,7 +77,7 @@ class Scripture
         }
     }
     
-    public function getText()
+    public function getVerses()
     {
         $retArr = array();
         foreach ( $this->verses as $verse )

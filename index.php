@@ -21,10 +21,5 @@ require_once __DIR__ . '/route.php';
 
 // Load and display view
 $route = new Route();
-
-if (isset($_GET['layout']))
-    $view = new View($route, $_GET['layout']);
-else
-    $view = new View($route);
-$view->get();
+$route->display();
 ?>

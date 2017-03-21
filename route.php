@@ -22,7 +22,7 @@ class Route {
     {
         $controllerClass = self::toClass($controller);
         
-        return defined('$controllerClass::ACTIONS') && in_array($action, $controllerClass::ACTIONS);
+        return defined("$controllerClass::ACTIONS") && in_array($action, $controllerClass::ACTIONS);
     }
     
     // Calls a given $action on $controller, if it exists, otherwise calls an error
@@ -118,9 +118,18 @@ class Route {
         return $this->uri;
     }
     // Call the controller and action
-    public function get()
+    public function getHTML()
     {
-        $this->call($this->controller, $this->action, $this->params);
+        return $this->call($this->controller, $this->action, $this->params);
+    }
+    
+    public function display()
+    {
+        if (isset($_GET['layout']))
+            $view = new View($this, $_GET['layout']);
+        else
+            $view = new View($this);
+        $view->display();
     }
 }
 ?>

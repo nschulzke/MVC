@@ -88,10 +88,10 @@ class View
         return $this->route;
     }
     
-    public function get()
+    public function display()
     {
         if ($this->layout == 'none')
-            $this->route->get();
+            echo $this->route->getHTML();
         else
             require_once __DIR__ . '/../view/' . $this->layout . '.php';
     }

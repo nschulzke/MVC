@@ -14,7 +14,7 @@ $dir = __DIR__ . '/';
         <?php $this->requireOnce($dir . $this->vars['navbar']) ?>
         
         <article id="main-container" class="container">
-            <?php $this->route->get(); ?>
+            <?php echo $this->route->getHTML(); ?>
         </article>
         
         <?php $this->requireOnce($dir . $this->vars['footer']) ?>
