@@ -35,14 +35,15 @@ $subtitle = ucfirst($route->getAction());
         <title><?= $title ?>: <?= $subtitle ?></title>
     </head>
     <body>
-        <div id="main-container" class="container">
-            <?php require_once $navbar ?>
-            
+        <?php require_once $navbar ?>
+        
+        <article id="main-container" class="container">
             <?php $route->get(); ?>
-            
-            <?php require_once $footer ?>
-        </div>
+        </article>
+        
+        <?php require_once $footer ?>
         <?php require_once $modal ?>
+        
         <div id="scripts" class="hidden">
             <?php
             require_once $mainFoot;
