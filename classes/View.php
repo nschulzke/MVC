@@ -46,11 +46,20 @@ class View
         if (!isset($vars['modal']) || !in_array($vars['modal'], self::VALID_MODALS))
             $this->vars['modal'] = 'modal';
         
+        // Set up include files
         $this->vars['navbar'] .= '.php';
         $this->vars['footer'] .= '.php';
         $this->vars['modal'] .= '.php';
-        $this->vars['head'] = array('head.php', $this->route->getController() . '/_head.php', $this->route->getController() . '/' . $this->route->getAction() . '_head.php');
-        $this->vars['foot'] = array('foot.php', $this->route->getController() . '/_foot.php', $this->route->getController() . '/' . $this->route->getAction() . '_foot.php');
+        $this->vars['head'] = array(
+            'head.php',
+            $this->route->getController() . '/_head.php',
+            $this->route->getController() . '/' . $this->route->getAction() . '_head.php'
+        );
+        $this->vars['foot'] = array(
+            'foot.php',
+            $this->route->getController() . '/_foot.php',
+            $this->route->getController() . '/' . $this->route->getAction() . '_foot.php'
+        );
     }
 
     private function requireOnce($path)
