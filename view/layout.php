@@ -1,6 +1,4 @@
 <?php
-$route = new Route();
-
 // Standard UI on every page
 $navbar = __DIR__ . '/navbar.php';
 $footer = __DIR__ . '/footer.php';

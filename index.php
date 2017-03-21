@@ -15,11 +15,10 @@ require_once __DIR__ . "/controller/static-pages.php";
 require_once __DIR__ . '/route.php';
 
 // Load and display view
+$route = new Route();
+
 if (isset($_GET['layout']) && $_GET['layout'] == 'none')
-{
-    $route = new Route();
     $route->get();
-}
 else
     require_once __DIR__ . '/view/layout.php';
 ?>
