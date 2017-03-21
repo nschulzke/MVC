@@ -53,6 +53,16 @@ class MScripture
             $this->verses = array( self::$versesRepo->findOneBy(array( 'chapterId' => $this->chapter->getId() , 'verseNumber' => $verseNums )) );
         else
         {
+            for ( $i = 0; $i < sizeof($verseNums); $i++ )
+            {
+                if ( strpos($verseNums[$i], '-') != false )
+                {
+                    $range = explode('-', $verseNums[$i]);
+                    unset ($verseNums[$i]);
+                    for ( $j = $range[0]; $j <= $range[1]; $j++)
+                        $verseNums[] = $j;
+                }
+            }
             $verses = self::$versesRepo->findBy(array( 'chapterId' => $this->chapter->getId() ));
             if ( isset($verseNums) )
             {

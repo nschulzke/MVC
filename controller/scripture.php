@@ -17,8 +17,6 @@ class Scripture
             $chapter = $_GET['chapter'];
             if ( isset($_GET['verses'] ) )
                 $verses = explode(',', $_GET['verses']);
-            else if ( isset($_GET['start']) && isset($_GET['end']) )
-                $verses = array('start' => $_GET['start'], 'end' => $_GET['end']);
             else
                 $verses = null;
             
