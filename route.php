@@ -4,16 +4,19 @@ class Route {
     /**
      *  Static Helper Functions
      */
+    
     // Takes a hyphen-format controller name and returns it in CamelCase
     private static function toClass($controller)
     {
         return str_replace(' ', '', ucwords(str_replace('-', ' ', $controller)));
     }
+    
     // Takes an action name and converts it to the method format (usually appending a prefix)
     private static function toMethod($action)
     {
         return 'action_' . $action;
     }
+    
     // Returns whether or not $action can be found in $controller, based on the ACTIONS constant
     private static function isAction($controller, $action)
     {
@@ -21,6 +24,7 @@ class Route {
         
         return defined("$controllerClass::ACTIONS") && in_array($action, $controllerClass::ACTIONS);
     }
+    
     // Calls a given $action on $controller, if it exists, otherwise calls an error
     private static function call($controller, $action, $params = array())
     {
