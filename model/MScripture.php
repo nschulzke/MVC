@@ -59,8 +59,8 @@ class MScripture
         return self::$versesRepo;
     }
 
-    private $book;
-    private $chapter;
+    private $book; /* @var Books $book */
+    private $chapter; /* @var Chapters $chapter */
     private $verses = array();
 
     /**
@@ -96,10 +96,10 @@ class MScripture
     {
         $this->book = $this->findBook( $bookName );
 
-        $this->chapter = self::getChaptersRepo()->findOneBy( array( 'bookId' => $this->book->getId(), 'chapterNumber' => $chapterNum ) );
+        $this->chapter = self::getChaptersRepo()->findOneBy( array( 'bookId' => $this->book->getId(), 'number' => $chapterNum ) );
 
         if ( is_numeric( $verseNums ) )
-            $this->verses = array( self::getVersesRepo()->findOneBy( array( 'chapterId' => $this->chapter->getId(), 'verseNumber' => $verseNums ) ) );
+            $this->verses = array( self::getVersesRepo()->findOneBy( array( 'chapterId' => $this->chapter->getId(), 'number' => $verseNums ) ) );
         else {
             for ( $i = 0; $i < sizeof( $verseNums ); $i++ ) {
                 if ( strpos( $verseNums[$i], '-' ) != false ) {
@@ -133,8 +133,8 @@ class MScripture
     public function getVerses()
     {
         $retArr = array();
-        foreach ( $this->verses as $verse )
-            $retArr[$verse->getVerseNumber()] = $verse->getScriptureText();
+        foreach ( $this->verses as $verse ) /* @var Verses $verse*/
+            $retArr[$verse->getNumber()] = $verse->getText();
         return $retArr;
     }
 
@@ -155,7 +155,7 @@ class MScripture
      */
     public function getChapter()
     {
-        return $this->chapter->getChapterNumber();
+        return $this->chapter->getNumber();
     }
 
     /**
@@ -163,6 +163,6 @@ class MScripture
      */
     public function getVerse()
     {
-        return $this->chapter->getVerseNumber();
+        return $this->chapter->getNumber();
     }
 }
