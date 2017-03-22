@@ -1,0 +1,11 @@
+.books-list {
+  -moz-column-width: 10em;
+  -webkit-column-width: 10em;
+  column-width: 10em;
+}
+.books-list a {
+  display: block;
+}
+.chapters-list {
+  max-width: 50em;
+}
