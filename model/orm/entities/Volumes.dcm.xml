@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Volumes" table="volumes">
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <field name="title" type="string" column="volume_title" length="22" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="longTitle" type="string" column="volume_long_title" length="26" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="subtitle" type="string" column="volume_subtitle" length="36" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="shortTitle" type="string" column="volume_short_title" length="3" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+        <field name="ldsUrl" type="string" column="volume_lds_url" length="12" nullable="false">
+            <options>
+                <option name="fixed"/>
+            </options>
+        </field>
+    </entity>
+</doctrine-mapping>
