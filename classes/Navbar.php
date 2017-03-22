@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . 'Navitem.php';
+require_once __DIR__ . '/Navitem.php';
 
 class Navbar
 {
