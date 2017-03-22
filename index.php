@@ -22,4 +22,3 @@ require_once __DIR__ . '/route.php';
 // Load and display view
 $route = new Route();
 $route->display();
-?>
