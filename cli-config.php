@@ -1,3 +1,3 @@
 <?php
-require_once "/orm/bootstrap.php";
+require_once __DIR__ . "/orm/bootstrap.php";
 return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($entityManager);
