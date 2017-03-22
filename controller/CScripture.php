@@ -1,6 +1,6 @@
 <?php
 
-class ScriptureController
+class CScripture
 {
     const ACTIONS = array(
         'view'

@@ -1,6 +1,6 @@
 <?php
 
-class ErrorController
+class CError
 {
     const ACTIONS = array(
         'html', 'json'

@@ -8,12 +8,12 @@ require_once __DIR__ . '/classes/Navbar.php';
 require_once __DIR__ . '/classes/View.php';
 
 // Load models
-require_once __DIR__ . '/model/Scripture.php';
+require_once __DIR__ . '/model/MScripture.php';
 
 // Load controllers
-require_once __DIR__ . "/controller/ErrorController.php";
-require_once __DIR__ . "/controller/StaticPagesController.php";
-require_once __DIR__ . "/controller/ScriptureController.php";
+require_once __DIR__ . "/controller/CError.php";
+require_once __DIR__ . "/controller/CStaticPages.php";
+require_once __DIR__ . "/controller/CScripture.php";
 
 // Load Route class
 require_once __DIR__ . '/route.php';
