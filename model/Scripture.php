@@ -57,10 +57,10 @@ class MScripture
             return self::getBooksRepo()->find( $bookName );
         $crit = Criteria::create();
         $crit->where(
-            $crit->expr()->orX(
-                $crit->expr()->contains( 'bookTitle', $bookName ),
-                $crit->expr()->contains( 'bookLongTitle', $bookName ),
-                $crit->expr()->contains( 'bookShortTitle', $bookName )
+            Criteria::expr()->orX(
+                Criteria::expr()->contains( 'bookTitle', $bookName ),
+                Criteria::expr()->contains( 'bookLongTitle', $bookName ),
+                Criteria::expr()->contains( 'bookShortTitle', $bookName )
             )
         );
         $books = self::getBooksRepo()->matching( $crit );

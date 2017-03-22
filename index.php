@@ -4,7 +4,6 @@ require_once __DIR__ . '/config/DBConfig.php';
 require_once __DIR__ . '/config/GlobalConfig.php';
 
 // Load required classes
-require_once __DIR__ . '/classes/Connection.php';
 require_once __DIR__ . '/classes/Navbar.php';
 require_once __DIR__ . '/classes/View.php';
 

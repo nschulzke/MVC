@@ -2,10 +2,6 @@
 
 class Route
 {
-    /**
-     *  Static Helper Functions
-     */
-
     // Takes a hyphen-format controller name and returns it in CamelCase
     private static function toClass( $controller )
     {
@@ -37,11 +33,12 @@ class Route
         } else {
             $viewFile = __DIR__ . '/view/' . $controller . '/' . $action . '.php';
             if ( file_exists( $viewFile ) ) {
-                require_once $viewFile;
+                return $viewFile;
             } else {
                 self::call( 'error', 'html', array( 'code' => '404', 'msg' => 'File not found: /' . $controller . '/' . $action ) );
             }
         }
+        return null;
     }
 
     /**
@@ -112,7 +109,7 @@ class Route
     // Call the controller and action
     public function getHTML()
     {
-        return $this->call( $this->controller, $this->action, $this->params );
+        return self::call( $this->controller, $this->action, $this->params );
     }
 
     public function display()

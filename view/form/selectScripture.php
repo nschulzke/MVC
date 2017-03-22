@@ -17,18 +17,19 @@ $chaptersRepo = MScripture::getChaptersRepo();
                 </optgroup>
             <?php endforeach; ?>
         </select>
-        <label for="chapter">Chapter:</label><input id="chapter" class="form-control positive integer" type="number" min="1"></input>
-        <label for="verse">Verses:</label><input id="verses" class="form-control positive integer" type="number-list"></input>
+        <label for="chapter">Chapter:</label><input id="chapter" class="form-control positive integer" type="number" min="1">
+        <label for="verses">Verses:</label><input id="verses" class="form-control positive integer" type="number-list">
     </div>
 
     <script>
         $( function () {
-            var max = $( '#book option:selected' ).data( 'chapters' );
+            var book = $( '#book' );
             var chapter = $( '#chapter' );
+            var max = book.find( 'option:selected' ).data( 'chapters' );
             chapter.attr( 'max', max );
-            $( '#book' ).change( function () {
+            book.change( function () {
                 console.log( 'book changed' );
-                var max = $( '#book option:selected' ).data( 'chapters' );
+                var max = $( '#book' ).find( 'option:selected' ).data( 'chapters' );
                 if ( chapter.val() > max )
                     chapter.val( max );
                 chapter.attr( 'max', max );
