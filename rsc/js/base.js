@@ -2,8 +2,10 @@ $( function () {
     /**
      *  Input field handling
      */
+    var input_number = $( 'input[type=number]' )
+    var input_number_list = $( 'input[type=number-list]' )
     // Ensure that only '0-9', '.' and '-' are allowed, and restrict '.' and '-' to the right place
-    $( 'input[type=number]' ).keypress( function ( e ) {
+    input_number.keypress( function ( e ) {
         var ch = String.fromCharCode( e.which );
 
         // Reject dot if we already have one, or if it's an integer
@@ -12,15 +14,15 @@ $( function () {
         var rejectMinus = $( this ).val().length > 0 || $( this ).hasClass( 'positive' );
 
         // Only allow 0-9 - .
-        if ( ch.match( /[^0-9\-\.]/g ) )
+        if ( ch.match( /[^0-9\-.]/g ) )
             e.preventDefault();
         if ( ch.match( /[\-]/g ) && rejectMinus )
             e.preventDefault();
-        if ( ch.match( /[\.]/g ) && rejectDot )
+        if ( ch.match( /[.]/g ) && rejectDot )
             e.preventDefault();
     } )
     // Make sure numbers stay within their min and max
-    $( 'input[type=number]' ).change( function () {
+    input_number.change( function () {
         var min = $( this ).attr( 'min' );
         var max = $( this ).attr( 'max' );
 
@@ -30,28 +32,28 @@ $( function () {
             $( this ).val( max );
     } )
     // Ensure that only '0-9', '.' ',', and '-' are allowed
-    $( 'input[type=number-list]' ).keypress( function ( e ) {
+    input_number_list.keypress( function ( e ) {
         var ch = String.fromCharCode( e.which );
 
         // Only allow 0-9 - . , space
-        if ( ch.match( /[^0-9\-\.\, ]/g ) )
+        if ( ch.match( /[^0-9\-., ]/g ) )
             e.preventDefault();
-        if ( ch.match( /[\.]/g ) && $( this ).hasClass( 'integer' ) )
+        if ( ch.match( /[.]/g ) && $( this ).hasClass( 'integer' ) )
             e.preventDefault();
     } )
     // Clean up input
-    $( 'input[type=number-list]' ).change( function () {
+    input_number_list.change( function () {
         // Replace spaces between numbers with commas
         $( this ).val( $( this ).val().replace( /([0-9])[ ]+(?=[0-9])/g, '$1, ' ) );
         // Remove all other spaces
         $( this ).val( $( this ).val().replace( /[ ]*/g, '' ) );
         // Replace duplicate characters
-        $( this ).val( $( this ).val().replace( /([\,\.\-])\1+/g, '$1' ) );
+        $( this ).val( $( this ).val().replace( /([,.\-])\1+/g, '$1' ) );
         // If positive, replace all dashes that aren't found between numbers
         if ( $( this ).hasClass( 'positive' ) )
             $( this ).val( $( this ).val().replace( /[\-]([^0-9]|$)|([^0-9]|^)[\-]/g, '$1' ) );
         // Replace
-        $( this ).val( $( this ).val().replace( /([0-9]\-)[0-9]+\-([0-9])/g, '$1$2' ) );
+        $( this ).val( $( this ).val().replace( /([0-9]-)[0-9]+-([0-9])/g, '$1$2' ) );
         // Remove commas not between numbers
         $( this ).val( $( this ).val().replace( /[,]([^0-9]|$)|([^0-9]|^)[,]/g, '$1' ) );
         // Add spaces back after commas

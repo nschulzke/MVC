@@ -20,18 +20,18 @@ $chaptersRepo = MScripture::getChaptersRepo();
         <label for="chapter">Chapter:</label><input id="chapter" class="form-control positive integer" type="number" min="1"></input>
         <label for="verse">Verses:</label><input id="verses" class="form-control positive integer" type="number-list"></input>
     </div>
-    </div>
 
     <script>
         $( function () {
             var max = $( '#book option:selected' ).data( 'chapters' );
-            $( '#chapter' ).attr( 'max', max );
+            var chapter = $( '#chapter' );
+            chapter.attr( 'max', max );
             $( '#book' ).change( function () {
                 console.log( 'book changed' );
                 var max = $( '#book option:selected' ).data( 'chapters' );
-                if ( $( '#chapter' ).val() > max )
-                    $( '#chapter' ).val( max );
-                $( '#chapter' ).attr( 'max', max );
+                if ( chapter.val() > max )
+                    chapter.val( max );
+                chapter.attr( 'max', max );
             } )
         } )
     </script>
