@@ -104,6 +104,6 @@ class Route
 
     public function getDefaultPath()
     {
-        return __DIR__ . '/view/' . $this->controller . '/' . $this->action . '.php';
+        return __DIR__ . '/../view/' . $this->controller . '/' . $this->action . '.php';
     }
 }

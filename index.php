@@ -3,19 +3,17 @@
 require_once __DIR__ . '/config/DBConfig.php';
 require_once __DIR__ . '/config/GlobalConfig.php';
 
-// Load required classes
-require_once __DIR__ . '/classes/Navbar.php';
-require_once __DIR__ . '/classes/View.php';
+// Autoload classes
+foreach ( glob( __DIR__ . "/class/*.php" ) as $filename )
+    require_once $filename;
 
-// Load models
-require_once __DIR__ . '/model/MScripture.php';
+// Autoload models
+foreach ( glob( __DIR__ . "/model/*.php" ) as $filename )
+    require_once $filename;
 
 // Autoload controllers
 foreach ( glob( __DIR__ . "/controller/*.php" ) as $filename )
     require_once $filename;
-
-// Load Route class
-require_once __DIR__ . '/route.php';
 
 // Load and display view
 $route = new Route();
