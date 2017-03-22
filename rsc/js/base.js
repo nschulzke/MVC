@@ -6,20 +6,22 @@ $( function () {
     var input_number_list = $( 'input[type=number-list]' );
     // Ensure that only '0-9', '.' and '-' are allowed, and restrict '.' and '-' to the right place
     input_number.keypress( function ( e ) {
-        var ch = String.fromCharCode( Number(e.which) );
+        if ( Number(e.which) > 32 ) {
+            var ch = String.fromCharCode( Number( e.which ) );
 
-        // Reject dot if we already have one, or if it's an integer
-        var rejectDot = $( this ).val().indexOf( '.' ) > -1 || $( this ).hasClass( 'integer' );
-        // Reject minus if it's not the first character, or it's positive-only
-        var rejectMinus = $( this ).val().length > 0 || $( this ).hasClass( 'positive' );
+            // Reject dot if we already have one, or if it's an integer
+            var rejectDot = $( this ).val().indexOf( '.' ) > -1 || $( this ).hasClass( 'integer' );
+            // Reject minus if it's not the first character, or it's positive-only
+            var rejectMinus = $( this ).val().length > 0 || $( this ).hasClass( 'positive' );
 
-        // Only allow 0-9 - .
-        if ( ch.match( /[^0-9\-.]/g ) )
-            e.preventDefault();
-        if ( ch.match( /[\-]/g ) && rejectMinus )
-            e.preventDefault();
-        if ( ch.match( /[.]/g ) && rejectDot )
-            e.preventDefault();
+            // Only allow 0-9 - .
+            if ( ch.match( /[^0-9\-.]/g ) )
+                e.preventDefault();
+            if ( ch.match( /[\-]/g ) && rejectMinus )
+                e.preventDefault();
+            if ( ch.match( /[.]/g ) && rejectDot )
+                e.preventDefault();
+        }
     } );
     // Make sure numbers stay within their min and max
     input_number.change( function () {
@@ -33,13 +35,15 @@ $( function () {
     } );
     // Ensure that only '0-9', '.' ',', and '-' are allowed
     input_number_list.keypress( function ( e ) {
-        var ch = String.fromCharCode( Number(e.which) );
+        if ( Number(e.which) > 32 ) {
+            var ch = String.fromCharCode( Number( e.which ) );
 
-        // Only allow 0-9 - . , space
-        if ( ch.match( /[^0-9\-., ]/g ) )
-            e.preventDefault();
-        if ( ch.match( /[.]/g ) && $( this ).hasClass( 'integer' ) )
-            e.preventDefault();
+            // Only allow 0-9 - . , space
+            if ( ch.match( /[^0-9\-., ]/g ) )
+                e.preventDefault();
+            if ( ch.match( /[.]/g ) && $( this ).hasClass( 'integer' ) )
+                e.preventDefault();
+        }
     } );
     // Clean up input
     input_number_list.change( function () {
