@@ -15,6 +15,9 @@ class MScripture
     private static $chaptersRepo;
     private static $versesRepo;
 
+    /**
+     * @return \Doctrine\ORM\EntityRepository
+     */
     public static function getVolumesRepo()
     {
         global $entityManager;
@@ -23,6 +26,9 @@ class MScripture
         return self::$volumesRepo;
     }
 
+    /**
+     * @return \Doctrine\ORM\EntityRepository
+     */
     public static function getBooksRepo()
     {
         global $entityManager;
@@ -31,6 +37,9 @@ class MScripture
         return self::$booksRepo;
     }
 
+    /**
+     * @return \Doctrine\ORM\EntityRepository
+     */
     public static function getChaptersRepo()
     {
         global $entityManager;
@@ -39,6 +48,9 @@ class MScripture
         return self::$chaptersRepo;
     }
 
+    /**
+     * @return \Doctrine\ORM\EntityRepository
+     */
     public static function getVersesRepo()
     {
         global $entityManager;
@@ -51,6 +63,10 @@ class MScripture
     private $chapter;
     private $verses = array();
 
+    /**
+     * @param $bookName
+     * @return Books|null|object
+     */
     private function findBook( $bookName )
     {
         if ( is_numeric( $bookName ) )
@@ -70,7 +86,13 @@ class MScripture
             return null;
     }
 
-    public function __construct( $bookName, $chapterNum, $verseNums = null )
+    /**
+     * MScripture constructor.
+     * @param $bookName
+     * @param $chapterNum
+     * @param array $verseNums
+     */
+    public function __construct( $bookName, $chapterNum, $verseNums = array() )
     {
         $this->book = $this->findBook( $bookName );
 
@@ -90,21 +112,24 @@ class MScripture
             $verses = self::getVersesRepo()->findBy( array( 'chapterId' => $this->chapter->getId() ) );
             if ( isset( $verseNums ) && sizeof( $verseNums ) > 0 ) {
                 if ( isset( $verseNums['start'] ) && isset( $verseNums['end'] ) ) {
-                    foreach ( $verses as $verse )
+                    foreach ( $verses as $verse ) /* @var Verses $verse*/
                         if ( $verse->getVerseNumber() >= $verseNums['start'] && $verse->getVerseNumber() <= $verseNums['end'] )
                             $this->verses[$verse->getVerseNumber()] = $verse;
                 } else {
-                    foreach ( $verses as $verse )
+                    foreach ( $verses as $verse ) /* @var Verses $verse*/
                         if ( in_array( $verse->getVerseNumber(), $verseNums ) )
                             $this->verses[$verse->getVerseNumber()] = $verse;
                 }
             } else {
-                foreach ( $verses as $verse )
+                foreach ( $verses as $verse ) /* @var Verses $verse*/
                     $this->verses[$verse->getVerseNumber()] = $verse;
             }
         }
     }
 
+    /**
+     * @return array
+     */
     public function getVerses()
     {
         $retArr = array();
@@ -113,6 +138,10 @@ class MScripture
         return $retArr;
     }
 
+    /**
+     * @param bool $long
+     * @return string
+     */
     public function getBook( $long = false )
     {
         if ( $long )
@@ -121,11 +150,17 @@ class MScripture
             return $this->book->getBookShortTitle();
     }
 
+    /**
+     * @return mixed
+     */
     public function getChapter()
     {
         return $this->chapter->getChapterNumber();
     }
 
+    /**
+     * @return mixed
+     */
     public function getVerse()
     {
         return $this->chapter->getVerseNumber();

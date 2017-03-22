@@ -22,6 +22,12 @@ class View
     private $layout;
     private $vars;
 
+    /**
+     * View constructor.
+     * @param Route $route
+     * @param string $layout
+     * @param array $vars
+     */
     public function __construct( $route, $layout = 'layout', $vars = array() )
     {
         $this->vars = $vars;
@@ -63,6 +69,10 @@ class View
         );
     }
 
+    /**
+     * @param string $path
+     * @return bool
+     */
     private function requireOnce( $path )
     {
         if ( file_exists( $path ) ) {
@@ -72,21 +82,35 @@ class View
             return false;
     }
 
+    /**
+     * @param mixed $key
+     * @param mixed $value
+     */
     public function setVar( $key, $value )
     {
         $this->vars[$key] = $value;
     }
 
+    /**
+     * @param mixed $key
+     * @return mixed
+     */
     public function getVar( $key )
     {
         return $this->vars[$key];
     }
 
+    /**
+     * @return Route
+     */
     public function getRoute()
     {
         return $this->route;
     }
 
+    /**
+     *
+     */
     public function display()
     {
         if ( $this->layout == 'none' )

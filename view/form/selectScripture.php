@@ -9,9 +9,9 @@ $chaptersRepo = MScripture::getChaptersRepo();
     <div class="form-group">
         <label for="book">Book:</label>
         <select class="custom-select" id="book">
-            <?php foreach ( $volumesRepo->findAll() as $volume ): ?>
+            <?php foreach ( $volumesRepo->findAll() as $volume ): /* @var Volumes $volume */ ?>
                 <optgroup label="<?= $volume->getVolumeTitle() ?>">
-                    <?php foreach ( $booksRepo->findBy( array( 'volumeId' => $volume->getId() ) ) as $book ): ?>
+                    <?php foreach ( $booksRepo->findBy( array( 'volumeId' => $volume->getId() ) ) as $book ): /* @var Books $book */?>
                         <option value="<?= $book->getId() ?>" data-chapters="<?= sizeof( $chaptersRepo->findBy( array( 'bookId' => $book->getId() ) ) ) ?>"><?= $book->getBookTitle() ?></option>
                     <?php endforeach; ?>
                 </optgroup>
