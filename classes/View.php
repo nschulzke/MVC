@@ -55,6 +55,7 @@ class View
 
         // Set up include files
         $this->vars['navbar'] .= '.php';
+        $this->vars['viewPath'] = $this->route->getPath();
         $this->vars['footer'] .= '.php';
         $this->vars['modal'] .= '.php';
         $this->vars['head'] = array(
