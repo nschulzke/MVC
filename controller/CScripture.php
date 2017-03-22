@@ -20,6 +20,33 @@ class CScripture
         $view->display();
     }
 
+    static public function action_view( $route, $params )
+    {
+        $view = new View( $route );
+        $verses = array();
+        if ( isset( $_GET['book'] ) && $_GET['book'] != '' && isset( $_GET['chapter'] ) && $_GET['chapter'] != '' ) {
+            $book = $_GET['book'];
+            $chapter = $_GET['chapter'];
+            if ( isset( $_GET['verses'] ) && $_GET['verses'] != '' )
+                $verses = explode( ',', $_GET['verses'] );
+        }
+        else if ( isset( $params[0] ) && isset( $params[1]) ) {
+            $book = $params[0];
+            $chapter = $params[1];
+            if ( isset( $params[2] ) && $params[2] != '' )
+                $verses = explode( ',', $params[2] );
+        }
+        else return;
+
+        $verses = MScripture::explodeRanges($verses);
+
+        $scripture = new MScripture( $book, $chapter );
+
+        $view->setVar( 'scripture', $scripture )
+             ->setVar( 'verses', $verses );
+        $view->display();
+    }
+
     static public function action_bookList( $route, $params )
     {
         if ( isset( $_GET['volume'] ) && is_numeric( $_GET['volume'] ) )
@@ -53,8 +80,8 @@ class CScripture
             $volume = MScripture::getVolumesRepo()->find( $book->getVolumeId() );
             $chapters = MScripture::getChaptersRepo()->findBy( array( 'bookId' => $book->getId() ) );
 
-            $view->setVar( 'book', $book->getTitle() )
-                 ->setVar( 'volume', $volume->getId() )
+            $view->setVar( 'book', $book )
+                 ->setVar( 'volume', $volume )
                  ->setVar( 'chapters', $chapters );
             $view->display();
         }

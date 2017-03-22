@@ -59,6 +59,19 @@ class MScripture
         return self::$versesRepo;
     }
 
+    public static function explodeRanges($verseNums)
+    {
+        for ( $i = 0; $i < sizeof( $verseNums ); $i++ ) {
+            if ( strpos( $verseNums[$i], '-' ) != false ) {
+                $range = explode( '-', $verseNums[$i] );
+                unset ( $verseNums[$i] );
+                for ( $j = $range[0]; $j <= $range[1]; $j++ )
+                    $verseNums[] = $j;
+            }
+        }
+        return $verseNums;
+    }
+
     private $book; /* @var Books $book */
     private $chapter; /* @var Chapters $chapter */
     private $verses = array();
@@ -74,9 +87,10 @@ class MScripture
         $criteria = Criteria::create();
         $criteria->where(
             Criteria::expr()->orX(
-                Criteria::expr()->contains( 'bookTitle', $bookName ),
-                Criteria::expr()->contains( 'bookLongTitle', $bookName ),
-                Criteria::expr()->contains( 'bookShortTitle', $bookName )
+                Criteria::expr()->contains( 'title', $bookName ),
+                Criteria::expr()->contains( 'longTitle', $bookName ),
+                Criteria::expr()->contains( 'shortTitle', $bookName ),
+                Criteria::expr()->contains( 'ldsUrl', $bookName )
             )
         );
         $books = self::getBooksRepo()->matching( $criteria );
@@ -101,14 +115,7 @@ class MScripture
         if ( is_numeric( $verseNums ) )
             $this->verses = array( self::getVersesRepo()->findOneBy( array( 'chapterId' => $this->chapter->getId(), 'number' => $verseNums ) ) );
         else {
-            for ( $i = 0; $i < sizeof( $verseNums ); $i++ ) {
-                if ( strpos( $verseNums[$i], '-' ) != false ) {
-                    $range = explode( '-', $verseNums[$i] );
-                    unset ( $verseNums[$i] );
-                    for ( $j = $range[0]; $j <= $range[1]; $j++ )
-                        $verseNums[] = $j;
-                }
-            }
+            $verseNums = self::explodeRanges($verseNums);
             $verses = self::getVersesRepo()->findBy( array( 'chapterId' => $this->chapter->getId() ) );
             if ( isset( $verseNums ) && sizeof( $verseNums ) > 0 ) {
                 if ( isset( $verseNums['start'] ) && isset( $verseNums['end'] ) ) {
