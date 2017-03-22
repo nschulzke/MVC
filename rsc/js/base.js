@@ -2,14 +2,14 @@ $( function () {
     /**
      *  Input field handling
      */
-    var input_number = $( 'input[type=number]' )
-    var input_number_list = $( 'input[type=number-list]' )
+    var input_number = $( 'input[type=number]' );
+    var input_number_list = $( 'input[type=number-list]' );
     // Ensure that only '0-9', '.' and '-' are allowed, and restrict '.' and '-' to the right place
     input_number.keypress( function ( e ) {
         var ch = String.fromCharCode( e.which );
 
         // Reject dot if we already have one, or if it's an integer
-        var rejectDot = $( this ).val().includes( '.' ) || $( this ).hasClass( 'integer' );
+        var rejectDot = $( this ).val().indexOf( '.' ) > -1 || $( this ).hasClass( 'integer' );
         // Reject minus if it's not the first character, or it's positive-only
         var rejectMinus = $( this ).val().length > 0 || $( this ).hasClass( 'positive' );
 
@@ -20,7 +20,7 @@ $( function () {
             e.preventDefault();
         if ( ch.match( /[.]/g ) && rejectDot )
             e.preventDefault();
-    } )
+    } );
     // Make sure numbers stay within their min and max
     input_number.change( function () {
         var min = $( this ).attr( 'min' );
@@ -30,7 +30,7 @@ $( function () {
             $( this ).val( min );
         if ( max != undefined && parseInt( $( this ).val() ) > max )
             $( this ).val( max );
-    } )
+    } );
     // Ensure that only '0-9', '.' ',', and '-' are allowed
     input_number_list.keypress( function ( e ) {
         var ch = String.fromCharCode( e.which );
@@ -40,7 +40,7 @@ $( function () {
             e.preventDefault();
         if ( ch.match( /[.]/g ) && $( this ).hasClass( 'integer' ) )
             e.preventDefault();
-    } )
+    } );
     // Clean up input
     input_number_list.change( function () {
         // Replace spaces between numbers with commas
@@ -58,7 +58,7 @@ $( function () {
         $( this ).val( $( this ).val().replace( /[,]([^0-9]|$)|([^0-9]|^)[,]/g, '$1' ) );
         // Add spaces back after commas
         $( this ).val( $( this ).val().replace( /[,]/g, ', ' ) );
-    } )
+    } );
 
     /**
      *  Modal handling
@@ -78,7 +78,7 @@ $( function () {
             closeBtn = 'Close';
 
         if ( getVars != undefined ) {
-            url += '?'
+            url += '?';
             for ( var i = 0; i < getVars.length; i++ ) {
                 url += getVars[i] + '=' + $( '#' + getVars[i] ).val() + '&';
             }
@@ -101,4 +101,4 @@ $( function () {
             modal.find( '#dynamic-modal-body' ).html( data );
         } );
     } );
-} )
+} );
