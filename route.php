@@ -107,7 +107,7 @@ class Route
     }
 
     // Call the controller and action
-    public function getHTML()
+    public function getPath()
     {
         return self::call( $this->controller, $this->action, $this->params );
     }

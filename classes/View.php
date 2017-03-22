@@ -63,7 +63,7 @@ class View
         );
     }
 
-    public static function requireOnce( $path )
+    private function requireOnce( $path )
     {
         if ( file_exists( $path ) ) {
             require_once $path;
@@ -90,7 +90,7 @@ class View
     public function display()
     {
         if ( $this->layout == 'none' )
-            echo $this->route->getHTML();
+            require_once $this->route->getPath();
         else
             require_once __DIR__ . '/../view/' . $this->layout . '.php';
     }
