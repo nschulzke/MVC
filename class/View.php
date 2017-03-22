@@ -24,12 +24,11 @@ class View
 
     /**
      * View constructor.
-     * @param Route $route
-     * @param array $vars
+     * @param Route $route The Route object for this page
      */
-    public function __construct( $route, $vars = array() )
+    public function __construct( $route )
     {
-        $this->vars = $vars;
+        $this->vars = array();
         $this->route = $route;
 
         if ( isset( $_GET['layout'] ) && in_array( $_GET['layout'], self::VALID_LAYOUTS ) )
@@ -74,10 +73,10 @@ class View
     }
 
     /**
-     * @param string $path
-     * @return bool
+     * @param string $path The path to the view file
+     * @return bool True if the path was able to be included, false otherwise
      */
-    private function requireOnce( $path )
+    public function requireOnce( $path )
     {
         if ( file_exists( $path ) ) {
             require_once $path;
@@ -87,17 +86,21 @@ class View
     }
 
     /**
+     * Create or update a var item to be passed to the view
      * @param mixed $key
      * @param mixed $value
+     * @return View $this
      */
     public function setVar( $key, $value )
     {
         $this->vars[$key] = $value;
+        return $this;
     }
 
     /**
+     * Get the var item that will be passed to the view
      * @param mixed $key
-     * @return mixed
+     * @return mixed The value
      */
     public function getVar( $key )
     {
@@ -105,7 +108,7 @@ class View
     }
 
     /**
-     * @return string
+     * @return Route
      */
     public function getRoute()
     {
@@ -113,7 +116,7 @@ class View
     }
 
     /**
-     *
+     * Call the .php view for based on the viewPath
      */
     public function display()
     {

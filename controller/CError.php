@@ -4,7 +4,9 @@ class CError
 {
     public static function action_html( $route, $params )
     {
-        $view = new View( $route, array( 'code' => $params['code'], 'msg' => $params['msg'] ) );
+        $view = new View( $route );
+        $view->setVar( 'code', $params['code'] )
+             ->setVar( 'msg', $params['msg'] );
         $view->display();
     }
 

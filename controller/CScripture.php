@@ -4,6 +4,7 @@ class CScripture
 {
     static public function action_view( $route, $params )
     {
+        $view = new View( $route );
         if ( isset( $_GET['book'] ) && $_GET['book'] != '' && isset( $_GET['chapter'] ) && $_GET['chapter'] != '' ) {
             $book = $_GET['book'];
             $chapter = $_GET['chapter'];
@@ -14,12 +15,9 @@ class CScripture
 
             $scripture = new MScripture( $book, $chapter, $verses );
 
-            $view = new View( $route, array( 'scripture' => $scripture ) );
-            $view->display();
-        } else {
-            $view = new View( $route );
-            $view->display();
+            $view->setVar( 'scripture', $scripture );
         }
+        $view->display();
     }
 
     private function __construct()
