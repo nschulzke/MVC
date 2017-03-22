@@ -1,9 +1,9 @@
 <?php
 // Bootstrap ORM
-require_once __DIR__ . "/../orm/bootstrap.php";
+require_once __DIR__ . "/../model/orm/bootstrap.php";
 
 // Load ORM classes
-foreach ( glob( __DIR__ . "/../orm/entities/*.php" ) as $filename )
+foreach ( glob( __DIR__ . "/../model/orm/entities/*.php" ) as $filename )
     require_once $filename;
 
 use Doctrine\Common\Collections\Criteria;
