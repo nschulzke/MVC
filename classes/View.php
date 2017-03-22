@@ -25,24 +25,23 @@ class View
     /**
      * View constructor.
      * @param Route $route
-     * @param string $layout
      * @param array $vars
      */
-    public function __construct( $route, $layout = 'layout', $vars = array() )
+    public function __construct( $route, $vars = array() )
     {
         $this->vars = $vars;
         $this->route = $route;
 
-        $this->vars['action'] = $this->route->getAction();
-        $this->vars['controller'] = $this->route->getController();
-        $this->vars['viewPath'] = $this->route->getPath();
-
-        // Validate vars
-        if ( in_array( $layout, self::VALID_LAYOUTS ) )
-            $this->layout = $layout;
+        if ( isset( $_GET['layout'] ) && in_array( $_GET['layout'], self::VALID_LAYOUTS ) )
+            $this->layout = $_GET['layout'];
         else
             $this->layout = 'layout';
 
+        $this->vars['action'] = $this->route->getAction();
+        $this->vars['controller'] = $this->route->getController();
+        $this->vars['viewPath'] = $this->route->getDefaultPath();
+
+        // Validate vars
         if ( !isset( $vars['title'] ) )
             $this->vars['title'] = GlobalConfig::getAppName();
         if ( !isset( $vars['subtitle'] ) )
@@ -118,7 +117,7 @@ class View
     public function display()
     {
         if ( $this->layout == 'none' )
-            require_once $this->route;
+            require_once $this->vars['viewPath'];
         else
             require_once __DIR__ . '/../view/' . $this->layout . '.php';
     }

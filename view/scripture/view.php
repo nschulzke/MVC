@@ -1,6 +1,6 @@
-<?php if ( isset( $scripture ) ): ?>
+<?php if ( isset( $this->vars['scripture'] ) ): ?>
     <ul class="chapter-text">
-        <?php foreach ( $scripture->getVerses() as $num => $text ): ?>
+        <?php foreach ( $this->vars['scripture']->getVerses() as $num => $text ): ?>
             <li class="verse-text">
                 <span class="verse-num"><?= $num ?></span>
                 <span class="verse-text"><?= $text ?></span>

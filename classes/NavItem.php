@@ -12,15 +12,17 @@ class NavItem
      * @param string $name The display name for the NavItem
      * @param string $controller The target controller
      * @param string $action The target action
-     * @param string $url The url, if not just '/controller/action'
+     * @param string|null $url The url, if not just '/controller/action'
      */
     public function __construct( $name, $controller, $action, $url = '' )
     {
         $this->name = $name;
         $this->action = $action;
         $this->controller = $controller;
-        if ($url == '')
+        if ( !isset($url) || $url == '' )
             $this->url = $this->controller . '/' . $this->action;
+        else if ($url == '/')
+            $this->url = '';
         else
             $this->url = $url;
     }

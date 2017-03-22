@@ -14,7 +14,7 @@ class Scripture
     {
     }
 
-    static public function action_view()
+    static public function action_view( $route, $params )
     {
         if ( isset( $_GET['book'] ) && isset( $_GET['chapter'] ) ) {
             $book = $_GET['book'];
@@ -26,7 +26,8 @@ class Scripture
 
             $scripture = new MScripture( $book, $chapter, $verses );
 
-            require_once __DIR__ . '/../view/scripture/view.php';
+            $view = new View($route, array('scripture' => $scripture));
+            $view->display();
         } else
             echo 'No chapter specified';
     }

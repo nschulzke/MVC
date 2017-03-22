@@ -1,6 +1,6 @@
 <?php
 $bar = new Navbar();
-$bar->addItem( 'Home', 'static-pages', 'home', '' );
+$bar->addItem( 'Home', 'static-pages', 'home', '/' );
 $bar->addItem( 'About', 'static-pages', 'about', 'about' );
 $bar->addItem( 'Test', 'static-pages', 'test', 'test' );
 ?>

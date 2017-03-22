@@ -22,25 +22,6 @@ class Route
         return defined( "$controllerClass::ACTIONS" ) && in_array( $action, $controllerClass::ACTIONS );
     }
 
-    // Calls a given $action on $controller, if it exists, otherwise calls an error
-    private static function call( $controller, $action, $params = array() )
-    {
-        if ( self::isAction( $controller, $action ) ) {
-            $controllerClass = self::toClass( $controller );
-            $actionMethod = self::toMethod( $action );
-
-            $controllerClass::$actionMethod( $params );
-        } else {
-            $viewFile = __DIR__ . '/view/' . $controller . '/' . $action . '.php';
-            if ( file_exists( $viewFile ) ) {
-                return $viewFile;
-            } else {
-                self::call( 'error', 'html', array( 'code' => '404', 'msg' => 'File not found: /' . $controller . '/' . $action ) );
-            }
-        }
-        return null;
-    }
-
     /**
      *  Class Members
      */
@@ -48,6 +29,20 @@ class Route
     private $action = '';
     private $uri = '';
     private $params = array();
+
+    // Calls a given $action on $controller, if it exists, otherwise calls an error
+    private function call( $controller, $action, $params = array() )
+    {
+        if ( self::isAction( $controller, $action ) ) {
+            $controllerClass = self::toClass( $controller );
+            $actionMethod = self::toMethod( $action );
+
+            $controllerClass::$actionMethod( $this, $params );
+        } else {
+            self::call( 'error', 'html', array( 'code' => '404', 'msg' => 'File not found: /' . $controller . '/' . $action ) );
+        }
+        return null;
+    }
 
     // Constructs the route object from the current URI
     public function __construct()
@@ -106,18 +101,13 @@ class Route
         return $this->uri;
     }
 
-    // Call the controller and action
-    public function getPath()
+    public function getDefaultPath()
     {
-        return self::call( $this->controller, $this->action, $this->params );
+        return __DIR__ . '/view/' . $this->controller . '/' . $this->action . '.php';
     }
 
     public function display()
     {
-        if ( isset( $_GET['layout'] ) )
-            $view = new View( $this, $_GET['layout'] );
-        else
-            $view = new View( $this );
-        $view->display();
+        self::call( $this->controller, $this->action, $this->params );
     }
 }
