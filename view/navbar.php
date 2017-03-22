@@ -1,5 +1,5 @@
 <?php
-$bar = new Navbar();
+$bar = new NavBar();
 $bar->addItem( 'Home', 'static-pages', 'home', '/' );
 $bar->addItem( 'About', 'static-pages', 'about', 'about' );
 $bar->addItem( 'Test', 'static-pages', 'test', 'test' );

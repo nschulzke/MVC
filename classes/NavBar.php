@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/NavItem.php';
 
-class Navbar
+class NavBar
 {
     /**
      * @param string $name The display name for the NavItem
