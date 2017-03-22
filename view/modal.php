@@ -8,10 +8,12 @@
                 </button>
             </div>
             <div class="modal-body" id="dynamic-modal-body">
-                
+
             </div>
             <div class="modal-footer">
-                <button type="button" id="dynamic-modal-close-btn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="dynamic-modal-close-btn" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                </button>
                 <button type="button" id="dynamic-modal-save-btn" class="btn btn-primary">Save</button>
             </div>
         </div>

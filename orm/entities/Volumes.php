@@ -1,7 +1,6 @@
 <?php
 
 
-
 /**
  * Volumes
  */
@@ -45,7 +44,7 @@ class Volumes
      *
      * @return Volumes
      */
-    public function setVolumeTitle($volumeTitle)
+    public function setVolumeTitle( $volumeTitle )
     {
         $this->volumeTitle = $volumeTitle;
 
@@ -69,7 +68,7 @@ class Volumes
      *
      * @return Volumes
      */
-    public function setVolumeLongTitle($volumeLongTitle)
+    public function setVolumeLongTitle( $volumeLongTitle )
     {
         $this->volumeLongTitle = $volumeLongTitle;
 
@@ -93,7 +92,7 @@ class Volumes
      *
      * @return Volumes
      */
-    public function setVolumeSubtitle($volumeSubtitle)
+    public function setVolumeSubtitle( $volumeSubtitle )
     {
         $this->volumeSubtitle = $volumeSubtitle;
 
@@ -117,7 +116,7 @@ class Volumes
      *
      * @return Volumes
      */
-    public function setVolumeShortTitle($volumeShortTitle)
+    public function setVolumeShortTitle( $volumeShortTitle )
     {
         $this->volumeShortTitle = $volumeShortTitle;
 
@@ -141,7 +140,7 @@ class Volumes
      *
      * @return Volumes
      */
-    public function setVolumeLdsUrl($volumeLdsUrl)
+    public function setVolumeLdsUrl( $volumeLdsUrl )
     {
         $this->volumeLdsUrl = $volumeLdsUrl;
 

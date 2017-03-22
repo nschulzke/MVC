@@ -5,25 +5,26 @@ $dir = __DIR__ . '/';
 <html lang="en">
     <head>
         <?php
-        foreach ($this->vars['head'] as $head)
-            $this->requireOnce($dir . $head)
+        foreach ( $this->vars['head'] as $head )
+                  $this->requireOnce( $dir . $head )
         ?>
-        <title><?= htmlspecialchars($this->vars['title']) ?>: <?= htmlspecialchars($this->vars['subtitle']) ?></title>
+        <title><?= htmlspecialchars( $this->vars['title'] ) ?>
+            : <?= htmlspecialchars( $this->vars['subtitle'] ) ?></title>
     </head>
     <body>
-        <?php $this->requireOnce($dir . $this->vars['navbar']) ?>
-        
+        <?php $this->requireOnce( $dir . $this->vars['navbar'] ) ?>
+
         <article id="main-container" class="container">
             <?php echo $this->route->getHTML(); ?>
         </article>
-        
-        <?php $this->requireOnce($dir . $this->vars['footer']) ?>
-        <?php $this->requireOnce($dir . $this->vars['modal']) ?>
-        
+
+        <?php $this->requireOnce( $dir . $this->vars['footer'] ) ?>
+        <?php $this->requireOnce( $dir . $this->vars['modal'] ) ?>
+
         <div id="scripts" class="hidden">
             <?php
-            foreach ($this->vars['foot'] as $foot)
-                $this->requireOnce($dir . $foot)
+            foreach ( $this->vars['foot'] as $foot )
+                      $this->requireOnce( $dir . $foot )
             ?>
         </div>
     </body>

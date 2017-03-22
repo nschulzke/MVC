@@ -1,5 +1,5 @@
 {
-    "require": {
-        "doctrine/orm": "*"
-    }
+  "require": {
+    "doctrine/orm": "*"
+  }
 }

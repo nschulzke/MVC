@@ -1,7 +1,6 @@
 <?php
 
 
-
 /**
  * Verses
  */
@@ -35,7 +34,7 @@ class Verses
      *
      * @return Verses
      */
-    public function setChapterId($chapterId)
+    public function setChapterId( $chapterId )
     {
         $this->chapterId = $chapterId;
 
@@ -59,7 +58,7 @@ class Verses
      *
      * @return Verses
      */
-    public function setVerseNumber($verseNumber)
+    public function setVerseNumber( $verseNumber )
     {
         $this->verseNumber = $verseNumber;
 
@@ -83,7 +82,7 @@ class Verses
      *
      * @return Verses
      */
-    public function setScriptureText($scriptureText)
+    public function setScriptureText( $scriptureText )
     {
         $this->scriptureText = $scriptureText;
 

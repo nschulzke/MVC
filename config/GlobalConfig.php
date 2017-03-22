@@ -1,15 +1,21 @@
 <?php
-class GlobalConfig {
+
+class GlobalConfig
+{
     private static $APP_PATH = '/framework';
     private static $APP_NAME = 'Framework Demo';
-    
-    private function __construct() {}
-    
-    private function __clone() {}
-    
-    public static function getAppPath($finalSlash = false)
+
+    private function __construct()
     {
-        if ($finalSlash)
+    }
+
+    private function __clone()
+    {
+    }
+
+    public static function getAppPath( $finalSlash = false )
+    {
+        if ( $finalSlash )
             return self::$APP_PATH . '/';
         else
             return self::$APP_PATH;
@@ -20,4 +26,3 @@ class GlobalConfig {
         return self::$APP_NAME;
     }
 }
-?>

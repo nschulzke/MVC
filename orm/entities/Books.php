@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Books
  */
@@ -47,7 +48,7 @@ class Books
      *
      * @return Books
      */
-    public function setVolumeId($volumeId)
+    public function setVolumeId( $volumeId )
     {
         $this->volumeId = $volumeId;
 
@@ -71,7 +72,7 @@ class Books
      *
      * @return Books
      */
-    public function setBookTitle($bookTitle)
+    public function setBookTitle( $bookTitle )
     {
         $this->bookTitle = $bookTitle;
 
@@ -95,7 +96,7 @@ class Books
      *
      * @return Books
      */
-    public function setBookLongTitle($bookLongTitle)
+    public function setBookLongTitle( $bookLongTitle )
     {
         $this->bookLongTitle = $bookLongTitle;
 
@@ -119,7 +120,7 @@ class Books
      *
      * @return Books
      */
-    public function setBookSubtitle($bookSubtitle)
+    public function setBookSubtitle( $bookSubtitle )
     {
         $this->bookSubtitle = $bookSubtitle;
 
@@ -143,7 +144,7 @@ class Books
      *
      * @return Books
      */
-    public function setBookShortTitle($bookShortTitle)
+    public function setBookShortTitle( $bookShortTitle )
     {
         $this->bookShortTitle = $bookShortTitle;
 
@@ -167,7 +168,7 @@ class Books
      *
      * @return Books
      */
-    public function setBookLdsUrl($bookLdsUrl)
+    public function setBookLdsUrl( $bookLdsUrl )
     {
         $this->bookLdsUrl = $bookLdsUrl;
 

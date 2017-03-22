@@ -1,7 +1,6 @@
 <?php
 
 
-
 /**
  * Pilcrow
  */
@@ -25,7 +24,7 @@ class Pilcrow
      *
      * @return Pilcrow
      */
-    public function setVerseId($verseId)
+    public function setVerseId( $verseId )
     {
         $this->verseId = $verseId;
 

@@ -1,7 +1,6 @@
 <?php
 
 
-
 /**
  * Chapters
  */
@@ -30,7 +29,7 @@ class Chapters
      *
      * @return Chapters
      */
-    public function setBookId($bookId)
+    public function setBookId( $bookId )
     {
         $this->bookId = $bookId;
 
@@ -54,7 +53,7 @@ class Chapters
      *
      * @return Chapters
      */
-    public function setChapterNumber($chapterNumber)
+    public function setChapterNumber( $chapterNumber )
     {
         $this->chapterNumber = $chapterNumber;
 

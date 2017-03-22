@@ -1,54 +1,49 @@
 <?php
 
-class Route {
+class Route
+{
     /**
      *  Static Helper Functions
      */
-    
+
     // Takes a hyphen-format controller name and returns it in CamelCase
-    private static function toClass($controller)
+    private static function toClass( $controller )
     {
-        return str_replace(' ', '', ucwords(str_replace('-', ' ', $controller)));
+        return str_replace( ' ', '', ucwords( str_replace( '-', ' ', $controller ) ) );
     }
-    
+
     // Takes an action name and converts it to the method format (usually appending a prefix)
-    private static function toMethod($action)
+    private static function toMethod( $action )
     {
         return 'action_' . $action;
     }
-    
+
     // Returns whether or not $action can be found in $controller, based on the ACTIONS constant
-    private static function isAction($controller, $action)
+    private static function isAction( $controller, $action )
     {
-        $controllerClass = self::toClass($controller);
-        
-        return defined("$controllerClass::ACTIONS") && in_array($action, $controllerClass::ACTIONS);
+        $controllerClass = self::toClass( $controller );
+
+        return defined( "$controllerClass::ACTIONS" ) && in_array( $action, $controllerClass::ACTIONS );
     }
-    
+
     // Calls a given $action on $controller, if it exists, otherwise calls an error
-    private static function call($controller, $action, $params = array())
+    private static function call( $controller, $action, $params = array() )
     {
-        if (self::isAction($controller, $action))
-        {
-            $controllerClass = self::toClass($controller);
-            $actionMethod = self::toMethod($action);
-            
-            $controllerClass::$actionMethod($params);
-        }
-        else
-        {
+        if ( self::isAction( $controller, $action ) ) {
+            $controllerClass = self::toClass( $controller );
+            $actionMethod = self::toMethod( $action );
+
+            $controllerClass::$actionMethod( $params );
+        } else {
             $viewFile = __DIR__ . '/view/' . $controller . '/' . $action . '.php';
-            if (file_exists($viewFile))
-            {
+            if ( file_exists( $viewFile ) ) {
                 require_once $viewFile;
-            }
-            else
-            {
-                self::call('error', 'html', array('code' => '404', 'msg' => 'File not found: /' . $controller . '/' . $action));
+            } else {
+                self::call( 'error', 'html', array( 'code' => '404', 'msg' => 'File not found: /' . $controller . '/' . $action ) );
             }
         }
     }
-    
+
     /**
      *  Class Members
      */
@@ -56,80 +51,78 @@ class Route {
     private $action = '';
     private $uri = '';
     private $params = array();
+
     // Constructs the route object from the current URI
     public function __construct()
     {
         $this->uri = $_SERVER['REQUEST_URI'];
         // Get the current URI, clean it up to be ready
-        $uri = str_replace(GlobalConfig::getAppPath(true), '', $this->uri);
-        $uri = preg_replace('#\?(.*)$#', '', $uri);
+        $uri = str_replace( GlobalConfig::getAppPath( true ), '', $this->uri );
+        $uri = preg_replace( '#\?(.*)$#', '', $uri );
         // Explode it like so: ( $controller, $action, $params )
         $uri = explode( '/', $uri, 3 );
         // Set $params
         $this->params = array();
-        if (isset($uri[2]) && $uri[2] != NULL)
-        {
-            $this->params = explode('/', $uri[2]);
+        if ( isset( $uri[2] ) && $uri[2] != NULL ) {
+            $this->params = explode( '/', $uri[2] );
         }
 
         // Set $this->controller and $this->action
-        if ((isset($uri[0]) && $uri[0] != NULL) && (isset($uri[1]) && $uri[1] != NULL))
-        {   // if the URI was '/controller/action'
+        if ( ( isset( $uri[0] ) && $uri[0] != NULL ) && ( isset( $uri[1] ) && $uri[1] != NULL ) ) {   // if the URI was '/controller/action'
             $this->controller = $uri[0];
             $this->action = $uri[1];
-        }
-        else if (isset($uri[0]) && $uri[0] != NULL)
-        {   // if the URI was just '/controller'
-            if (self::isAction($uri[0], 'default'))
-            {   // if there's a default action, use it
+        } else if ( isset( $uri[0] ) && $uri[0] != NULL ) {   // if the URI was just '/controller'
+            if ( self::isAction( $uri[0], 'default' ) ) {   // if there's a default action, use it
                 $this->controller = $uri[0];
                 $this->action = 'default';
-            }
-            else
-            {   // if there's no default, assume we're looking for a static page by that name
+            } else {   // if there's no default, assume we're looking for a static page by that name
                 $this->controller = 'static-pages';
                 $this->action = $uri[0];
             }
-        }
-        else
-        {   // if the URI was '/'
+        } else {   // if the URI was '/'
             $this->controller = 'static-pages';
             $this->action = 'home';
         }
     }
+
     // Return the name of the controller
     public function getController()
     {
         return $this->controller;
     }
+
     // Return the name of the action
     public function getAction()
     {
         return $this->action;
     }
+
     // Return the params
     public function getParams()
     {
         return $this->params;
     }
+
     // Return the params
     public function getURI()
     {
         return $this->uri;
     }
+
     // Call the controller and action
     public function getHTML()
     {
-        return $this->call($this->controller, $this->action, $this->params);
+        return $this->call( $this->controller, $this->action, $this->params );
     }
-    
+
     public function display()
     {
-        if (isset($_GET['layout']))
-            $view = new View($this, $_GET['layout']);
+        if ( isset( $_GET['layout'] ) )
+            $view = new View( $this, $_GET['layout'] );
         else
-            $view = new View($this);
+            $view = new View( $this );
         $view->display();
     }
 }
+
 ?>
