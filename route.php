@@ -5,7 +5,7 @@ class Route
     // Takes a hyphen-format controller name and returns it in CamelCase
     private static function toClass( $controller )
     {
-        return str_replace( ' ', '', ucwords( str_replace( '-', ' ', $controller ) ) );
+        return str_replace( ' ', '', ucwords( str_replace( '-', ' ', $controller ) ) ) . 'Controller';
     }
 
     // Takes an action name and converts it to the method format (usually appending a prefix)

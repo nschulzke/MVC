@@ -1,6 +1,6 @@
 <?php
 
-class StaticPages
+class StaticPagesController
 {
     const ACTIONS = array(
         'home',

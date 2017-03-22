@@ -11,9 +11,9 @@ require_once __DIR__ . '/classes/View.php';
 require_once __DIR__ . '/model/Scripture.php';
 
 // Load controllers
-require_once __DIR__ . "/controller/error.php";
-require_once __DIR__ . "/controller/static-pages.php";
-require_once __DIR__ . "/controller/scripture.php";
+require_once __DIR__ . "/controller/ErrorController.php";
+require_once __DIR__ . "/controller/StaticPagesController.php";
+require_once __DIR__ . "/controller/ScriptureController.php";
 
 // Load Route class
 require_once __DIR__ . '/route.php';

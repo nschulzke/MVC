@@ -1,6 +1,6 @@
 <?php
 
-class Scripture
+class ScriptureController
 {
     const ACTIONS = array(
         'view'
