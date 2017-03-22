@@ -31,17 +31,12 @@ class Route
     private $params = array();
 
     // Calls a given $action on $controller, if it exists, otherwise calls an error
-    private function call( $controller, $action, $params = array() )
+    public function call()
     {
-        if ( self::isAction( $controller, $action ) ) {
-            $controllerClass = self::toClass( $controller );
-            $actionMethod = self::toMethod( $action );
+        $controllerClass = self::toClass( $this->controller );
+        $actionMethod = self::toMethod( $this->action );
 
-            $controllerClass::$actionMethod( $this, $params );
-        } else {
-            self::call( 'error', 'html', array( 'code' => '404', 'msg' => 'File not found: /' . $controller . '/' . $action ) );
-        }
-        return null;
+        $controllerClass::$actionMethod( $this, $this->params );
     }
 
     // Constructs the route object from the current URI
@@ -75,6 +70,12 @@ class Route
             $this->controller = 'static-pages';
             $this->action = 'home';
         }
+
+        if ( !self::isAction( $this->controller, $this->action ) ) {
+            $this->params = array( 'code' => '404', 'msg' => 'File not found: /' . $this->controller . '/' . $this->action );
+            $this->controller = 'error';
+            $this->action = 'html';
+        }
     }
 
     // Return the name of the controller
@@ -104,10 +105,5 @@ class Route
     public function getDefaultPath()
     {
         return __DIR__ . '/view/' . $this->controller . '/' . $this->action . '.php';
-    }
-
-    public function display()
-    {
-        self::call( $this->controller, $this->action, $this->params );
     }
 }

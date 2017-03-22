@@ -17,7 +17,8 @@ class CError
 
     public static function action_html( $route, $params )
     {
-        require_once __DIR__ . '/../view/error/html.php';
+        $view = new View( $route, array( 'code' => $params['code'], 'msg' => $params['msg'] ) );
+        $view->display();
     }
 
     public static function action_json( $route, $params )

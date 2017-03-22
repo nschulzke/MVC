@@ -39,7 +39,8 @@ class View
 
         $this->vars['action'] = $this->route->getAction();
         $this->vars['controller'] = $this->route->getController();
-        $this->vars['viewPath'] = $this->route->getDefaultPath();
+        if (!isset($this->vars['viewPath']))
+            $this->vars['viewPath'] = $this->route->getDefaultPath();
 
         // Validate vars
         if ( !isset( $vars['title'] ) )
