@@ -10,10 +10,9 @@ require_once __DIR__ . '/classes/View.php';
 // Load models
 require_once __DIR__ . '/model/MScripture.php';
 
-// Load controllers
-require_once __DIR__ . "/controller/CError.php";
-require_once __DIR__ . "/controller/CStaticPages.php";
-require_once __DIR__ . "/controller/CScripture.php";
+// Autoload controllers
+foreach ( glob( __DIR__ . "/controller/*.php" ) as $filename )
+    require_once $filename;
 
 // Load Route class
 require_once __DIR__ . '/route.php';

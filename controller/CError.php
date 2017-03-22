@@ -3,7 +3,8 @@
 class CError
 {
     const ACTIONS = array(
-        'html', 'json'
+        'html',
+        'json',
     );
 
     private function __construct()

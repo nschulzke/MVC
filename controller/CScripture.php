@@ -3,7 +3,7 @@
 class CScripture
 {
     const ACTIONS = array(
-        'view'
+        'view',
     );
 
     private function __construct()
