@@ -59,7 +59,7 @@ class MScripture
         return self::$versesRepo;
     }
 
-    public static function explodeRanges($verseNums)
+    public static function explodeRanges( $verseNums )
     {
         for ( $i = 0; $i < sizeof( $verseNums ); $i++ ) {
             if ( strpos( $verseNums[$i], '-' ) != false ) {
@@ -72,15 +72,11 @@ class MScripture
         return $verseNums;
     }
 
-    private $book; /* @var Books $book */
-    private $chapter; /* @var Chapters $chapter */
-    private $verses = array();
-
     /**
      * @param $bookName
      * @return Books|null|object
      */
-    private function findBook( $bookName )
+    public static function findBook( $bookName )
     {
         if ( is_numeric( $bookName ) )
             return self::getBooksRepo()->find( $bookName );
@@ -100,10 +96,16 @@ class MScripture
             return null;
     }
 
+    private $book;
+    /* @var Books $book */
+    private $chapter;
+    /* @var Chapters $chapter */
+    private $verses = array();
+
     /**
      * MScripture constructor.
-     * @param $bookName
-     * @param $chapterNum
+     * @param       $bookName
+     * @param       $chapterNum
      * @param array $verseNums
      */
     public function __construct( $bookName, $chapterNum, $verseNums = array() )
@@ -115,20 +117,20 @@ class MScripture
         if ( is_numeric( $verseNums ) )
             $this->verses = array( self::getVersesRepo()->findOneBy( array( 'chapterId' => $this->chapter->getId(), 'number' => $verseNums ) ) );
         else {
-            $verseNums = self::explodeRanges($verseNums);
+            $verseNums = self::explodeRanges( $verseNums );
             $verses = self::getVersesRepo()->findBy( array( 'chapterId' => $this->chapter->getId() ) );
             if ( isset( $verseNums ) && sizeof( $verseNums ) > 0 ) {
                 if ( isset( $verseNums['start'] ) && isset( $verseNums['end'] ) ) {
-                    foreach ( $verses as $verse ) /* @var Verses $verse*/
+                    foreach ( $verses as $verse ) /* @var Verses $verse */
                         if ( $verse->getNumber() >= $verseNums['start'] && $verse->getNumber() <= $verseNums['end'] )
                             $this->verses[$verse->getNumber()] = $verse;
                 } else {
-                    foreach ( $verses as $verse ) /* @var Verses $verse*/
+                    foreach ( $verses as $verse ) /* @var Verses $verse */
                         if ( in_array( $verse->getNumber(), $verseNums ) )
                             $this->verses[$verse->getNumber()] = $verse;
                 }
             } else {
-                foreach ( $verses as $verse ) /* @var Verses $verse*/
+                foreach ( $verses as $verse ) /* @var Verses $verse */
                     $this->verses[$verse->getNumber()] = $verse;
             }
         }
@@ -140,7 +142,7 @@ class MScripture
     public function getVerses()
     {
         $retArr = array();
-        foreach ( $this->verses as $verse ) /* @var Verses $verse*/
+        foreach ( $this->verses as $verse ) /* @var Verses $verse */
             $retArr[$verse->getNumber()] = $verse->getText();
         return $retArr;
     }

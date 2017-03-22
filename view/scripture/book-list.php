@@ -1,5 +1,5 @@
 <?php
-$url = GlobalConfig::getAppPath() . '/scripture/chapter-list';
+$url = GlobalConfig::getAppPath() . '/scripture/view';
 ?>
 
 <div id="books-accordion" role="tablist" aria-multiselectable="true">
@@ -18,7 +18,7 @@ $volId = str_replace(' ', '', $volume);
         <div class="collapse<?= $this->vars['active'] == $volume ? ' show' : '' ?>" role="tabpanel" id="books_<?= $volId ?>" aria-labelledby="volume_<?= $volId ?>">
             <div class="card-block books-list">
             <?php foreach ( $books as $id => $book ): ?>
-                <a href="<?= $url ?>?book=<?= $id ?>"><?= $book ?></a>
+                <a href="<?= $url ?>/<?= $id ?>"><?= $book ?></a>
             <?php endforeach ?>
             </div>
         </div>

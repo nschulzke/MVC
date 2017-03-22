@@ -74,19 +74,19 @@ $( function () {
         var title = button.data( 'title' );
         var saveBtn = button.data( 'saveBtn' );
         var closeBtn = button.data( 'closeBtn' );
-        var getVars = button.data( 'getVars' );
+        var params = button.data( 'params' );
         // Validate the data
         if ( saveBtn == undefined )
             saveBtn = 'Save';
         if ( closeBtn == undefined )
             closeBtn = 'Close';
 
-        if ( getVars != undefined ) {
-            url += '?';
-            for ( var i = 0; i < getVars.length; i++ ) {
-                url += getVars[i] + '=' + $( '#' + getVars[i] ).val() + '&';
+        if ( params != undefined ) {
+            for ( var i = 0; i < params.length; i++ ) {
+                url += '/' + $( '#' + params[i] ).val();
             }
         }
+        console.log(url);
 
         // Set the HTML based on the button's data
         var modal = $( this );

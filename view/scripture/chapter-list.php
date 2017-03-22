@@ -1,5 +1,5 @@
 <?php
-$back = GlobalConfig::getAppPath() . '/scripture/book-list?volume=' . $this->vars['volume']->getId();
+$back = GlobalConfig::getAppPath() . '/scripture/view?volume=' . $this->vars['volume']->getId();
 $url = GlobalConfig::getAppPath() . '/scripture/view';
 ?>
 
@@ -13,7 +13,7 @@ $url = GlobalConfig::getAppPath() . '/scripture/view';
     </div>
     <div class="card-block chapters-list">
         <?php foreach ( $this->vars['chapters'] as $chapter ): /* @var Chapters $chapter */?>
-            <a href="<?= $url ?>?book=<?= $this->vars['book']->getLdsUrl() ?>&chapter=<?= $chapter->getNumber() ?>"><?= $chapter->getNumber() ?></a>
+            <a href="<?= $url ?>/<?= $this->vars['book']->getLdsUrl() ?>/<?= $chapter->getNumber() ?>"><?= $chapter->getNumber() ?></a>
         <?php endforeach ?>
     </div>
 </div>

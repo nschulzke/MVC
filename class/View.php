@@ -85,6 +85,8 @@ class View
             $this->vars['footer'] = 'footer.php';
         else if ( $key == 'modal' && !in_array( $value, self::VALID_MODALS ) )
             $this->vars['modal'] = 'modal.php';
+        else if ( $key == 'viewPath' )
+            $this->vars['viewPath'] = __DIR__ . '/../view/' . $value;
         return $this;
     }
 

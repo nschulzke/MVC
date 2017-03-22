@@ -12,7 +12,7 @@ $chaptersRepo = MScripture::getChaptersRepo();
             <?php foreach ( $volumesRepo->findAll() as $volume ): /* @var Volumes $volume */ ?>
                 <optgroup label="<?= $volume->getTitle() ?>">
                     <?php foreach ( $booksRepo->findBy( array( 'volumeId' => $volume->getId() ) ) as $book ): /* @var Books $book */?>
-                        <option value="<?= $book->getId() ?>" data-chapters="<?= sizeof( $chaptersRepo->findBy( array( 'bookId' => $book->getId() ) ) ) ?>"><?= $book->getTitle() ?></option>
+                        <option value="<?= $book->getLdsUrl() ?>" data-chapters="<?= sizeof( $chaptersRepo->findBy( array( 'bookId' => $book->getId() ) ) ) ?>"><?= $book->getTitle() ?></option>
                     <?php endforeach; ?>
                 </optgroup>
             <?php endforeach; ?>
