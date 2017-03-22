@@ -3,6 +3,8 @@ require_once __DIR__ . '/NavItem.php';
 
 class NavBar
 {
+    private $items = array();
+
     /**
      * @param string $name The display name for the NavItem
      * @param string $controller The target controller
@@ -12,16 +14,6 @@ class NavBar
     public function addItem( $name, $controller, $action, $url = '' )
     {
         $this->items[] = new NavItem( $name, $controller, $action, $url );
-    }
-
-    private $items = array();
-
-    /**
-     * Navbar constructor.
-     */
-    public function __construct()
-    {
-        $this->items = array();
     }
 
     /**
