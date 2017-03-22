@@ -9,21 +9,24 @@ class NavItem
 
     /**
      * NavItem constructor.
-     * @param string $name
-     * @param string $controller
-     * @param string $action
-     * @param string $url
+     * @param string $name The display name for the NavItem
+     * @param string $controller The target controller
+     * @param string $action The target action
+     * @param string $url The url, if not just '/controller/action'
      */
     public function __construct( $name, $controller, $action, $url = '' )
     {
         $this->name = $name;
         $this->action = $action;
         $this->controller = $controller;
-        $this->url = $url;
+        if ($url == '')
+            $this->url = $this->controller . '/' . $this->action;
+        else
+            $this->url = $url;
     }
 
     /**
-     * @return string
+     * @return string The display name for the NavItem
      */
     public function getName()
     {
@@ -31,7 +34,7 @@ class NavItem
     }
 
     /**
-     * @return string
+     * @return string The target controller
      */
     public function getAction()
     {
@@ -39,7 +42,7 @@ class NavItem
     }
 
     /**
-     * @return string
+     * @return string The target action
      */
     public function getController()
     {
@@ -47,19 +50,17 @@ class NavItem
     }
 
     /**
-     * @return string
+     * @return string The target URL
      */
     public function getURL()
     {
-        if ( $this->url === '' )
-            return GlobalConfig::getAppPath( true ) . $this->controller . '/' . $this->action;
-        else return GlobalConfig::getAppPath( true ) . $this->url;
+        return GlobalConfig::getAppPath( true ) . $this->url;
     }
 
     /**
-     * @param string $controller
-     * @param string $action
-     * @return bool
+     * @param string $controller The controller to compare to
+     * @param string $action The action to compare to
+     * @return bool True if we point to the same controller and action
      */
     public function equals( $controller, $action )
     {
