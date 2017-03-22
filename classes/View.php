@@ -33,6 +33,10 @@ class View
         $this->vars = $vars;
         $this->route = $route;
 
+        $this->vars['action'] = $this->route->getAction();
+        $this->vars['controller'] = $this->route->getController();
+        $this->vars['viewPath'] = $this->route->getPath();
+
         // Validate vars
         if ( in_array( $layout, self::VALID_LAYOUTS ) )
             $this->layout = $layout;
@@ -42,7 +46,7 @@ class View
         if ( !isset( $vars['title'] ) )
             $this->vars['title'] = GlobalConfig::getAppName();
         if ( !isset( $vars['subtitle'] ) )
-            $this->vars['subtitle'] = ucfirst( $this->route->getAction() );
+            $this->vars['subtitle'] = ucfirst( $this->vars['action'] );
 
         if ( !isset( $vars['navbar'] ) || !in_array( $vars['navbar'], self::VALID_NAVBARS ) )
             $this->vars['navbar'] = 'navbar';
@@ -55,18 +59,17 @@ class View
 
         // Set up include files
         $this->vars['navbar'] .= '.php';
-        $this->vars['viewPath'] = $this->route->getPath();
         $this->vars['footer'] .= '.php';
         $this->vars['modal'] .= '.php';
         $this->vars['head'] = array(
             'head.php',
-            $this->route->getController() . '/_head.php',
-            $this->route->getController() . '/' . $this->route->getAction() . '_head.php'
+            $this->vars['controller'] . '/_head.php',
+            $this->vars['controller'] . '/' . $this->vars['action'] . '_head.php'
         );
         $this->vars['foot'] = array(
             'foot.php',
-            $this->route->getController() . '/_foot.php',
-            $this->route->getController() . '/' . $this->route->getAction() . '_foot.php'
+            $this->vars['controller'] . '/_foot.php',
+            $this->vars['controller'] . '/' . $this->vars['action'] . '_foot.php'
         );
     }
 
@@ -102,7 +105,7 @@ class View
     }
 
     /**
-     * @return Route
+     * @return string
      */
     public function getRoute()
     {
@@ -115,7 +118,7 @@ class View
     public function display()
     {
         if ( $this->layout == 'none' )
-            require_once $this->route->getPath();
+            require_once $this->route;
         else
             require_once __DIR__ . '/../view/' . $this->layout . '.php';
     }
