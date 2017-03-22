@@ -2,21 +2,9 @@
 
 class CScripture
 {
-    const ACTIONS = array(
-        'view',
-    );
-
-    private function __construct()
-    {
-    }
-
-    private function __clone()
-    {
-    }
-
     static public function action_view( $route, $params )
     {
-        if ( isset( $_GET['book'] ) && $_GET['book'] != '' && isset( $_GET['chapter'])  && $_GET['chapter'] != '' ) {
+        if ( isset( $_GET['book'] ) && $_GET['book'] != '' && isset( $_GET['chapter'] ) && $_GET['chapter'] != '' ) {
             $book = $_GET['book'];
             $chapter = $_GET['chapter'];
             if ( isset( $_GET['verses'] ) && $_GET['verses'] != '' )
@@ -32,5 +20,13 @@ class CScripture
             $view = new View( $route );
             $view->display();
         }
+    }
+
+    private function __construct()
+    {
+    }
+
+    private function __clone()
+    {
     }
 }

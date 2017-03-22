@@ -18,8 +18,9 @@ class Route
     private static function isAction( $controller, $action )
     {
         $controllerClass = self::toClass( $controller );
+        $actionMethod = self::toMethod( $action );
 
-        return defined( "$controllerClass::ACTIONS" ) && in_array( $action, $controllerClass::ACTIONS );
+        return class_exists($controllerClass) && is_callable("$controllerClass::$actionMethod");
     }
 
     /**
