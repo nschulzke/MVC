@@ -1,6 +1,6 @@
 <?php
 
-class Navitem
+class NavItem
 {
     private $name;
     private $action;

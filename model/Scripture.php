@@ -55,15 +55,15 @@ class MScripture
     {
         if ( is_numeric( $bookName ) )
             return self::getBooksRepo()->find( $bookName );
-        $crit = Criteria::create();
-        $crit->where(
+        $criteria = Criteria::create();
+        $criteria->where(
             Criteria::expr()->orX(
                 Criteria::expr()->contains( 'bookTitle', $bookName ),
                 Criteria::expr()->contains( 'bookLongTitle', $bookName ),
                 Criteria::expr()->contains( 'bookShortTitle', $bookName )
             )
         );
-        $books = self::getBooksRepo()->matching( $crit );
+        $books = self::getBooksRepo()->matching( $criteria );
         if ( $books->count() > 0 )
             return $books->get( 0 );
         else

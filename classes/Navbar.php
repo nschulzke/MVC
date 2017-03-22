@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/Navitem.php';
+require_once __DIR__ . '/NavItem.php';
 
 class Navbar
 {
@@ -12,7 +12,7 @@ class Navbar
 
     public function addItem( $name, $action, $controller, $url = null )
     {
-        $this->items[] = new Navitem( $name, $action, $controller, $url );
+        $this->items[] = new NavItem( $name, $action, $controller, $url );
     }
 
     public function getItems()
