@@ -5,13 +5,16 @@ class Route
     // Takes a hyphen-format controller name and returns it in CamelCase
     private static function toClass( $controller )
     {
-        return 'C' . str_replace( ' ', '', ucwords( str_replace( '-', ' ', $controller ) ) );
+        $classString = str_replace( ' ', '', ucwords( str_replace( '-', ' ', $controller ) ) );
+        return 'C' . $classString;
     }
 
     // Takes an action name and converts it to the method format (usually appending a prefix)
     private static function toMethod( $action )
     {
-        return 'action_' . $action;
+        $actionString = str_replace( ' ', '', ucwords( str_replace( '-', ' ', $action ) ) );
+        $actionString[0] = strtolower($actionString[0]);
+        return 'action_' . $actionString;
     }
 
     // Returns whether or not $action can be found in $controller, based on the ACTIONS constant
