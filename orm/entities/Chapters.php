@@ -14,7 +14,7 @@ class Chapters
     /**
      * @var integer
      */
-    private $chapterNumber = '0';
+    private $number = '0';
 
     /**
      * @var integer
@@ -49,13 +49,13 @@ class Chapters
     /**
      * Set chapterNumber
      *
-     * @param integer $chapterNumber
+     * @param integer $number
      *
      * @return Chapters
      */
-    public function setChapterNumber( $chapterNumber )
+    public function setNumber( $number )
     {
-        $this->chapterNumber = $chapterNumber;
+        $this->number = $number;
 
         return $this;
     }
@@ -65,9 +65,9 @@ class Chapters
      *
      * @return integer
      */
-    public function getChapterNumber()
+    public function getNumber()
     {
-        return $this->chapterNumber;
+        return $this->number;
     }
 
     /**

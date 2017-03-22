@@ -9,27 +9,27 @@ class Volumes
     /**
      * @var string
      */
-    private $volumeTitle;
+    private $title;
 
     /**
      * @var string
      */
-    private $volumeLongTitle;
+    private $longTitle;
 
     /**
      * @var string
      */
-    private $volumeSubtitle;
+    private $subtitle;
 
     /**
      * @var string
      */
-    private $volumeShortTitle;
+    private $shortTitle;
 
     /**
      * @var string
      */
-    private $volumeLdsUrl;
+    private $ldsUrl;
 
     /**
      * @var integer
@@ -40,13 +40,13 @@ class Volumes
     /**
      * Set volumeTitle
      *
-     * @param string $volumeTitle
+     * @param string $title
      *
      * @return Volumes
      */
-    public function setVolumeTitle( $volumeTitle )
+    public function setTitle( $title )
     {
-        $this->volumeTitle = $volumeTitle;
+        $this->title = $title;
 
         return $this;
     }
@@ -56,21 +56,21 @@ class Volumes
      *
      * @return string
      */
-    public function getVolumeTitle()
+    public function getTitle()
     {
-        return $this->volumeTitle;
+        return $this->title;
     }
 
     /**
      * Set volumeLongTitle
      *
-     * @param string $volumeLongTitle
+     * @param string $longTitle
      *
      * @return Volumes
      */
-    public function setVolumeLongTitle( $volumeLongTitle )
+    public function setLongTitle( $longTitle )
     {
-        $this->volumeLongTitle = $volumeLongTitle;
+        $this->longTitle = $longTitle;
 
         return $this;
     }
@@ -80,21 +80,21 @@ class Volumes
      *
      * @return string
      */
-    public function getVolumeLongTitle()
+    public function getLongTitle()
     {
-        return $this->volumeLongTitle;
+        return $this->longTitle;
     }
 
     /**
      * Set volumeSubtitle
      *
-     * @param string $volumeSubtitle
+     * @param string $subtitle
      *
      * @return Volumes
      */
-    public function setVolumeSubtitle( $volumeSubtitle )
+    public function setSubtitle( $subtitle )
     {
-        $this->volumeSubtitle = $volumeSubtitle;
+        $this->subtitle = $subtitle;
 
         return $this;
     }
@@ -104,21 +104,21 @@ class Volumes
      *
      * @return string
      */
-    public function getVolumeSubtitle()
+    public function getSubtitle()
     {
-        return $this->volumeSubtitle;
+        return $this->subtitle;
     }
 
     /**
      * Set volumeShortTitle
      *
-     * @param string $volumeShortTitle
+     * @param string $shortTitle
      *
      * @return Volumes
      */
-    public function setVolumeShortTitle( $volumeShortTitle )
+    public function setShortTitle( $shortTitle )
     {
-        $this->volumeShortTitle = $volumeShortTitle;
+        $this->shortTitle = $shortTitle;
 
         return $this;
     }
@@ -128,21 +128,21 @@ class Volumes
      *
      * @return string
      */
-    public function getVolumeShortTitle()
+    public function getShortTitle()
     {
-        return $this->volumeShortTitle;
+        return $this->shortTitle;
     }
 
     /**
      * Set volumeLdsUrl
      *
-     * @param string $volumeLdsUrl
+     * @param string $ldsUrl
      *
      * @return Volumes
      */
-    public function setVolumeLdsUrl( $volumeLdsUrl )
+    public function setLdsUrl( $ldsUrl )
     {
-        $this->volumeLdsUrl = $volumeLdsUrl;
+        $this->ldsUrl = $ldsUrl;
 
         return $this;
     }
@@ -152,9 +152,9 @@ class Volumes
      *
      * @return string
      */
-    public function getVolumeLdsUrl()
+    public function getLdsUrl()
     {
-        return $this->volumeLdsUrl;
+        return $this->ldsUrl;
     }
 
     /**

@@ -113,16 +113,16 @@ class MScripture
             if ( isset( $verseNums ) && sizeof( $verseNums ) > 0 ) {
                 if ( isset( $verseNums['start'] ) && isset( $verseNums['end'] ) ) {
                     foreach ( $verses as $verse ) /* @var Verses $verse*/
-                        if ( $verse->getVerseNumber() >= $verseNums['start'] && $verse->getVerseNumber() <= $verseNums['end'] )
-                            $this->verses[$verse->getVerseNumber()] = $verse;
+                        if ( $verse->getNumber() >= $verseNums['start'] && $verse->getNumber() <= $verseNums['end'] )
+                            $this->verses[$verse->getNumber()] = $verse;
                 } else {
                     foreach ( $verses as $verse ) /* @var Verses $verse*/
-                        if ( in_array( $verse->getVerseNumber(), $verseNums ) )
-                            $this->verses[$verse->getVerseNumber()] = $verse;
+                        if ( in_array( $verse->getNumber(), $verseNums ) )
+                            $this->verses[$verse->getNumber()] = $verse;
                 }
             } else {
                 foreach ( $verses as $verse ) /* @var Verses $verse*/
-                    $this->verses[$verse->getVerseNumber()] = $verse;
+                    $this->verses[$verse->getNumber()] = $verse;
             }
         }
     }
@@ -145,9 +145,9 @@ class MScripture
     public function getBook( $long = false )
     {
         if ( $long )
-            return $this->book->getBookLongTitle();
+            return $this->book->getLongTitle();
         else
-            return $this->book->getBookShortTitle();
+            return $this->book->getShortTitle();
     }
 
     /**

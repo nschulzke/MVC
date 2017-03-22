@@ -4,27 +4,27 @@
         <id name="id" type="integer" column="id">
             <generator strategy="IDENTITY"/>
         </id>
-        <field name="volumeTitle" type="string" column="volume_title" length="22" nullable="false">
+        <field name="title" type="string" column="volume_title" length="22" nullable="false">
             <options>
                 <option name="fixed"/>
             </options>
         </field>
-        <field name="volumeLongTitle" type="string" column="volume_long_title" length="26" nullable="false">
+        <field name="longTitle" type="string" column="volume_long_title" length="26" nullable="false">
             <options>
                 <option name="fixed"/>
             </options>
         </field>
-        <field name="volumeSubtitle" type="string" column="volume_subtitle" length="36" nullable="false">
+        <field name="subtitle" type="string" column="volume_subtitle" length="36" nullable="false">
             <options>
                 <option name="fixed"/>
             </options>
         </field>
-        <field name="volumeShortTitle" type="string" column="volume_short_title" length="3" nullable="false">
+        <field name="shortTitle" type="string" column="volume_short_title" length="3" nullable="false">
             <options>
                 <option name="fixed"/>
             </options>
         </field>
-        <field name="volumeLdsUrl" type="string" column="volume_lds_url" length="12" nullable="false">
+        <field name="ldsUrl" type="string" column="volume_lds_url" length="12" nullable="false">
             <options>
                 <option name="fixed"/>
             </options>

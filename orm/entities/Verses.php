@@ -14,12 +14,12 @@ class Verses
     /**
      * @var integer
      */
-    private $verseNumber = '0';
+    private $number = '0';
 
     /**
      * @var string
      */
-    private $scriptureText;
+    private $text;
 
     /**
      * @var integer
@@ -54,13 +54,13 @@ class Verses
     /**
      * Set verseNumber
      *
-     * @param integer $verseNumber
+     * @param integer $number
      *
      * @return Verses
      */
-    public function setVerseNumber( $verseNumber )
+    public function setNumber( $number )
     {
-        $this->verseNumber = $verseNumber;
+        $this->number = $number;
 
         return $this;
     }
@@ -70,21 +70,21 @@ class Verses
      *
      * @return integer
      */
-    public function getVerseNumber()
+    public function getNumber()
     {
-        return $this->verseNumber;
+        return $this->number;
     }
 
     /**
      * Set scriptureText
      *
-     * @param string $scriptureText
+     * @param string $text
      *
      * @return Verses
      */
-    public function setScriptureText( $scriptureText )
+    public function setText( $text )
     {
-        $this->scriptureText = $scriptureText;
+        $this->text = $text;
 
         return $this;
     }
@@ -94,9 +94,9 @@ class Verses
      *
      * @return string
      */
-    public function getScriptureText()
+    public function getText()
     {
-        return $this->scriptureText;
+        return $this->text;
     }
 
     /**

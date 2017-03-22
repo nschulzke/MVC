@@ -13,27 +13,27 @@ class Books
     /**
      * @var string
      */
-    private $bookTitle;
+    private $title;
 
     /**
      * @var string
      */
-    private $bookLongTitle;
+    private $longTitle;
 
     /**
      * @var string
      */
-    private $bookSubtitle;
+    private $subtitle;
 
     /**
      * @var string
      */
-    private $bookShortTitle;
+    private $shortTitle;
 
     /**
      * @var string
      */
-    private $bookLdsUrl;
+    private $ldsUrl;
 
     /**
      * @var integer
@@ -68,13 +68,13 @@ class Books
     /**
      * Set bookTitle
      *
-     * @param string $bookTitle
+     * @param string $title
      *
      * @return Books
      */
-    public function setBookTitle( $bookTitle )
+    public function setTitle( $title )
     {
-        $this->bookTitle = $bookTitle;
+        $this->title = $title;
 
         return $this;
     }
@@ -84,21 +84,21 @@ class Books
      *
      * @return string
      */
-    public function getBookTitle()
+    public function getTitle()
     {
-        return $this->bookTitle;
+        return $this->title;
     }
 
     /**
      * Set bookLongTitle
      *
-     * @param string $bookLongTitle
+     * @param string $longTitle
      *
      * @return Books
      */
-    public function setBookLongTitle( $bookLongTitle )
+    public function setLongTitle( $longTitle )
     {
-        $this->bookLongTitle = $bookLongTitle;
+        $this->longTitle = $longTitle;
 
         return $this;
     }
@@ -108,21 +108,21 @@ class Books
      *
      * @return string
      */
-    public function getBookLongTitle()
+    public function getLongTitle()
     {
-        return $this->bookLongTitle;
+        return $this->longTitle;
     }
 
     /**
      * Set bookSubtitle
      *
-     * @param string $bookSubtitle
+     * @param string $subtitle
      *
      * @return Books
      */
-    public function setBookSubtitle( $bookSubtitle )
+    public function setSubtitle( $subtitle )
     {
-        $this->bookSubtitle = $bookSubtitle;
+        $this->subtitle = $subtitle;
 
         return $this;
     }
@@ -132,21 +132,21 @@ class Books
      *
      * @return string
      */
-    public function getBookSubtitle()
+    public function getSubtitle()
     {
-        return $this->bookSubtitle;
+        return $this->subtitle;
     }
 
     /**
      * Set bookShortTitle
      *
-     * @param string $bookShortTitle
+     * @param string $shortTitle
      *
      * @return Books
      */
-    public function setBookShortTitle( $bookShortTitle )
+    public function setShortTitle( $shortTitle )
     {
-        $this->bookShortTitle = $bookShortTitle;
+        $this->shortTitle = $shortTitle;
 
         return $this;
     }
@@ -156,21 +156,21 @@ class Books
      *
      * @return string
      */
-    public function getBookShortTitle()
+    public function getShortTitle()
     {
-        return $this->bookShortTitle;
+        return $this->shortTitle;
     }
 
     /**
      * Set bookLdsUrl
      *
-     * @param string $bookLdsUrl
+     * @param string $ldsUrl
      *
      * @return Books
      */
-    public function setBookLdsUrl( $bookLdsUrl )
+    public function setLdsUrl( $ldsUrl )
     {
-        $this->bookLdsUrl = $bookLdsUrl;
+        $this->ldsUrl = $ldsUrl;
 
         return $this;
     }
@@ -180,9 +180,9 @@ class Books
      *
      * @return string
      */
-    public function getBookLdsUrl()
+    public function getLdsUrl()
     {
-        return $this->bookLdsUrl;
+        return $this->ldsUrl;
     }
 
     /**
