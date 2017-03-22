@@ -3,19 +3,19 @@
 class View
 {
     const VALID_LAYOUTS = array(
-        'layout', 'none'
+        'layout.php', 'none'
     );
 
     const VALID_NAVBARS = array(
-        'navbar', 'none'
+        'navbar.php', 'none'
     );
 
     const VALID_MODALS = array(
-        'modal', 'none'
+        'modal.php', 'none'
     );
 
     const VALID_FOOTERS = array(
-        'footer', 'none'
+        'footer.php', 'none'
     );
 
     private $route;
@@ -28,47 +28,31 @@ class View
      */
     public function __construct( $route )
     {
-        $this->vars = array();
         $this->route = $route;
-
         if ( isset( $_GET['layout'] ) && in_array( $_GET['layout'], self::VALID_LAYOUTS ) )
             $this->layout = $_GET['layout'];
         else
             $this->layout = 'layout';
 
-        $this->vars['action'] = $this->route->getAction();
-        $this->vars['controller'] = $this->route->getController();
-        if (!isset($this->vars['viewPath']))
-            $this->vars['viewPath'] = $this->route->getDefaultPath();
-
-        // Validate vars
-        if ( !isset( $vars['title'] ) )
-            $this->vars['title'] = GlobalConfig::getAppName();
-        if ( !isset( $vars['subtitle'] ) )
-            $this->vars['subtitle'] = ucfirst( $this->vars['action'] );
-
-        if ( !isset( $vars['navbar'] ) || !in_array( $vars['navbar'], self::VALID_NAVBARS ) )
-            $this->vars['navbar'] = 'navbar';
-
-        if ( !isset( $vars['footer'] ) || !in_array( $vars['footer'], self::VALID_MODALS ) )
-            $this->vars['footer'] = 'footer';
-
-        if ( !isset( $vars['modal'] ) || !in_array( $vars['modal'], self::VALID_MODALS ) )
-            $this->vars['modal'] = 'modal';
-
-        // Set up include files
-        $this->vars['navbar'] .= '.php';
-        $this->vars['footer'] .= '.php';
-        $this->vars['modal'] .= '.php';
-        $this->vars['head'] = array(
-            'head.php',
-            $this->vars['controller'] . '/_head.php',
-            $this->vars['controller'] . '/' . $this->vars['action'] . '_head.php'
-        );
-        $this->vars['foot'] = array(
-            'foot.php',
-            $this->vars['controller'] . '/_foot.php',
-            $this->vars['controller'] . '/' . $this->vars['action'] . '_foot.php'
+        $this->vars = array(
+            'action'     => $this->route->getAction(),
+            'controller' => $this->route->getController(),
+            'viewPath'   => $this->route->getDefaultPath(),
+            'title'      => GlobalConfig::getAppName(),
+            'subtitle'   => ucfirst( $this->vars['action'] ),
+            'navbar'     => 'navbar.php',
+            'footer'     => 'footer.php',
+            'modal'      => 'modal.php',
+            'head'       => array(
+                'head.php',
+                $this->vars['controller'] . '/_head.php',
+                $this->vars['controller'] . '/' . $this->vars['action'] . '_head.php'
+            ),
+            'foot'       => array(
+                'foot.php',
+                $this->vars['controller'] . '/_foot.php',
+                $this->vars['controller'] . '/' . $this->vars['action'] . '_foot.php'
+            ),
         );
     }
 
@@ -94,6 +78,13 @@ class View
     public function setVar( $key, $value )
     {
         $this->vars[$key] = $value;
+
+        if ( $key == 'navbar' && !in_array( $value, self::VALID_NAVBARS ) )
+            $this->vars['navbar'] = 'navbar.php';
+        else if ( $key == 'footer' && !in_array( $value, self::VALID_MODALS ) )
+            $this->vars['footer'] = 'footer.php';
+        else if ( $key == 'modal' && !in_array( $value, self::VALID_MODALS ) )
+            $this->vars['modal'] = 'modal.php';
         return $this;
     }
 
