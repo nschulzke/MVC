@@ -45,7 +45,7 @@ $( function () {
         var char;
         $(this).find( 'span.footnote' ).each(function() {
             char = String.fromCharCode(aChar + footnotes);
-            $(this).before('<sup class="footnote">' + char + '</sup>');
+            $(this).prepend('<sup>' + char + '</sup>');
             footnotes++;
         });
     });

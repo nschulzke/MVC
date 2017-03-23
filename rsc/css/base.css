@@ -1,19 +1,30 @@
+sup,
+sub {
+  vertical-align: baseline;
+  position: relative;
+  top: -0.4em;
+}
+sub {
+  top: 0.4em;
+}
 .books-list {
-  -moz-column-width: 10em;
-  -webkit-column-width: 10em;
-  column-width: 10em;
+  -moz-column-width: 12rem;
+  -webkit-column-width: 12rem;
+  column-width: 12rem;
 }
 .books-list a {
   display: block;
 }
 .chapters-list {
-  max-width: 50em;
+  max-width: 40rem;
+  text-align: center;
+  margin: 0 auto;
 }
 .chapters-list a {
-  margin: .5em;
+  margin: .5rem;
   display: inline-block;
   background-color: #f7f7f9;
-  border-radius: .5em;
+  border-radius: .5rem;
   width: 2em;
   height: 2em;
   line-height: 2em;
