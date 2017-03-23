@@ -2,7 +2,13 @@
 require_once __DIR__ . '/breadcrumb.php'
 ?>
 
-<div class="chapter-view">
+<div id="highlight-menu" class="card">
+    <div class="card-block">
+        <a class="fa fa-link"></a>
+        <a class="fa fa-bookmark"></a>
+    </div>
+</div>
+<div class="container chapter-view">
     <ul class="chapter-text">
         <?php foreach ( $this->vars['scripture']->getVerses() as $num => $text ): ?>
         <li class="verse<?= in_array($num, $this->vars['verses']) ? ' highlight' : ''?>">
@@ -12,3 +18,4 @@ require_once __DIR__ . '/breadcrumb.php'
         <?php endforeach ?>
     </ul>
 </div>
+<script src="<?= GlobalConfig::getAppPath() ?>/rsc/js/highlight.js"></script>

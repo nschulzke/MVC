@@ -28,16 +28,19 @@ class CScripture
         if ( isset( $params[0] ) && isset( $params[1] ) ) {
             $verses = array();
             $book = $params[0];
+            $mBook = MScripture::findBook($book);
             $chapter = $params[1];
+            $volume = MScripture::getVolumesRepo()->find( $mBook->getVolumeId() ); /* @var Volumes $volume */
             if ( isset( $params[2] ) && $params[2] != '' )
                 $verses = explode( ',', $params[2] );
 
+            $chapterName = 'Chapter ' . $chapter;
             $breadcrumb = array(
-                $rootName => $crumbRoot,
-                MScripture::findBook($book)->getShortTitle() => $crumbRoot . '/' . $book,
-                $chapter => $crumbRoot . '/' . $book . '/' . $chapter
+                $volume->getTitle() => $crumbRoot . '?volume=' . $volume->getId(),
+                $mBook->getTitle() => $crumbRoot . '/' . $book,
+                $chapterName => $crumbRoot . '/' . $book . '/' . $chapter
             );
-            $activeCrumb = $chapter;
+            $activeCrumb = $chapterName;
 
             $verses = MScripture::explodeRanges( $verses );
 
@@ -53,12 +56,12 @@ class CScripture
 
             $book = MScripture::findBook( $params[0] );
             /* @var Books $book */
-            $volume = MScripture::getVolumesRepo()->find( $book->getVolumeId() );
+            $volume = MScripture::getVolumesRepo()->find( $book->getVolumeId() ); /* @var Volumes $volume */
             $chapters = MScripture::getChaptersRepo()->findBy( array( 'bookId' => $book->getId() ) );
 
-            $bookTitle = $book->getShortTitle();
+            $bookTitle = $book->getTitle();
             $breadcrumb = array(
-                $rootName => $crumbRoot,
+                $volume->getTitle() => $crumbRoot . '?volume=' . $volume->getId(),
                 $bookTitle => $crumbRoot . '/' . $book->getLdsUrl(),
             );
             $activeCrumb = $bookTitle;

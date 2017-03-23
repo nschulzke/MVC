@@ -1,6 +1,6 @@
 <?php
 ?>
-<ol class="breadcrumb">
+<ol class="breadcrumb sticky-top">
 <?php foreach ($this->vars['breadcrumb'] as $name => $path):
     $active = $this->vars['activeCrumb'] == $name;
 ?>

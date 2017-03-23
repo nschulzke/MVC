@@ -1,5 +1,4 @@
 <?php
-$back = GlobalConfig::getAppPath() . '/scripture/view?volume=' . $this->vars['volume']->getId();
 $url = GlobalConfig::getAppPath() . '/scripture/view';
 
 require_once __DIR__ . '/breadcrumb.php'
@@ -8,8 +7,6 @@ require_once __DIR__ . '/breadcrumb.php'
 <div class="card">
     <div class="card-header" role="tab" id="book_<?= $this->vars['book']->getId() ?>">
         <h5 class="mb-0">
-            <a class="fa fa-arrow-left" href="<?= $back ?>">
-            </a>
             <?= $this->vars['book']->getTitle() ?>
         </h5>
     </div>

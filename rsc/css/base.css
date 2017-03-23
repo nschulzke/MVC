@@ -20,9 +20,15 @@
   text-align: center;
 }
 .chapter-view {
-  -moz-column-width: 20em;
-  -webkit-column-width: 20em;
-  column-width: 20em;
+  max-width: 35em;
+  min-width: 25em;
+  padding-left: 5em;
+  padding-right: 5em;
+}
+.chapter-view ul.chapter-text {
+  max-width: 25em;
+  min-width: 15em;
+  padding: 0;
 }
 .chapter-view ul.chapter-text li.verse {
   list-style: none;
@@ -42,4 +48,12 @@
 article#main-container {
   margin-top: 1em;
   margin-bottom: 2em;
+}
+.card#highlight-menu {
+  position: absolute;
+  width: 4em;
+  text-align: center;
+}
+.card#highlight-menu a.fa {
+  display: inline-block;
 }
