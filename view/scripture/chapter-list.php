@@ -1,6 +1,8 @@
 <?php
 $back = GlobalConfig::getAppPath() . '/scripture/view?volume=' . $this->vars['volume']->getId();
 $url = GlobalConfig::getAppPath() . '/scripture/view';
+
+require_once __DIR__ . '/breadcrumb.php'
 ?>
 
 <div class="card">

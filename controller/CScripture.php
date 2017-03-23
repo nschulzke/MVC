@@ -23,19 +23,30 @@ class CScripture
     static public function action_view( $route, $params )
     {
         $view = new View( $route );
-        $verses = array();
+        $crumbRoot = GlobalConfig::getAppPath() . '/scripture/view';
+        $rootName = 'Books';
         if ( isset( $params[0] ) && isset( $params[1] ) ) {
+            $verses = array();
             $book = $params[0];
             $chapter = $params[1];
             if ( isset( $params[2] ) && $params[2] != '' )
                 $verses = explode( ',', $params[2] );
+
+            $breadcrumb = array(
+                $rootName => $crumbRoot,
+                MScripture::findBook($book)->getShortTitle() => $crumbRoot . '/' . $book,
+                $chapter => $crumbRoot . '/' . $book . '/' . $chapter
+            );
+            $activeCrumb = $chapter;
 
             $verses = MScripture::explodeRanges( $verses );
 
             $scripture = new MScripture( $book, $chapter );
 
             $view->setVar( 'scripture', $scripture )
-                 ->setVar( 'verses', $verses );
+                 ->setVar( 'verses', $verses )
+                 ->setVar( 'activeCrumb', $activeCrumb )
+                 ->setVar( 'breadcrumb', $breadcrumb );
             $view->display();
         } else if ( isset( $params[0] ) ) {
             $view = new View( $route );
@@ -45,9 +56,18 @@ class CScripture
             $volume = MScripture::getVolumesRepo()->find( $book->getVolumeId() );
             $chapters = MScripture::getChaptersRepo()->findBy( array( 'bookId' => $book->getId() ) );
 
+            $bookTitle = $book->getShortTitle();
+            $breadcrumb = array(
+                $rootName => $crumbRoot,
+                $bookTitle => $crumbRoot . '/' . $book->getLdsUrl(),
+            );
+            $activeCrumb = $bookTitle;
+
             $view->setVar( 'book', $book )
                  ->setVar( 'volume', $volume )
                  ->setVar( 'chapters', $chapters )
+                 ->setVar( 'activeCrumb', $activeCrumb )
+                 ->setVar( 'breadcrumb', $breadcrumb )
                  ->setVar( 'viewPath', 'scripture/chapter-list.php' );
             $view->display();
         } else {
@@ -59,6 +79,11 @@ class CScripture
             $volumes = MScripture::getVolumesRepo()->findAll();
             $books = MScripture::getBooksRepo();
 
+            $breadcrumb = array(
+                $rootName => $crumbRoot,
+            );
+            $activeCrumb = $rootName;
+
             $array = array();
             foreach ( $volumes as $volume ) /* @var Volumes $volume */ {
                 $array[$volume->getTitle()] = array();
@@ -68,6 +93,8 @@ class CScripture
             }
 
             $view->setVar( 'volumes', $array )
+                 ->setVar( 'activeCrumb', $activeCrumb )
+                 ->setVar( 'breadcrumb', $breadcrumb )
                  ->setVar( 'viewPath', 'scripture/book-list.php' );
             if ( isset( $active ) )
                 $view->setVar( 'active', $active->getTitle() );

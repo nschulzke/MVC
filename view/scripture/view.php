@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/breadcrumb.php'
+?>
+
 <div class="chapter-view">
     <ul class="chapter-text">
         <?php foreach ( $this->vars['scripture']->getVerses() as $num => $text ): ?>

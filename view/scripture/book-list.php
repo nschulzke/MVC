@@ -1,7 +1,8 @@
 <?php
 $url = GlobalConfig::getAppPath() . '/scripture/view';
-?>
 
+require_once __DIR__ . '/breadcrumb.php'
+?>
 <div id="books-accordion" role="tablist" aria-multiselectable="true">
 <?php
 foreach ($this->vars['volumes'] as $volume => $books): /* @var Books[] $books */
