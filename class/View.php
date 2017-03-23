@@ -56,7 +56,6 @@ class View
                 $this->vars['controller'] . '/' . $this->vars['action'] . '_foot.php'
             ),
         );
-        echo print_r($this->vars['foot']);
     }
 
     /**
