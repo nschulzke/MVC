@@ -38,5 +38,15 @@ if ( $( '.chapter-view' ).length > 0 ) {
 }
 
 $( function () {
+    var aChar = 97;
     $( '#highlight-menu' ).hide();
+    $( 'span.verse-text' ).each(function() {
+        var footnotes = 0;
+        var char;
+        $(this).find( 'span.footnote' ).each(function() {
+            char = String.fromCharCode(aChar + footnotes);
+            $(this).before('<sup class="footnote">' + char + '</sup>');
+            footnotes++;
+        });
+    });
 } )
