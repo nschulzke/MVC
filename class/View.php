@@ -38,7 +38,9 @@ class View
             'action'     => $this->route->getAction(),
             'controller' => $this->route->getController(),
             'viewPath'   => $this->route->getDefaultPath(),
-            'title'      => GlobalConfig::getAppName(),
+            'title'      => GlobalConfig::getAppName()
+        );
+        $this->vars += array(
             'subtitle'   => ucfirst( $this->vars['action'] ),
             'navbar'     => 'navbar.php',
             'footer'     => 'footer.php',
@@ -54,6 +56,7 @@ class View
                 $this->vars['controller'] . '/' . $this->vars['action'] . '_foot.php'
             ),
         );
+        echo print_r($this->vars['foot']);
     }
 
     /**
