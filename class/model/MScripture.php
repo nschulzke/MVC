@@ -1,6 +1,7 @@
 <?php namespace model;
 
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\EntityRepository;
 use model\orm\entity\Books;
 use model\orm\entity\Chapters;
 use model\orm\entity\Verses;
@@ -14,7 +15,7 @@ class MScripture
     private static $versesRepo;
 
     /**
-     * @return \Doctrine\ORM\EntityRepository
+     * @return EntityRepository The repository of volumes
      */
     public static function getVolumesRepo()
     {
@@ -24,7 +25,7 @@ class MScripture
     }
 
     /**
-     * @return \Doctrine\ORM\EntityRepository
+     * @return EntityRepository The repository of books
      */
     public static function getBooksRepo()
     {
@@ -34,7 +35,7 @@ class MScripture
     }
 
     /**
-     * @return \Doctrine\ORM\EntityRepository
+     * @return EntityRepository The repository of chapters
      */
     public static function getChaptersRepo()
     {
@@ -44,7 +45,7 @@ class MScripture
     }
 
     /**
-     * @return \Doctrine\ORM\EntityRepository
+     * @return EntityRepository The repository of verses
      */
     public static function getVersesRepo()
     {
@@ -53,6 +54,10 @@ class MScripture
         return self::$versesRepo;
     }
 
+    /**
+     * @param array $verseNums Array of integers in one of these formats: '#', '#-#'
+     * @return array The same array, with ranges filled in. So, 1-3 would output [1, 2, 3]
+     */
     public static function explodeRanges( $verseNums )
     {
         for ( $i = 0; $i < sizeof( $verseNums ); $i++ ) {
@@ -67,8 +72,8 @@ class MScripture
     }
 
     /**
-     * @param $bookName
-     * @return Books|null|object
+     * @param $bookName The name of the book, either the title, abbreviation, or ldsUrl
+     * @return Books|null|object The Book object (if found), else null
      */
     public static function findBook( $bookName )
     {
@@ -95,12 +100,13 @@ class MScripture
     private $chapter;
     /* @var Chapters $chapter */
     private $verses = array();
+    /* @var Verses[] $verses */
 
     /**
      * MScripture constructor.
      * @param       $bookName
      * @param       $chapterNum
-     * @param array $verseNums
+     * @param array $verseNums Array of verses, ranges are acceptable
      */
     public function __construct( $bookName, $chapterNum, $verseNums = array() )
     {
@@ -131,7 +137,7 @@ class MScripture
     }
 
     /**
-     * @return array
+     * @return array An array mapped verseNum => verseText
      */
     public function getText()
     {
@@ -141,14 +147,17 @@ class MScripture
         return $retArr;
     }
 
+    /**
+     * @return Verses[] The objects for each verse stored
+     */
     public function getVerses()
     {
         return $this->verses;
     }
 
     /**
-     * @param bool $long
-     * @return string
+     * @param bool $long Whether to use the long title or the short title
+     * @return string The title of the book
      */
     public function getBookTitle( $long = false )
     {
@@ -159,10 +168,26 @@ class MScripture
     }
 
     /**
-     * @return mixed
+     * @return Books The Books object for the scripture
+     */
+    public function getBook()
+    {
+        return $this->book;
+    }
+
+    /**
+     * @return integer The number of the chapter
      */
     public function getChapterNumber()
     {
         return $this->chapter->getNumber();
+    }
+
+    /**
+     * @return Chapters The Chapters object for the scripture
+     */
+    public function getChapter()
+    {
+        return $this->chapter;
     }
 }
