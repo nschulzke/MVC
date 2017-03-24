@@ -1,9 +1,9 @@
 <?php namespace controller;
 
 use config\Application;
-use \model\MScripture;
-use model\orm\entity\Volumes;
+use model\MScripture;
 use model\orm\entity\Books;
+use model\orm\entity\Volumes;
 use util\View;
 
 class Scripture

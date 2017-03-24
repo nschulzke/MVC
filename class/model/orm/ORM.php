@@ -2,21 +2,23 @@
 
 // Normally loaded by index, but cli-config.php also loads this file
 // so we want to make sure we have this
-require_once directory(array('vendor', 'autoload.php'), true);
+require_once directory( array( 'vendor', 'autoload.php' ), true );
 
 use config\Database;
-use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\Setup;
 
-class ORM {
+class ORM
+{
 
     private static $entityManager;
 
     /**
      * @return EntityManager
      */
-    public static function getManager() {
-        if (!isset (self::$entityManager))
+    public static function getManager()
+    {
+        if ( !isset ( self::$entityManager ) )
             self::initManager();
         return self::$entityManager;
     }
@@ -24,7 +26,8 @@ class ORM {
     /**
      * Private function that sets up the manager, called by getManager() if none found
      */
-    private static function initManager() {
+    private static function initManager()
+    {
         $paths = array( __DIR__ . '/entity/' );
         $isDevMode = false;
 
@@ -39,13 +42,15 @@ class ORM {
 
         $config = Setup::createXMLMetadataConfiguration( $paths, $isDevMode );
         self::$entityManager = EntityManager::create( $dbParams, $config );
-        self::$entityManager->getConfiguration()->addEntityNamespace('entity', 'model\orm\entity');
+        self::$entityManager->getConfiguration()->addEntityNamespace( 'entity', 'model\orm\entity' );
     }
 
-    private function __construct() {
+    private function __construct()
+    {
     }
 
-    private function __clone() {
+    private function __clone()
+    {
 
     }
 }
