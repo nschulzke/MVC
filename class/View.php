@@ -47,13 +47,13 @@ class View
             'modal'      => 'modal.php',
             'head'       => array(
                 'head.php',
-                $this->vars['controller'] . '/_head.php',
-                $this->vars['controller'] . '/' . $this->vars['action'] . '_head.php'
+                $this->vars['controller'] . '/_components/_head.php',
+                $this->vars['controller'] . '/_components/' . $this->vars['action'] . '_head.php'
             ),
             'foot'       => array(
                 'foot.php',
-                $this->vars['controller'] . '/_foot.php',
-                $this->vars['controller'] . '/' . $this->vars['action'] . '_foot.php'
+                $this->vars['controller'] . '/_components/_foot.php',
+                $this->vars['controller'] . '/_components/' . $this->vars['action'] . '_foot.php'
             ),
         );
     }

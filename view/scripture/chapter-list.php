@@ -1,7 +1,7 @@
 <?php
 $url = GlobalConfig::getAppPath() . '/scripture/view';
 
-require_once __DIR__ . '/breadcrumb.php'
+require_once __DIR__ . '/../_components/breadcrumb.php'
 ?>
 
 <div class="card chapters-list">

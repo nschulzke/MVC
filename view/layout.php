@@ -1,5 +1,5 @@
 <?php
-$dir = __DIR__ . '/';
+$dir = __DIR__ . '/_components/';
 ?>
 <!DOCTYPE html>
 <html lang="en">
