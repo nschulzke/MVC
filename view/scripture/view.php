@@ -1,5 +1,12 @@
 <?php
-require_once __DIR__ . '/../_components/breadcrumb.php'
+extract( $this->vars );
+/**
+ * variables needed here:
+ * @var model\MScripture $scripture
+ * @var array            $verses
+ */
+
+include __DIR__ . '/../_components/breadcrumb.php'
 ?>
 
 <div id="highlight-menu" class="card">
@@ -10,8 +17,8 @@ require_once __DIR__ . '/../_components/breadcrumb.php'
 </div>
 <div class="container chapter-view">
     <ul class="chapter-text">
-        <?php foreach ( $this->vars['scripture']->getText() as $num => $text ): ?>
-            <li class="verse<?= in_array( $num, $this->vars['verses'] ) ? ' highlight' : '' ?>">
+        <?php foreach ( $scripture->getText() as $num => $text ): ?>
+            <li class="verse<?= in_array( $num, $verses ) ? ' highlight' : '' ?>">
                 <span class="verse-num"><?= $num ?></span>
                 <span class="verse-text"><?= $text ?></span>
             </li>

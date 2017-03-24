@@ -1,6 +1,13 @@
-<?php if ( isset( $this->vars['scripture'] ) ): ?>
+<?php
+extract( $this->vars );
+/**
+ * variables needed here:
+ * @var model\MScripture $scripture
+ */
+?>
+<?php if ( isset( $scripture ) ): ?>
     <ul class="chapter-text">
-        <?php foreach ( $this->vars['scripture']->getText() as $num => $text ): ?>
+        <?php foreach ( $scripture->getText() as $num => $text ): ?>
             <li class="verse">
                 <span class="verse-num"><?= $num ?></span>
                 <span class="verse-text"><?= $text ?></span>

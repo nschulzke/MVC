@@ -21,8 +21,6 @@ class View
     ];
 
     private $viewRoot;
-
-    private $route;
     private $layout;
     private $vars;
 
@@ -34,21 +32,19 @@ class View
     public function __construct( $route )
     {
         $this->viewRoot = directory( [ 'view' ], true );
-        $this->route = $route;
         if ( isset( $_GET['layout'] ) && in_array( $_GET['layout'], self::VALID_LAYOUTS ) )
             $this->layout = $_GET['layout'];
         else
             $this->layout = 'layout';
 
         $this->vars = [
-            'action'     => $this->route->getAction(),
-            'controller' => $this->route->getController(),
-            'viewPath'   => $this->route->getDefaultPath(),
+            'action'     => $route->getAction(),
+            'controller' => $route->getController(),
+            'viewPath'   => $route->getDefaultPath(),
             'title'      => Application::getAppName(),
         ];
         $this->vars += [
             'subtitle' => ucfirst( $this->vars['action'] ),
-            'navbar'   => 'navbar.php',
             'footer'   => 'footer.php',
             'modal'    => 'modal.php',
             'head'     => [
@@ -62,6 +58,11 @@ class View
                 directory( [ $this->vars['controller'], '_components', $this->vars['action'] . '_foot.php' ] ),
             ],
         ];
+        $this->vars['navbar'] = new NavBar('nav-main', $this->vars);
+        $this->vars['navbar']->addItem( 'Home', 'static-pages', 'home', '/' );
+        $this->vars['navbar']->addItem( 'About', 'static-pages', 'about', 'about' );
+        $this->vars['navbar']->addItem( 'Test', 'static-pages', 'test', 'test' );
+
     }
 
     /**
@@ -69,11 +70,10 @@ class View
      *
      * @return bool True if the path was able to be included, false otherwise
      */
-    public function requireOnce( $path )
+    public function includeFile( $path )
     {
         if ( file_exists( $path ) ) {
-            require_once $path;
-
+            include $path;
             return true;
         } else
             return false;
@@ -116,21 +116,13 @@ class View
     }
 
     /**
-     * @return Route
-     */
-    public function getRoute()
-    {
-        return $this->route;
-    }
-
-    /**
      * Call the .php view for based on the viewPath
      */
     public function display()
     {
         if ( $this->layout == 'none' )
-            require_once $this->vars['viewPath'];
+            include $this->vars['viewPath'];
         else
-            require_once directory( [ $this->viewRoot, $this->layout . '.php' ] );
+            include directory( [ $this->viewRoot, $this->layout . '.php' ] );
     }
 }

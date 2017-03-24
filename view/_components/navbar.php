@@ -1,24 +1,18 @@
-<?php
-use util\NavBar;
-
-$bar = new NavBar();
-$bar->addItem( 'Home', 'static-pages', 'home', '/' );
-$bar->addItem( 'About', 'static-pages', 'about', 'about' );
-$bar->addItem( 'Test', 'static-pages', 'test', 'test' );
+<?php /* @var util\NavBar $this */
 ?>
 <header id="navbar-container" class="container bg-faded">
-    <nav class="navbar navbar-toggleable-sm navbar-light">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <nav id="<?= $this->getId() ?>" class="navbar navbar-toggleable-sm navbar-light">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#<?= $this->getId() ?>-collapse" aria-controls="<?= $this->getId() ?>-collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand"><?= \config\Application::getAppName() ?></a>
-        <div id="main-navbar" class="collapse navbar-collapse">
+        <div id="<?= $this->getId() ?>-collapse" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-                <?php foreach ( $bar->getItems() as $item ):
+                <?php foreach ( $this->getItems() as $item ):
                     $active = $item->equals( $this->vars['controller'], $this->vars['action'] );
                     ?>
                     <li class="nav-item<?= $active ? ' active' : '' ?>">
-                        <a class="nav-link" href="<?= $active ? '#' : $item->getURL() ?>">
+                        <a id="<?= $item->getId() ?>" class="nav-link" href="<?= $active ? '#' : $item->getURL() ?>">
                             <?= $item->getName() ?>
                         </a>
                     </li>

@@ -1,9 +1,16 @@
 <?php
 $url = \config\Application::getAppPath() . '/scripture/view';
+
+extract( $this->vars );
+/**
+ * variables needed here:
+ * @var array  $volumes
+ * @var string $active
+ */
 ?>
 <div id="books-accordion" role="tablist" aria-multiselectable="true">
     <?php
-    foreach ( $this->vars['volumes'] as $volume => $books ): /* @var string[] $books */
+    foreach ( $volumes as $volume => $books ):
         $volId = str_replace( ' ', '', $volume );
         ?>
         <div class="card">
@@ -14,7 +21,7 @@ $url = \config\Application::getAppPath() . '/scripture/view';
                     </a>
                 </h5>
             </div>
-            <div class="collapse<?= $this->vars['active'] == $volume ? ' show' : '' ?>" role="tabpanel" id="books_<?= $volId ?>" aria-labelledby="volume_<?= $volId ?>">
+            <div class="collapse<?= $active == $volume ? ' show' : '' ?>" role="tabpanel" id="books_<?= $volId ?>" aria-labelledby="volume_<?= $volId ?>">
                 <div class="card-block books-list">
                     <?php foreach ( $books as $id => $book ): ?>
                         <a href="<?= $url ?>/<?= $id ?>"><?= $book ?></a>
