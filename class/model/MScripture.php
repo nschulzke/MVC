@@ -78,7 +78,7 @@ class MScripture
     }
 
     /**
-     * @param $bookName The name of the book, either the title, abbreviation, or ldsUrl
+     * @param string $bookName The name of the book, either the title, abbreviation, or ldsUrl
      *
      * @return Books|null|object The Book object (if found), else null
      */
@@ -103,11 +103,8 @@ class MScripture
     }
 
     private $book;
-    /* @var Books $book */
     private $chapter;
-    /* @var Chapters $chapter */
     private $verses = [];
-    /* @var Verses[] $verses */
 
     /**
      * MScripture constructor.
@@ -194,7 +191,7 @@ class MScripture
     }
 
     /**
-     * @return Chapters The Chapters object for the scripture
+     * @return object|Chapters The Chapters object for the scripture
      */
     public function getChapter()
     {
