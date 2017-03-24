@@ -1,7 +1,7 @@
 <?php namespace model\orm;
 
-use config\Application;
-
+// Normally loaded by index, but cli-config.php also loads this file
+// so we want to make sure we have this
 require_once directory(array('vendor', 'autoload.php'), true);
 
 use config\Database;
@@ -21,6 +21,9 @@ class ORM {
         return self::$entityManager;
     }
 
+    /**
+     * Private function that sets up the manager, called by getManager() if none found
+     */
     private static function initManager() {
         $paths = array( __DIR__ . '/entity/' );
         $isDevMode = false;
