@@ -15,7 +15,7 @@ $components = __DIR__ . '/_components/';
         <?php $this->requireOnce( $components . $this->vars['navbar'] ) ?>
 
         <article id="main-container" class="container">
-            <?php $this->requireOnce($this->vars['viewPath']) ?>
+            <?php $this->requireOnce( $this->vars['viewPath'] ) ?>
         </article>
 
         <?php $this->requireOnce( $components . $this->vars['footer'] ) ?>

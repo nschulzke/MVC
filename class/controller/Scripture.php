@@ -91,9 +91,9 @@ class Scripture
 
             $array = [];
             foreach ( $volumes as $volume ) /* @var Volumes $volume */ {
-                $array[ $volume->getTitle() ] = [];
+                $array[$volume->getTitle()] = [];
                 foreach ( $books->findBy( [ 'volumeId' => $volume->getId() ] ) as $book ) /* @var Books $book */ {
-                    $array[ $volume->getTitle() ][ $book->getLdsUrl() ] = $book->getTitle();
+                    $array[$volume->getTitle()][$book->getLdsUrl()] = $book->getTitle();
                 }
             }
 

@@ -2,7 +2,7 @@
 
 class NavBar
 {
-    private $items = array();
+    private $items = [];
 
     /**
      * @param string $name       The display name for the NavItem

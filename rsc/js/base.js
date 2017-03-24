@@ -6,7 +6,7 @@ $( function () {
     var input_number_list = $( 'input[type=number-list]' );
     // Ensure that only '0-9', '.' and '-' are allowed, and restrict '.' and '-' to the right place
     input_number.keypress( function ( e ) {
-        if ( Number(e.which) > 32 ) {
+        if ( Number( e.which ) > 32 ) {
             var ch = String.fromCharCode( Number( e.which ) );
 
             // Reject dot if we already have one, or if it's an integer
@@ -35,7 +35,7 @@ $( function () {
     } );
     // Ensure that only '0-9', '.' ',', and '-' are allowed
     input_number_list.keypress( function ( e ) {
-        if ( Number(e.which) > 32 ) {
+        if ( Number( e.which ) > 32 ) {
             var ch = String.fromCharCode( Number( e.which ) );
 
             // Only allow 0-9 - . , space
@@ -86,7 +86,7 @@ $( function () {
                 url += '/' + $( '#' + params[i] ).val();
             }
         }
-        console.log(url);
+        console.log( url );
 
         // Set the HTML based on the button's data
         var modal = $( this );

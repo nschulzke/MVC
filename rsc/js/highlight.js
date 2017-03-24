@@ -22,7 +22,7 @@ if ( $( '.chapter-view' ).length > 0 ) {
 
         if ( respond ) {
             highlightMenu.fadeIn();
-            highlightMenu.offset( { top: $( range.startContainer ).closest('li').offset().top } );
+            highlightMenu.offset( { top: $( range.startContainer ).closest( 'li' ).offset().top } );
         }
         else
             highlightMenu.hide();
@@ -41,13 +41,13 @@ if ( $( '.chapter-view' ).length > 0 ) {
 $( function () {
     var aChar = 97;
     $( '#highlight-menu' ).hide();
-    $( 'span.verse-text' ).each(function() {
+    $( 'span.verse-text' ).each( function () {
         var footnotes = 0;
         var char;
-        $(this).find( 'span.footnote' ).each(function() {
-            char = String.fromCharCode(aChar + footnotes);
-            $(this).prepend('<sup>' + char + '</sup>');
+        $( this ).find( 'span.footnote' ).each( function () {
+            char = String.fromCharCode( aChar + footnotes );
+            $( this ).prepend( '<sup>' + char + '</sup>' );
             footnotes++;
-        });
-    });
+        } );
+    } );
 } );

@@ -38,9 +38,9 @@ class ScriptureAnalysis
                         $words = WordAnalysis::explodeWords( $verse->getText() );
                         foreach ( $words as $word ) {
                             if ( array_key_exists( $word, $wordsArray ) )
-                                $wordsArray[ $word ]++;
+                                $wordsArray[$word]++;
                             else
-                                $wordsArray[ $word ] = 1;
+                                $wordsArray[$word] = 1;
                             $wordCount++;
                         }
                     }
@@ -83,9 +83,9 @@ class ScriptureAnalysis
                     $verses = $versesRepo->matching( $criteria );
                     foreach ( $verses as $verse ) {
                         if ( array_key_exists( $verse->getId(), $references ) )
-                            $references[ $verse->getId() ] += $count + WordAnalysis::countWord( $word, $verse->getText() );
+                            $references[$verse->getId()] += $count + WordAnalysis::countWord( $word, $verse->getText() );
                         else
-                            $references[ $verse->getId() ] = $count + WordAnalysis::countWord( $word, $verse->getText() );
+                            $references[$verse->getId()] = $count + WordAnalysis::countWord( $word, $verse->getText() );
                     }
                 }
             }

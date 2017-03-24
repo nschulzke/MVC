@@ -14,7 +14,7 @@ require_once __DIR__ . '/../_components/breadcrumb.php'
         </h5>
     </div>
     <div class="card-block">
-        <?php foreach ( $this->vars['chapters'] as $chapter ): /* @var Chapters $chapter */?>
+        <?php foreach ( $this->vars['chapters'] as $chapter ): /* @var Chapters $chapter */ ?>
             <a href="<?= $url ?>/<?= $this->vars['book']->getLdsUrl() ?>/<?= $chapter->getNumber() ?>"><?= $chapter->getNumber() ?></a>
         <?php endforeach ?>
     </div>

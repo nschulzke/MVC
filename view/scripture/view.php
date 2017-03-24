@@ -11,10 +11,10 @@ require_once __DIR__ . '/../_components/breadcrumb.php'
 <div class="container chapter-view">
     <ul class="chapter-text">
         <?php foreach ( $this->vars['scripture']->getText() as $num => $text ): ?>
-        <li class="verse<?= in_array($num, $this->vars['verses']) ? ' highlight' : ''?>">
-            <span class="verse-num"><?= $num ?></span>
-            <span class="verse-text"><?= $text ?></span>
-        </li>
+            <li class="verse<?= in_array( $num, $this->vars['verses'] ) ? ' highlight' : '' ?>">
+                <span class="verse-num"><?= $num ?></span>
+                <span class="verse-text"><?= $text ?></span>
+            </li>
         <?php endforeach ?>
     </ul>
 </div>

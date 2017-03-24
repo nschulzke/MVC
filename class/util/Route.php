@@ -8,6 +8,7 @@ class Route
     private static function toClass( $controller )
     {
         $classString = str_replace( ' ', '', ucwords( str_replace( '-', ' ', $controller ) ) );
+
         return 'controller\\' . $classString;
     }
 
@@ -15,7 +16,8 @@ class Route
     private static function toMethod( $action )
     {
         $actionString = str_replace( ' ', '', ucwords( str_replace( '-', ' ', $action ) ) );
-        $actionString[0] = strtolower($actionString[0]);
+        $actionString[0] = strtolower( $actionString[0] );
+
         return 'action_' . $actionString;
     }
 
@@ -25,7 +27,7 @@ class Route
         $controllerClass = self::toClass( $controller );
         $actionMethod = self::toMethod( $action );
 
-        return class_exists($controllerClass) && is_callable("$controllerClass::$actionMethod");
+        return class_exists( $controllerClass ) && is_callable( "$controllerClass::$actionMethod" );
     }
 
     /**
@@ -34,7 +36,7 @@ class Route
     private $controller = '';
     private $action = '';
     private $uri = '';
-    private $params = array();
+    private $params = [];
 
     // Calls a given $action on $controller, if it exists, otherwise calls an error
     public function call()
@@ -55,16 +57,16 @@ class Route
         // Explode it like so: ( $controller, $action, $params )
         $uri = explode( '/', $uri, 3 );
         // Set $params
-        $this->params = array();
-        if ( isset( $uri[2] ) && $uri[2] != NULL ) {
+        $this->params = [];
+        if ( isset( $uri[2] ) && $uri[2] != null ) {
             $this->params = explode( '/', $uri[2] );
         }
 
         // Set $this->controller and $this->action
-        if ( ( isset( $uri[0] ) && $uri[0] != NULL ) && ( isset( $uri[1] ) && $uri[1] != NULL ) ) {   // if the URI was '/controller/action'
+        if ( ( isset( $uri[0] ) && $uri[0] != null ) && ( isset( $uri[1] ) && $uri[1] != null ) ) {   // if the URI was '/controller/action'
             $this->controller = $uri[0];
             $this->action = $uri[1];
-        } else if ( isset( $uri[0] ) && $uri[0] != NULL ) {   // if the URI was just '/controller'
+        } else if ( isset( $uri[0] ) && $uri[0] != null ) {   // if the URI was just '/controller'
             if ( self::isAction( $uri[0], 'default' ) ) {   // if there's a default action, use it
                 $this->controller = $uri[0];
                 $this->action = 'default';
@@ -78,7 +80,7 @@ class Route
         }
 
         if ( !self::isAction( $this->controller, $this->action ) ) {
-            $this->params = array( 'code' => '404', 'msg' => 'File not found: /' . $this->controller . '/' . $this->action );
+            $this->params = [ 'code' => '404', 'msg' => 'File not found: /' . $this->controller . '/' . $this->action ];
             $this->controller = 'error';
             $this->action = 'html';
         }
@@ -110,6 +112,6 @@ class Route
 
     public function getDefaultPath()
     {
-        return directory(array('view', $this->controller, $this->action . '.php'), true);
+        return directory( [ 'view', $this->controller, $this->action . '.php' ], true );
     }
 }
