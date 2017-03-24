@@ -110,7 +110,7 @@ class MScripture
      */
     public function __construct( $bookName, $chapterNum, $verseNums = array() )
     {
-        $this->book = $this->findBook( $bookName );
+        $this->book = self::findBook( $bookName );
 
         $this->chapter = self::getChaptersRepo()->findOneBy( array( 'bookId' => $this->book->getId(), 'number' => $chapterNum ) );
 
@@ -139,7 +139,7 @@ class MScripture
     /**
      * @return array
      */
-    public function getVerses()
+    public function getText()
     {
         $retArr = array();
         foreach ( $this->verses as $verse ) /* @var Verses $verse */
@@ -147,11 +147,16 @@ class MScripture
         return $retArr;
     }
 
+    public function getVerses()
+    {
+        return $this->verses;
+    }
+
     /**
      * @param bool $long
      * @return string
      */
-    public function getBook( $long = false )
+    public function getBookTitle( $long = false )
     {
         if ( $long )
             return $this->book->getLongTitle();
@@ -162,15 +167,7 @@ class MScripture
     /**
      * @return mixed
      */
-    public function getChapter()
-    {
-        return $this->chapter->getNumber();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getVerse()
+    public function getChapterNumber()
     {
         return $this->chapter->getNumber();
     }

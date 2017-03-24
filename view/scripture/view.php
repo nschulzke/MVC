@@ -10,7 +10,7 @@ require_once __DIR__ . '/breadcrumb.php'
 </div>
 <div class="container chapter-view">
     <ul class="chapter-text">
-        <?php foreach ( $this->vars['scripture']->getVerses() as $num => $text ): ?>
+        <?php foreach ( $this->vars['scripture']->getText() as $num => $text ): ?>
         <li class="verse<?= in_array($num, $this->vars['verses']) ? ' highlight' : ''?>">
             <span class="verse-num"><?= $num ?></span>
             <span class="verse-text"><?= $text ?></span>
