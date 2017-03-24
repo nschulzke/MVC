@@ -1,12 +1,12 @@
-<?php
+<?php namespace model;
 // Bootstrap ORM
-require_once __DIR__ . "/../model/orm/bootstrap.php";
-
-// Load ORM classes
-foreach ( glob( __DIR__ . "/../model/orm/entities/*.php" ) as $filename )
-    require_once $filename;
+require_once __DIR__ . "/orm/bootstrap.php";
 
 use Doctrine\Common\Collections\Criteria;
+use model\orm\entity\Books;
+use model\orm\entity\Chapters;
+use model\orm\entity\Verses;
+use model\orm\ORM;
 
 class MScripture
 {
@@ -20,9 +20,8 @@ class MScripture
      */
     public static function getVolumesRepo()
     {
-        global $entityManager;
         if ( !isset( $volumesRepo ) )
-            self::$volumesRepo = $entityManager->getRepository( 'Volumes' );
+            self::$volumesRepo = ORM::getManager()->getRepository( 'entity:Volumes' );
         return self::$volumesRepo;
     }
 
@@ -31,9 +30,8 @@ class MScripture
      */
     public static function getBooksRepo()
     {
-        global $entityManager;
         if ( !isset( $booksRepo ) )
-            self::$booksRepo = $entityManager->getRepository( 'Books' );
+            self::$booksRepo = ORM::getManager()->getRepository( 'entity:Books' );
         return self::$booksRepo;
     }
 
@@ -42,9 +40,8 @@ class MScripture
      */
     public static function getChaptersRepo()
     {
-        global $entityManager;
         if ( !isset( $chaptersRepo ) )
-            self::$chaptersRepo = $entityManager->getRepository( 'Chapters' );
+            self::$chaptersRepo = ORM::getManager()->getRepository( 'entity:Chapters' );
         return self::$chaptersRepo;
     }
 
@@ -53,9 +50,8 @@ class MScripture
      */
     public static function getVersesRepo()
     {
-        global $entityManager;
         if ( !isset( $versesRepo ) )
-            self::$versesRepo = $entityManager->getRepository( 'Verses' );
+            self::$versesRepo = ORM::getManager()->getRepository( 'entity:Verses' );
         return self::$versesRepo;
     }
 

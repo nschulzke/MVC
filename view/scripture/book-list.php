@@ -1,9 +1,9 @@
 <?php
-$url = GlobalConfig::getAppPath() . '/scripture/view';
+$url = \config\Application::getAppPath() . '/scripture/view';
 ?>
 <div id="books-accordion" role="tablist" aria-multiselectable="true">
 <?php
-foreach ($this->vars['volumes'] as $volume => $books): /* @var Books[] $books */
+foreach ($this->vars['volumes'] as $volume => $books): /* @var string[] $books */
 $volId = str_replace(' ', '', $volume);
 ?>
     <div class="card">

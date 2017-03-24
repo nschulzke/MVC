@@ -1,6 +1,8 @@
-<?php
+<?php namespace controller;
 
-class CError
+use util\View;
+
+class Error
 {
     public static function action_html( $route, $params )
     {

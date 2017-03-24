@@ -1,8 +1,14 @@
-<?php
+<?php namespace controller;
 
 use Doctrine\Common\Collections\Criteria;
+use model\MScripture;
+use model\orm\entity\Books;
+use model\orm\entity\Chapters;
+use model\orm\entity\Verses;
+use model\orm\entity\Volumes;
+use util\WordAnalysis;
 
-class CScriptureAnalysis
+class ScriptureAnalysis
 {
     public static function action_mostCommonWords( $route, $params )
     {
@@ -44,7 +50,7 @@ class CScriptureAnalysis
         echo 'words:' . $wordCount . ' ';
         arsort( $wordsArray );
         foreach ( $wordsArray as $word => $count ) {
-            if ( $count / $wordCount < $threshold)
+            if ( $count / $wordCount < $threshold )
                 break;
             else
                 echo $word . ', ';
@@ -53,7 +59,8 @@ class CScriptureAnalysis
         print_r( $wordsArray );
     }
 
-    public static function action_findConnections( $route, $params ) {
+    public static function action_findConnections( $route, $params )
+    {
         if ( isset( $params[0] ) && isset( $params[1] ) ) {
             $book = $params[0];
             $chapter = $params[1];
@@ -68,25 +75,24 @@ class CScriptureAnalysis
             $references = array();
             foreach ( $scripture->getVerses() as $verse ) /* @var Verses $verse */ {
                 $words = WordAnalysis::countWords( $verse->getText() );
-                WordAnalysis::filterWords($words);
+                WordAnalysis::filterWords( $words );
                 foreach ( $words as $word => $count ) {
                     echo "$word, ";
                     $criteria = Criteria::create();
-                    $criteria->where(Criteria::expr()->contains( 'text', $word ));
-                    $verses = $versesRepo->matching($criteria);
+                    $criteria->where( Criteria::expr()->contains( 'text', $word ) );
+                    $verses = $versesRepo->matching( $criteria );
                     foreach ( $verses as $verse ) {
-                        if (array_key_exists($verse->getId(), $references))
-                            $references[$verse->getId()] += $count + WordAnalysis::countWord($word, $verse->getText());
+                        if ( array_key_exists( $verse->getId(), $references ) )
+                            $references[$verse->getId()] += $count + WordAnalysis::countWord( $word, $verse->getText() );
                         else
-                            $references[$verse->getId()] = $count + WordAnalysis::countWord($word, $verse->getText());
+                            $references[$verse->getId()] = $count + WordAnalysis::countWord( $word, $verse->getText() );
                     }
                 }
             }
-            arsort($references);
+            arsort( $references );
             echo '<br/>';
-            foreach($references as $refId => $count)
-            {
-                $verse = $versesRepo->find($refId);
+            foreach ( $references as $refId => $count ) {
+                $verse = $versesRepo->find( $refId );
                 echo $count . ': ';
                 echo $verse->getText();
                 echo '<br/>';

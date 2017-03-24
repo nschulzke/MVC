@@ -1,4 +1,6 @@
 <?php
+use util\NavBar;
+
 $bar = new NavBar();
 $bar->addItem( 'Home', 'static-pages', 'home', '/' );
 $bar->addItem( 'About', 'static-pages', 'about', 'about' );
@@ -9,7 +11,7 @@ $bar->addItem( 'Test', 'static-pages', 'test', 'test' );
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand"><?= GlobalConfig::getAppName() ?></a>
+        <a class="navbar-brand"><?= \config\Application::getAppName() ?></a>
         <div id="main-navbar" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <?php foreach ( $bar->getItems() as $item ):

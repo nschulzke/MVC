@@ -1,4 +1,6 @@
-<?php
+<?php namespace util;
+
+use config\Application;
 
 class Route
 {
@@ -6,7 +8,7 @@ class Route
     private static function toClass( $controller )
     {
         $classString = str_replace( ' ', '', ucwords( str_replace( '-', ' ', $controller ) ) );
-        return 'C' . $classString;
+        return 'controller\\' . $classString;
     }
 
     // Takes an action name and converts it to the method format (usually appending a prefix)
@@ -48,7 +50,7 @@ class Route
     {
         $this->uri = $_SERVER['REQUEST_URI'];
         // Get the current URI, clean it up to be ready
-        $uri = str_replace( GlobalConfig::getAppPath( true ), '', $this->uri );
+        $uri = str_replace( Application::getAppPath( true ), '', $this->uri );
         $uri = preg_replace( '#\?(.*)$#', '', $uri );
         // Explode it like so: ( $controller, $action, $params )
         $uri = explode( '/', $uri, 3 );
@@ -108,6 +110,6 @@ class Route
 
     public function getDefaultPath()
     {
-        return __DIR__ . '/../view/' . $this->controller . '/' . $this->action . '.php';
+        return Application::getDocRoot() . '/view/' . $this->controller . '/' . $this->action . '.php';
     }
 }

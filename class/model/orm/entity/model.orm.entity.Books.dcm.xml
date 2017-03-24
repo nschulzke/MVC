@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Volumes" table="volumes">
+    <entity name="model\orm\entity\Books" table="books">
+        <indexes>
+            <index name="volume" columns="volume_id"/>
+        </indexes>
         <id name="id" type="integer" column="id">
             <generator strategy="IDENTITY"/>
         </id>
-        <field name="title" type="string" column="volume_title" length="22" nullable="false">
+        <field name="volumeId" type="smallint" column="volume_id" nullable="false">
+            <options>
+                <option name="unsigned">1</option>
+            </options>
+        </field>
+        <field name="title" type="string" column="book_title" length="22" nullable="false">
             <options>
                 <option name="fixed"/>
             </options>
         </field>
-        <field name="longTitle" type="string" column="volume_long_title" length="26" nullable="false">
+        <field name="longTitle" type="string" column="book_long_title" length="59" nullable="false">
             <options>
                 <option name="fixed"/>
             </options>
         </field>
-        <field name="subtitle" type="string" column="volume_subtitle" length="36" nullable="false">
+        <field name="subtitle" type="string" column="book_subtitle" length="80" nullable="false">
             <options>
                 <option name="fixed"/>
             </options>
         </field>
-        <field name="shortTitle" type="string" column="volume_short_title" length="3" nullable="false">
+        <field name="shortTitle" type="string" column="book_short_title" length="8" nullable="false">
             <options>
                 <option name="fixed"/>
             </options>
         </field>
-        <field name="ldsUrl" type="string" column="volume_lds_url" length="12" nullable="false">
+        <field name="ldsUrl" type="string" column="book_lds_url" length="255" nullable="false">
             <options>
                 <option name="fixed"/>
             </options>

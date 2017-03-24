@@ -1,4 +1,6 @@
-<?php
+<?php namespace util;
+
+use config\Application;
 
 class View
 {
@@ -18,6 +20,8 @@ class View
         'footer.php', 'none'
     );
 
+    private $viewRoot;
+
     private $route;
     private $layout;
     private $vars;
@@ -28,6 +32,7 @@ class View
      */
     public function __construct( $route )
     {
+        $this->viewRoot  = Application::getDocRoot(true) . '/view/';
         $this->route = $route;
         if ( isset( $_GET['layout'] ) && in_array( $_GET['layout'], self::VALID_LAYOUTS ) )
             $this->layout = $_GET['layout'];
@@ -38,7 +43,7 @@ class View
             'action'     => $this->route->getAction(),
             'controller' => $this->route->getController(),
             'viewPath'   => $this->route->getDefaultPath(),
-            'title'      => GlobalConfig::getAppName()
+            'title'      => Application::getAppName()
         );
         $this->vars += array(
             'subtitle'   => ucfirst( $this->vars['action'] ),
@@ -88,7 +93,7 @@ class View
         else if ( $key == 'modal' && !in_array( $value, self::VALID_MODALS ) )
             $this->vars['modal'] = 'modal.php';
         else if ( $key == 'viewPath' )
-            $this->vars['viewPath'] = __DIR__ . '/../view/' . $value;
+            $this->vars['viewPath'] = $this->viewRoot . $value;
         return $this;
     }
 
@@ -118,6 +123,6 @@ class View
         if ( $this->layout == 'none' )
             require_once $this->vars['viewPath'];
         else
-            require_once __DIR__ . '/../view/' . $this->layout . '.php';
+            require_once $this->viewRoot . $this->layout . '.php';
     }
 }

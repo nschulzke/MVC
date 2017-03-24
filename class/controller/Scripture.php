@@ -1,8 +1,12 @@
-<?php
+<?php namespace controller;
 
-use Doctrine\Common\Collections\Criteria;
+use config\Application;
+use \model\MScripture;
+use model\orm\entity\Volumes;
+use model\orm\entity\Books;
+use util\View;
 
-class CScripture
+class Scripture
 {
     static public function action_lookup( $route, $params )
     {
@@ -25,8 +29,7 @@ class CScripture
     static public function action_view( $route, $params )
     {
         $view = new View( $route );
-        $crumbRoot = GlobalConfig::getAppPath() . '/scripture/view';
-        $rootName = 'Books';
+        $crumbRoot = Application::getAppPath() . '/scripture/view';
         if ( isset( $params[0] ) && isset( $params[1] ) ) {
             $verses = array();
             $book = $params[0];
@@ -58,9 +61,9 @@ class CScripture
             $view = new View( $route );
 
             $book = MScripture::findBook( $params[0] );
-            /* @var Books $book */
+            /* @var \model\orm\entity\Books $book */
             $volume = MScripture::getVolumesRepo()->find( $book->getVolumeId() );
-            /* @var Volumes $volume */
+            /* @var \model\orm\entity\Volumes $volume */
             $chapters = MScripture::getChaptersRepo()->findBy( array( 'bookId' => $book->getId() ) );
 
             $bookTitle = $book->getTitle();

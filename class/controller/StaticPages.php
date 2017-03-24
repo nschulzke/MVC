@@ -1,6 +1,8 @@
-<?php
+<?php namespace controller;
 
-class CStaticPages
+use util\View;
+
+class StaticPages
 {
     public static function action_home( $route, $params )
     {

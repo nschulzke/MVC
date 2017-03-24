@@ -1,4 +1,6 @@
-<?php
+<?php namespace util;
+
+use config\Application;
 
 class NavItem
 {
@@ -56,7 +58,7 @@ class NavItem
      */
     public function getURL()
     {
-        return GlobalConfig::getAppPath( true ) . $this->url;
+        return Application::getAppPath( true ) . $this->url;
     }
 
     /**

@@ -1,20 +1,26 @@
 <?php
-// Load configuration files
-require_once __DIR__ . '/config/DBConfig.php';
-require_once __DIR__ . '/config/GlobalConfig.php';
+/**
+ * AutoLoader
+ * Namespaces we use:
+ *      \class\*
+ *      \config\*
+ *      \controller\*
+ *      \model\*
+ * Other directories should not contain classes
+ */
+spl_autoload_register( function ( $className ) {
+    $className = ltrim( $className, '\\' );
+    $fileName = 'class' . DIRECTORY_SEPARATOR;
+    if ( $lastNsPos = strrpos( $className, '\\' ) ) {       // Find the last backslash
+        $namespace = substr( $className, 0, $lastNsPos );   // Everything to the left is the namespace
+        $className = substr( $className, $lastNsPos + 1 );  // Everything to the right is the class name
+        $fileName .= str_replace( '\\', DIRECTORY_SEPARATOR, $namespace ) . DIRECTORY_SEPARATOR; // Convert to path
+    }
+    $fileName .= $className . '.php';   // Append ClassName.php
 
-// Autoload classes
-foreach ( glob( __DIR__ . "/class/*.php" ) as $filename )
-    require_once $filename;
-
-// Autoload models
-foreach ( glob( __DIR__ . "/model/*.php" ) as $filename )
-    require_once $filename;
-
-// Autoload controllers
-foreach ( glob( __DIR__ . "/controller/*.php" ) as $filename )
-    require_once $filename;
+    require $fileName;
+} );
 
 // Load and display view
-$route = new Route();
+$route = new \util\Route();
 $route->call();

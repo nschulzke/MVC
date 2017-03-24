@@ -3,6 +3,7 @@ if ( $( '.chapter-view' ).length > 0 ) {
         var range;
         var selection;
         var respond = true;
+        var highlightMenu = $( '#highlight-menu' );
         if ( window.getSelection ) {
             selection = window.getSelection();
             if ( selection.getRangeAt( 0 ).toString().length == 0 )
@@ -20,21 +21,21 @@ if ( $( '.chapter-view' ).length > 0 ) {
             respond = false;
 
         if ( respond ) {
-            $( '#highlight-menu' ).fadeIn();
-            $( '#highlight-menu' ).offset( { top: $( range.startContainer ).closest('li').offset().top } );
+            highlightMenu.fadeIn();
+            highlightMenu.offset( { top: $( range.startContainer ).closest('li').offset().top } );
         }
         else
-            $( '#highlight-menu' ).hide();
+            highlightMenu.hide();
     }
 
     document.onmouseup = function () {
         detectSelection();
-    }
+    };
 
     document.onkeyup = function ( e ) {
         if ( Number( e.keyCode ) <= 40 && Number( e.keyCode ) >= 37 )
             detectSelection();
-    }
+    };
 }
 
 $( function () {
@@ -49,4 +50,4 @@ $( function () {
             footnotes++;
         });
     });
-} )
+} );

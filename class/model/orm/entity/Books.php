@@ -1,4 +1,4 @@
-<?php
+<?php namespace model\orm\entity;
 
 /**
  * Books

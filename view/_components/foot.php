@@ -1,1 +1,1 @@
-<script src="<?= GlobalConfig::getAppPath() ?>/rsc/js/base.js"></script>
+<script src="<?= \config\Application::getAppPath() ?>/rsc/js/base.js"></script>

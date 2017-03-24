@@ -1,15 +1,14 @@
-<?php
-require_once __DIR__ . '/NavItem.php';
+<?php namespace util;
 
 class NavBar
 {
     private $items = array();
 
     /**
-     * @param string $name The display name for the NavItem
+     * @param string $name       The display name for the NavItem
      * @param string $controller The target controller
-     * @param string $action The target action
-     * @param string $url The url, if not just '/controller/action'
+     * @param string $action     The target action
+     * @param string $url        The url, if not just '/controller/action'
      */
     public function addItem( $name, $controller, $action, $url = '' )
     {

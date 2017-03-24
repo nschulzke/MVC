@@ -1,4 +1,9 @@
 <?php
+
+use model\MScripture;
+use model\orm\entity\Books;
+use model\orm\entity\Volumes;
+
 $volumesRepo = MScripture::getVolumesRepo();
 $booksRepo = MScripture::getBooksRepo();
 $chaptersRepo = MScripture::getChaptersRepo();
