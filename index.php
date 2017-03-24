@@ -10,15 +10,18 @@
  */
 require_once __DIR__ . '/vendor/autoload.php';
 
-function directory( $array = array(), $root = true )
+/**
+ * @param array $array The breadcrumb trail (strings)
+ * @param bool  $root Whether to start at the root or just build a path
+ * @return string The path
+ */
+function directory( $array = array(), $root = false )
 {
     if ( $root )
-        $retString = __DIR__;
+        $start = __DIR__ . '/';
     else
-        $retString = '';
-    foreach ( $array as $item )
-        $retString .= DIRECTORY_SEPARATOR . $item;
-    return $retString;
+        $start = '';
+    return $start . implode(DIRECTORY_SEPARATOR, $array);
 }
 
 spl_autoload_register( function ( $className ) {

@@ -32,7 +32,7 @@ class View
      */
     public function __construct( $route )
     {
-        $this->viewRoot  = 'view';
+        $this->viewRoot = directory( array( 'view' ), true );
         $this->route = $route;
         if ( isset( $_GET['layout'] ) && in_array( $_GET['layout'], self::VALID_LAYOUTS ) )
             $this->layout = $_GET['layout'];
@@ -46,19 +46,19 @@ class View
             'title'      => Application::getAppName()
         );
         $this->vars += array(
-            'subtitle'   => ucfirst( $this->vars['action'] ),
-            'navbar'     => 'navbar.php',
-            'footer'     => 'footer.php',
-            'modal'      => 'modal.php',
-            'head'       => array(
+            'subtitle' => ucfirst( $this->vars['action'] ),
+            'navbar'   => 'navbar.php',
+            'footer'   => 'footer.php',
+            'modal'    => 'modal.php',
+            'head'     => array(
                 'head.php',
-                $this->vars['controller'] . '/_components/_head.php',
-                $this->vars['controller'] . '/_components/' . $this->vars['action'] . '_head.php'
+                directory( array( $this->vars['controller'], '_components', '_head.php' ) ),
+                directory( array( $this->vars['controller'], '_components', $this->vars['action'] . '_head.php' ) )
             ),
-            'foot'       => array(
+            'foot'     => array(
                 'foot.php',
-                $this->vars['controller'] . '/_components/_foot.php',
-                $this->vars['controller'] . '/_components/' . $this->vars['action'] . '_foot.php'
+                directory( array( $this->vars['controller'], '_components', '_foot.php' ) ),
+                directory( array( $this->vars['controller'], '_components', $this->vars['action'] . '_foot.php' ) )
             ),
         );
     }
@@ -88,12 +88,12 @@ class View
 
         if ( $key == 'navbar' && !in_array( $value, self::VALID_NAVBARS ) )
             $this->vars['navbar'] = 'navbar.php';
-        else if ( $key == 'footer' && !in_array( $value, self::VALID_MODALS ) )
+        else if ( $key == 'footer' && !in_array( $value, self::VALID_FOOTERS ) )
             $this->vars['footer'] = 'footer.php';
         else if ( $key == 'modal' && !in_array( $value, self::VALID_MODALS ) )
             $this->vars['modal'] = 'modal.php';
         else if ( $key == 'viewPath' )
-            $this->vars['viewPath'] = directory(array($this->viewRoot, $value));
+            $this->vars['viewPath'] = directory( array( $this->viewRoot, $value ) );
         return $this;
     }
 
@@ -123,6 +123,6 @@ class View
         if ( $this->layout == 'none' )
             require_once $this->vars['viewPath'];
         else
-            require_once directory(array($this->viewRoot, $this->layout . '.php'));
+            require_once directory( array( $this->viewRoot, $this->layout . '.php' ) );
     }
 }

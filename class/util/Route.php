@@ -110,6 +110,6 @@ class Route
 
     public function getDefaultPath()
     {
-        return Application::getDocRoot() . '/view/' . $this->controller . '/' . $this->action . '.php';
+        return directory(array('view', $this->controller, $this->action . '.php'), true);
     }
 }

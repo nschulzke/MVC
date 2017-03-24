@@ -2,7 +2,7 @@
 
 use config\Application;
 
-require_once Application::getDocRoot() . '/vendor/autoload.php';
+require_once directory(array('vendor', 'autoload.php'), true);
 
 use config\Database;
 use Doctrine\ORM\Tools\Setup;
