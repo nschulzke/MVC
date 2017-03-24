@@ -24,7 +24,7 @@ class Database
     }
 
     /**
-     * @return string The dbname parameter for database connnection
+     * @return string The dbname parameter for database connection
      */
     public static function getName()
     {
