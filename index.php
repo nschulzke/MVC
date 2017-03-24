@@ -1,5 +1,20 @@
 <?php
 /**
+ * Use this function to form paths for ease of migration
+ * @param array $array The breadcrumb trail (strings)
+ * @param bool  $root  Whether to start at the root or just build a path
+ * @return string The path
+ */
+function directory( $array = array(), $root = false )
+{
+    if ( $root )
+        $start = __DIR__ . DIRECTORY_SEPARATOR;
+    else
+        $start = '';
+    return $start . implode( DIRECTORY_SEPARATOR, $array );
+}
+
+/**
  * AutoLoader
  * Namespaces we use:
  *      \class\*
@@ -8,22 +23,6 @@
  *      \model\*
  * Other directories should not contain classes
  */
-require_once __DIR__ . '/vendor/autoload.php';
-
-/**
- * @param array $array The breadcrumb trail (strings)
- * @param bool  $root Whether to start at the root or just build a path
- * @return string The path
- */
-function directory( $array = array(), $root = false )
-{
-    if ( $root )
-        $start = __DIR__ . '/';
-    else
-        $start = '';
-    return $start . implode(DIRECTORY_SEPARATOR, $array);
-}
-
 spl_autoload_register( function ( $className ) {
     $className = ltrim( $className, '\\' );
     $fileName = 'class' . DIRECTORY_SEPARATOR;
@@ -36,6 +35,8 @@ spl_autoload_register( function ( $className ) {
 
     require $fileName;
 } );
+
+require_once directory( array( 'vendor', 'autoload.php' ), true );
 
 // Load and display view
 $route = new \util\Route();
