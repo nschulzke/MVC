@@ -19,28 +19,28 @@ class ScriptureAnalysis
         $threshold = 0.007;
 
         if ( isset( $params[0] ) )
-            $volumes = MScripture::getVolumesRepo()->findBy( array( 'ldsUrl' => $params[0] ) );
+            $volumes = MScripture::getVolumesRepo()->findBy( [ 'ldsUrl' => $params[0] ] );
         else
             $volumes = MScripture::getVolumesRepo()->findAll();
 
-        $wordsArray = array();
+        $wordsArray = [];
         $wordCount = 0;
         foreach ( $volumes as $volume ) /* @var Volumes $volume */ {
-            $books = $booksRepo->findBy( array( 'volumeId' => $volume->getId() ) );
+            $books = $booksRepo->findBy( [ 'volumeId' => $volume->getId() ] );
 
             foreach ( $books as $book ) /* @var Books $book */ {
-                $chapters = $chaptersRepo->findBy( array( 'bookId' => $book->getId() ) );
+                $chapters = $chaptersRepo->findBy( [ 'bookId' => $book->getId() ] );
 
                 foreach ( $chapters as $chapter ) /* @var Chapters $chapter */ {
-                    $verses = $versesRepo->findBy( array( 'chapterId' => $chapter->getId() ) );
+                    $verses = $versesRepo->findBy( [ 'chapterId' => $chapter->getId() ] );
 
                     foreach ( $verses as $verse ) /* @var Verses $verse */ {
                         $words = WordAnalysis::explodeWords( $verse->getText() );
                         foreach ( $words as $word ) {
                             if ( array_key_exists( $word, $wordsArray ) )
-                                $wordsArray[$word]++;
+                                $wordsArray[ $word ]++;
                             else
-                                $wordsArray[$word] = 1;
+                                $wordsArray[ $word ] = 1;
                             $wordCount++;
                         }
                     }
@@ -72,7 +72,7 @@ class ScriptureAnalysis
             $versesRepo = MScripture::getVersesRepo();
             $scripture = new MScripture( $book, $chapter, $verses );
 
-            $references = array();
+            $references = [];
             foreach ( $scripture->getVerses() as $verse ) /* @var Verses $verse */ {
                 $words = WordAnalysis::countWords( $verse->getText() );
                 WordAnalysis::filterWords( $words );
@@ -83,9 +83,9 @@ class ScriptureAnalysis
                     $verses = $versesRepo->matching( $criteria );
                     foreach ( $verses as $verse ) {
                         if ( array_key_exists( $verse->getId(), $references ) )
-                            $references[$verse->getId()] += $count + WordAnalysis::countWord( $word, $verse->getText() );
+                            $references[ $verse->getId() ] += $count + WordAnalysis::countWord( $word, $verse->getText() );
                         else
-                            $references[$verse->getId()] = $count + WordAnalysis::countWord( $word, $verse->getText() );
+                            $references[ $verse->getId() ] = $count + WordAnalysis::countWord( $word, $verse->getText() );
                     }
                 }
             }
