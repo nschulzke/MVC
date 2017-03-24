@@ -10,6 +10,17 @@
  */
 require_once __DIR__ . '/vendor/autoload.php';
 
+function directory( $array = array(), $root = true )
+{
+    if ( $root )
+        $retString = __DIR__;
+    else
+        $retString = '';
+    foreach ( $array as $item )
+        $retString .= DIRECTORY_SEPARATOR . $item;
+    return $retString;
+}
+
 spl_autoload_register( function ( $className ) {
     $className = ltrim( $className, '\\' );
     $fileName = 'class' . DIRECTORY_SEPARATOR;

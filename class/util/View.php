@@ -32,7 +32,7 @@ class View
      */
     public function __construct( $route )
     {
-        $this->viewRoot  = Application::getDocRoot(true) . '/view/';
+        $this->viewRoot  = 'view';
         $this->route = $route;
         if ( isset( $_GET['layout'] ) && in_array( $_GET['layout'], self::VALID_LAYOUTS ) )
             $this->layout = $_GET['layout'];
@@ -93,7 +93,7 @@ class View
         else if ( $key == 'modal' && !in_array( $value, self::VALID_MODALS ) )
             $this->vars['modal'] = 'modal.php';
         else if ( $key == 'viewPath' )
-            $this->vars['viewPath'] = $this->viewRoot . $value;
+            $this->vars['viewPath'] = directory(array($this->viewRoot, $value));
         return $this;
     }
 
@@ -123,6 +123,6 @@ class View
         if ( $this->layout == 'none' )
             require_once $this->vars['viewPath'];
         else
-            require_once $this->viewRoot . $this->layout . '.php';
+            require_once directory(array($this->viewRoot, $this->layout . '.php'));
     }
 }
