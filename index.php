@@ -1,6 +1,6 @@
 <?php
 /**
- * Use this function to form paths for ease of migration
+ * Use this function to form complicated or root-based paths. Not necessary for relative paths.
  * @param array $array The breadcrumb trail (strings)
  * @param bool  $root  Whether to start at the root or just build a path
  * @return string The path
