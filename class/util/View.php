@@ -58,7 +58,7 @@ class View
                 directory( [ $this->vars['controller'], '_components', $this->vars['action'] . '_foot.php' ] ),
             ],
         ];
-        $this->vars['navbar'] = new NavBar('nav-main', $this->vars);
+        $this->vars['navbar'] = new NavBar( 'nav-main', [ 'controller' => $this->vars['controller'], 'action' => $this->vars['action'] ] );
         $this->vars['navbar']->addItem( 'Home', 'static-pages', 'home', '/' );
         $this->vars['navbar']->addItem( 'About', 'static-pages', 'about', 'about' );
         $this->vars['navbar']->addItem( 'Test', 'static-pages', 'test', 'test' );
@@ -74,6 +74,7 @@ class View
     {
         if ( file_exists( $path ) ) {
             include $path;
+
             return true;
         } else
             return false;

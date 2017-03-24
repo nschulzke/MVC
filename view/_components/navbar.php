@@ -1,4 +1,10 @@
 <?php /* @var util\NavBar $this */
+extract( $this->vars );
+/**
+ * variables needed here:
+ * @var string $controller
+ * @var string $action
+ */
 ?>
 <header id="navbar-container" class="container bg-faded">
     <nav id="<?= $this->getId() ?>" class="navbar navbar-toggleable-sm navbar-light">
@@ -9,7 +15,7 @@
         <div id="<?= $this->getId() ?>-collapse" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <?php foreach ( $this->getItems() as $item ):
-                    $active = $item->equals( $this->vars['controller'], $this->vars['action'] );
+                    $active = $item->equals( $controller, $action );
                     ?>
                     <li class="nav-item<?= $active ? ' active' : '' ?>">
                         <a id="<?= $item->getId() ?>" class="nav-link" href="<?= $active ? '#' : $item->getURL() ?>">
