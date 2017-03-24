@@ -13,6 +13,10 @@ class Application
     {
     }
 
+    /**
+     * @param bool $finalSlash Whether to include a final slash in the path.
+     * @return string The path of the application (after the domain). Example: localhost/framework
+     */
     public static function getAppPath( $finalSlash = false )
     {
         if ( $finalSlash )
@@ -21,6 +25,9 @@ class Application
             return self::$APP_PATH;
     }
 
+    /**
+     * @return string The name of the application, for display.
+     */
     public static function getAppName()
     {
         return self::$APP_NAME;
