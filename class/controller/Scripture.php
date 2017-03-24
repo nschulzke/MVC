@@ -31,7 +31,7 @@ class Scripture
         $view = new View( $route );
         $crumbRoot = Application::getAppPath() . '/scripture/view';
         if ( isset( $params[0] ) && isset( $params[1] ) ) {
-            $verses = array();
+            $verses = [];
             $book = $params[0];
             $mBook = MScripture::findBook( $book );
             $chapter = $params[1];
@@ -41,11 +41,11 @@ class Scripture
                 $verses = explode( ',', $params[2] );
 
             $chapterName = 'Chapter ' . $chapter;
-            $breadcrumb = array(
+            $breadcrumb = [
                 $volume->getTitle() => $crumbRoot . '?volume=' . $volume->getId(),
                 $mBook->getTitle()  => $crumbRoot . '/' . $book,
-                $chapterName        => $crumbRoot . '/' . $book . '/' . $chapter
-            );
+                $chapterName        => $crumbRoot . '/' . $book . '/' . $chapter,
+            ];
             $activeCrumb = $chapterName;
 
             $verses = MScripture::explodeRanges( $verses );
@@ -64,13 +64,13 @@ class Scripture
             /* @var \model\orm\entity\Books $book */
             $volume = MScripture::getVolumesRepo()->find( $book->getVolumeId() );
             /* @var \model\orm\entity\Volumes $volume */
-            $chapters = MScripture::getChaptersRepo()->findBy( array( 'bookId' => $book->getId() ) );
+            $chapters = MScripture::getChaptersRepo()->findBy( [ 'bookId' => $book->getId() ] );
 
             $bookTitle = $book->getTitle();
-            $breadcrumb = array(
+            $breadcrumb = [
                 $volume->getTitle() => $crumbRoot . '?volume=' . $volume->getId(),
                 $bookTitle          => $crumbRoot . '/' . $book->getLdsUrl(),
-            );
+            ];
             $activeCrumb = $bookTitle;
 
             $view->setVar( 'book', $book )
@@ -89,11 +89,11 @@ class Scripture
             $volumes = MScripture::getVolumesRepo()->findAll();
             $books = MScripture::getBooksRepo();
 
-            $array = array();
+            $array = [];
             foreach ( $volumes as $volume ) /* @var Volumes $volume */ {
-                $array[$volume->getTitle()] = array();
-                foreach ( $books->findBy( array( 'volumeId' => $volume->getId() ) ) as $book ) /* @var Books $book */ {
-                    $array[$volume->getTitle()][$book->getLdsUrl()] = $book->getTitle();
+                $array[ $volume->getTitle() ] = [];
+                foreach ( $books->findBy( [ 'volumeId' => $volume->getId() ] ) as $book ) /* @var Books $book */ {
+                    $array[ $volume->getTitle() ][ $book->getLdsUrl() ] = $book->getTitle();
                 }
             }
 
