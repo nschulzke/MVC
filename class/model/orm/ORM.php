@@ -2,7 +2,7 @@
 
 // Normally loaded by index, but cli-config.php also loads this file
 // so we want to make sure we have this
-require_once directory( array( 'vendor', 'autoload.php' ), true );
+require_once directory( [ 'vendor', 'autoload.php' ], true );
 
 use config\Database;
 use Doctrine\ORM\EntityManager;
@@ -10,7 +10,6 @@ use Doctrine\ORM\Tools\Setup;
 
 class ORM
 {
-
     private static $entityManager;
 
     /**
@@ -20,6 +19,7 @@ class ORM
     {
         if ( !isset ( self::$entityManager ) )
             self::initManager();
+
         return self::$entityManager;
     }
 
@@ -28,17 +28,17 @@ class ORM
      */
     private static function initManager()
     {
-        $paths = array( __DIR__ . '/entity/' );
+        $paths = [ __DIR__ . '/entity/' ];
         $isDevMode = false;
 
         // the connection configuration
-        $dbParams = array(
+        $dbParams = [
             'driver'   => 'pdo_mysql',
             'user'     => Database::getUser(),
             'host'     => Database::getHost(),
             'password' => Database::getPass(),
             'dbname'   => Database::getName(),
-        );
+        ];
 
         $config = Setup::createXMLMetadataConfiguration( $paths, $isDevMode );
         self::$entityManager = EntityManager::create( $dbParams, $config );
