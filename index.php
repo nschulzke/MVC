@@ -1,16 +1,19 @@
 <?php
 /**
  * Use this function to form complicated or root-based paths. Not necessary for relative paths.
+ *
  * @param array $array The breadcrumb trail (strings)
  * @param bool  $root  Whether to start at the root or just build a path
+ *
  * @return string The path
  */
-function directory( $array = array(), $root = false )
+function directory( $array = [], $root = false )
 {
     if ( $root )
         $start = __DIR__ . DIRECTORY_SEPARATOR;
     else
         $start = '';
+
     return $start . implode( DIRECTORY_SEPARATOR, $array );
 }
 
@@ -33,10 +36,13 @@ spl_autoload_register( function ( $className ) {
     }
     $fileName .= $className . '.php';   // Append ClassName.php
 
-    require $fileName;
+    // Only require the file if it exists, otherwise just let the class error get thrown
+    // This is needed for our controller checks in Route
+    if ( file_exists( $fileName ) )
+        require $fileName;
 } );
 
-require_once directory( array( 'vendor', 'autoload.php' ), true );
+require_once directory( [ 'vendor', 'autoload.php' ], true );
 
 // Load and display view
 $route = new \util\Route();
