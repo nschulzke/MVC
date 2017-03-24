@@ -8,6 +8,8 @@
  *      \model\*
  * Other directories should not contain classes
  */
+require_once __DIR__ . '/vendor/autoload.php';
+
 spl_autoload_register( function ( $className ) {
     $className = ltrim( $className, '\\' );
     $fileName = 'class' . DIRECTORY_SEPARATOR;

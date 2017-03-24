@@ -1,6 +1,8 @@
 <?php namespace model\orm;
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
+use config\Application;
+
+require_once Application::getDocRoot() . '/vendor/autoload.php';
 
 use config\Database;
 use Doctrine\ORM\Tools\Setup;
@@ -10,6 +12,9 @@ class ORM {
 
     private static $entityManager;
 
+    /**
+     * @return EntityManager
+     */
     public static function getManager() {
         if (!isset (self::$entityManager))
             self::initManager();

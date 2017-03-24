@@ -1,6 +1,4 @@
 <?php namespace model;
-// Bootstrap ORM
-require_once __DIR__ . "/orm/bootstrap.php";
 
 use Doctrine\Common\Collections\Criteria;
 use model\orm\entity\Books;
