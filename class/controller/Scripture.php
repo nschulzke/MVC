@@ -48,7 +48,8 @@ class Scripture
             ];
             if ( isset( $params[1] ) ) {
                 if ( sizeof( $chapters ) == 1 && !isset( $params[2] ) ) {
-                    $scripture = new MScripture( $book, $chapters[0]->getNumber() );
+                    $chapter = $chapters[0]->getNumber();
+                    $scripture = new MScripture( $book, $chapter );
                     $verses = MScripture::explodeVerses( $params[1] );
                 } else if ( $params[1] <= sizeof( $chapters ) && $params[1] > 0 ) {
                     $chapter = $params[1];
@@ -57,14 +58,19 @@ class Scripture
                     if ( isset( $params[2] ) && $params[2] != '' ) {
                         $verses = MScripture::explodeVerses( $params[2] );
                     }
-                    $arrows = [];
-                    if ( $chapter < sizeof( $chapters ) )
-                        $arrows['right'] = url( [ self::ROOT, $book->getLdsUrl(), ( $chapter + 1 ) ] );
-                    if ( $chapter > 1 )
-                        $arrows['left'] = url( [ self::ROOT, $book->getLdsUrl(), ( $chapter - 1 ) ] );
                 }
             } else if ( sizeof( $chapters ) == 1 )
-                $scripture = new MScripture( $book, $chapters[0]->getNumber() );
+            {
+                $chapter = $chapters[0]->getNumber();
+                $scripture = new MScripture( $book, $chapter );
+            }
+            if ( isset( $chapter ) ) {
+                $arrows = [];
+                if ( $chapter < sizeof( $chapters ) )
+                    $arrows['right'] = url( [ self::ROOT, $book->getLdsUrl(), ( $chapter + 1 ) ] );
+                if ( $chapter > 1 )
+                    $arrows['left'] = url( [ self::ROOT, $book->getLdsUrl(), ( $chapter - 1 ) ] );
+            }
         }
         
         // Based on the variables set, load te appropriate view
