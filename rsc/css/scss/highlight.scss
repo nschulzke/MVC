@@ -1,4 +1,5 @@
 $highlight: #f6fcc4;
+$background: #eceeef;
 
 @import 'colors.scss';
 
@@ -18,7 +19,7 @@ span.footnote {
   a {
     margin: .5rem;
     display: inline-block;
-    background-color: $color-teal-3;
+    background-color: $background;
     border-radius: .5rem;
     width: 2em;
     height: 2em;

@@ -61,6 +61,7 @@ class View
         $this->vars['navbar'] = new NavBar( 'nav-main', [ 'controller' => $this->vars['controller'], 'action' => $this->vars['action'] ] );
         $this->vars['navbar']->addItem( 'Home', 'static-pages', 'home', '/' );
         $this->vars['navbar']->addItem( 'About', 'static-pages', 'about', 'about' );
+        $this->vars['navbar']->addItem( 'Scriptures', 'scripture', 'view' );
         $this->vars['navbar']->addItem( 'Test', 'static-pages', 'test', 'test' );
 
     }
