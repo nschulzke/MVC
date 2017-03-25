@@ -30,55 +30,40 @@ class Scripture
     {
         $view = new View( $route );
         $crumbRoot = Application::getAppPath() . '/scripture/view';
-        if ( isset( $params[0] ) && isset( $params[1] ) ) {
-            $verses = [];
-            $book = $params[0];
-            $mBook = MScripture::findBook( $book );
-            $chapter = $params[1];
-            $volume = MScripture::getVolumesRepo()->find( $mBook->getVolumeId() );
-            /* @var Volumes $volume */
-            if ( isset( $params[2] ) && $params[2] != '' )
-                $verses = explode( ',', $params[2] );
-
-            $chapterName = 'Chapter ' . $chapter;
-            $breadcrumb = [
-                $volume->getTitle() => $crumbRoot . '?volume=' . $volume->getId(),
-                $mBook->getTitle()  => $crumbRoot . '/' . $book,
-                $chapterName        => $crumbRoot . '/' . $book . '/' . $chapter,
-            ];
-            $activeCrumb = $chapterName;
-
-            $verses = MScripture::explodeRanges( $verses );
-
-            $scripture = new MScripture( $book, $chapter );
-
-            $view->setVar( 'scripture', $scripture )
-                 ->setVar( 'verses', $verses )
-                 ->setVar( 'activeCrumb', $activeCrumb )
-                 ->setVar( 'breadcrumb', $breadcrumb );
-            $view->display();
-        } else if ( isset( $params[0] ) ) {
-            $view = new View( $route );
-
+        $verses = [];
+        if ( isset( $params[0] ) ) {
             $book = MScripture::findBook( $params[0] );
-            /* @var \model\orm\entity\Books $book */
             $volume = MScripture::getVolumesRepo()->find( $book->getVolumeId() );
-            /* @var \model\orm\entity\Volumes $volume */
             $chapters = MScripture::getChaptersRepo()->findBy( [ 'bookId' => $book->getId() ] );
-
-            $bookTitle = $book->getTitle();
             $breadcrumb = [
-                $volume->getTitle() => $crumbRoot . '?volume=' . $volume->getId(),
-                $bookTitle          => $crumbRoot . '/' . $book->getLdsUrl(),
+                [ 'name' => $volume->getTitle(), 'path' => $crumbRoot . '?volume=' . $volume->getId() ],
+                [ 'name' => $book->getTitle(), 'path' => $crumbRoot . '/' . $book->getLdsUrl() ],
             ];
-            $activeCrumb = $bookTitle;
+            if ( isset( $params[1] ) ) {
+                $chapter = $params[1];
+                $scripture = new MScripture( $book, $chapter );
+                $breadcrumb[] = [ 'name' => 'Chapter ' . $chapter, 'path' => $crumbRoot . '/' . $book->getLdsUrl() . '/' . $chapter ];
+                if ( isset( $params[2] ) && $params[2] != '' ) {
+                    $verses = explode( ',', $params[2] );
+                    $verses = MScripture::explodeRanges( $verses );
+                }
+            }
+            else if ( sizeof($chapters) == 1 )
+                $scripture = new MScripture( $book, $chapters[0]->getNumber() );
+        }
 
-            $view->setVar( 'book', $book )
-                 ->setVar( 'volume', $volume )
-                 ->setVar( 'chapters', $chapters )
-                 ->setVar( 'activeCrumb', $activeCrumb )
-                 ->setVar( 'breadcrumb', $breadcrumb )
-                 ->setVar( 'viewPath', 'scripture/chapter-list.php' );
+        if ( isset( $breadcrumb ) ) {
+            $view->setVar( 'breadcrumb', $breadcrumb );
+            if ( isset( $scripture ) ) {
+                $view->setVar( 'scripture', $scripture )
+                     ->setVar( 'verses', $verses );
+            } else if ( isset( $book ) && isset( $volume ) && isset( $chapters ) ) {
+                $view->setVar( 'book', $book )
+                     ->setVar( 'volume', $volume )
+                     ->setVar( 'chapters', $chapters )
+                     ->setVar( 'breadcrumb', $breadcrumb )
+                     ->setVar( 'viewPath', 'scripture/chapter-list.php' );
+            }
             $view->display();
         } else {
             if ( isset( $_GET['volume'] ) && is_numeric( $_GET['volume'] ) )

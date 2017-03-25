@@ -109,13 +109,16 @@ class MScripture
     /**
      * MScripture constructor.
      *
-     * @param       $bookName
-     * @param       $chapterNum
-     * @param array $verseNums Array of verses, ranges are acceptable
+     * @param string|Books $book
+     * @param              $chapterNum
+     * @param array        $verseNums Array of verses, ranges are acceptable
      */
-    public function __construct( $bookName, $chapterNum, $verseNums = [] )
+    public function __construct( $book, $chapterNum, $verseNums = [] )
     {
-        $this->book = self::findBook( $bookName );
+        if ( get_class( $book ) != 'model\orm\entity\Books' )
+            $this->book = self::findBook( $book );
+        else
+            $this->book = $book;
 
         $this->chapter = self::getChaptersRepo()->findOneBy( [ 'bookId' => $this->book->getId(), 'number' => $chapterNum ] );
 
