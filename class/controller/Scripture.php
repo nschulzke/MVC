@@ -39,7 +39,7 @@ class Scripture
             $chapters = MScripture::getChaptersRepo()->findBy( [ 'bookId' => $book->getId() ] );
             /* @var Chapters[] $chapters */
             $breadcrumb = [
-                [ 'name' => $volume->getTitle(), 'path' => $crumbRoot . '?volume=' . $volume->getId() ],
+                [ 'name' => $volume->getTitle(), 'path' => $crumbRoot . '?volume=' . $volume->getLdsUrl() ],
                 [ 'name' => $book->getTitle(), 'path' => $crumbRoot . '/' . $book->getLdsUrl() ],
             ];
             if ( isset( $params[1] ) ) {
@@ -77,7 +77,7 @@ class Scripture
 
             $array = [];
             foreach ( $volumes as $volume ) /* @var Volumes $volume */ {
-                $array[$volume->getLdsUrl()] = ['name' => $volume->getTitle()];
+                $array[$volume->getLdsUrl()] = [ 'name' => $volume->getTitle() ];
                 foreach ( $books->findBy( [ 'volumeId' => $volume->getId() ] ) as $book ) /* @var Books $book */ {
                     $array[$volume->getLdsUrl()]['books'][$book->getLdsUrl()] = $book->getTitle();
                 }
