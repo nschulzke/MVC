@@ -20,9 +20,19 @@ $activeCrumb = sizeof($breadcrumb) - 1;
         </li>
     <?php endforeach ?>
     <?php if ( isset($arrows) ): ?>
-        <li class="float-right breadcrumb-arrows">
-            <a <?= isset($arrows['left']) ? 'href="' . $arrows['left'] . '"' : '' ?> class="fa fa-arrow-left ajax-link"></a>
-            <a <?= isset($arrows['right']) ? 'href="' . $arrows['right'] . '"' : '' ?> class="fa fa-arrow-right ajax-link"></a>
-        </li>
+            <ul class="pagination float-right">
+                <li class="page-item<?= !isset($arrows['left']) ? ' disabled' : '' ?>">
+                    <a class="page-link ajax-link" <?= isset($arrows['left']) ? 'href="' . $arrows['left'] . '"' : '' ?> aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item<?= !isset($arrows['right']) ? ' disabled' : '' ?>">
+                    <a class="page-link ajax-link" <?= isset($arrows['right']) ? 'href="' . $arrows['right'] . '"' : '' ?> aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
     <?php endif ?>
 </ol>
