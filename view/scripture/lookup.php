@@ -6,14 +6,14 @@ extract( $this->vars );
  */
 ?>
 <?php if ( isset( $scripture ) ): ?>
-    <ul class="chapter-text">
+    <div class="chapter-text">
         <?php foreach ( $scripture->getText() as $num => $text ): ?>
-            <li class="verse">
+            <div class="verse">
                 <span class="verse-num"><?= $num ?></span>
                 <span class="verse-text"><?= $text ?></span>
-            </li>
+            </div>
         <?php endforeach ?>
-    </ul>
+    </div>
 <?php else: ?>
     <ul class="chapter-text">
         <li class="verse">

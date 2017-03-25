@@ -115,10 +115,10 @@ class MScripture
      */
     public function __construct( $book, $chapterNum, $verseNums = [] )
     {
-        if ( get_class( $book ) != 'model\orm\entity\Books' )
-            $this->book = self::findBook( $book );
-        else
+        if ( is_object( $book ) && get_class( $book ) == 'model\orm\entity\Books' )
             $this->book = $book;
+        else
+            $this->book = self::findBook( $book );
 
         $this->chapter = self::getChaptersRepo()->findOneBy( [ 'bookId' => $this->book->getId(), 'number' => $chapterNum ] );
 

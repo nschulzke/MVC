@@ -17,7 +17,7 @@
     Followed by a whole lot of text.
     Followed by a whole lot of text.
     <span class="verse-text">
-        This is a <span class="footnote">test</span> paragraph <span class="footnote">with</span> a <span class="footnote">few</span> footnotes.
+        This is a <a class="footnote" href="#" data-book="john" data-chapter="3" data-verse="16">test</a> paragraph <a class="footnote" href="#" data-book="mosiah" data-chapter="3" data-verse="19">with</a> a <a class="footnote" href="#" data-book="moses" data-chapter="1" data-verse="39">few</a> footnotes.
     </span>
     Followed by a whole lot of text.
     Followed by a whole lot of text.

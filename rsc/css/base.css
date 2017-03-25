@@ -1,3 +1,6 @@
+a.footnote {
+  text-decoration: none; }
+
 .books-list {
   -moz-column-width: 12rem;
   -webkit-column-width: 12rem;

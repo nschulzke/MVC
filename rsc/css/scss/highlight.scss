@@ -3,7 +3,8 @@ $background: #eceeef;
 
 @import 'colors.scss';
 
-span.footnote {
+a.footnote {
+  text-decoration: none;
 }
 
 .books-list {
