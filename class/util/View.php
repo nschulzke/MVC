@@ -1,30 +1,30 @@
 <?php namespace util;
 
-use config\Application;
 use component\NavBar;
+use config\Application;
 
 class View
 {
     const VALID_LAYOUTS = [
         'layout.php', 'none',
     ];
-
+    
     const VALID_NAVBARS = [
         'navbar.php', 'none',
     ];
-
+    
     const VALID_MODALS = [
         'modal.php', 'none',
     ];
-
+    
     const VALID_FOOTERS = [
         'footer.php', 'none',
     ];
-
+    
     private $viewRoot;
     private $layout;
     private $vars;
-
+    
     /**
      * View constructor.
      *
@@ -37,7 +37,7 @@ class View
             $this->layout = $_GET['layout'];
         else
             $this->layout = 'layout';
-
+        
         $this->vars = [
             'action'     => $route->getAction(),
             'controller' => $route->getController(),
@@ -56,7 +56,7 @@ class View
         ];
         $this->vars['navbar'] = new NavBar( 'nav-main', [ 'controller' => $this->vars['controller'], 'action' => $this->vars['action'] ], true );
     }
-
+    
     /**
      * @param string $path The path to the view file
      *
@@ -66,12 +66,12 @@ class View
     {
         if ( file_exists( $path ) ) {
             include $path;
-
+            
             return true;
         } else
             return false;
     }
-
+    
     /**
      * Create or update a var item to be passed to the view
      *
@@ -83,7 +83,7 @@ class View
     public function setVar( $key, $value )
     {
         $this->vars[$key] = $value;
-
+        
         if ( $key == 'navbar' && !in_array( $value, self::VALID_NAVBARS ) )
             $this->vars['navbar'] = 'navbar.php';
         else if ( $key == 'footer' && !in_array( $value, self::VALID_FOOTERS ) )
@@ -92,10 +92,23 @@ class View
             $this->vars['modal'] = 'modal.php';
         else if ( $key == 'viewPath' )
             $this->vars['viewPath'] = directory( [ $this->viewRoot, $value ] );
-
+        
         return $this;
     }
-
+    
+    /**
+     * @param array $array
+     *
+     * @return View $this
+     */
+    public function setVars( $array )
+    {
+        foreach ( $array as $key => $value )
+            $this->setVar( $key, $value );
+        
+        return $this;
+    }
+    
     /**
      * Get the var item that will be passed to the view
      *
@@ -107,7 +120,7 @@ class View
     {
         return $this->vars[$key];
     }
-
+    
     /**
      * Call the .php view for based on the viewPath
      */
