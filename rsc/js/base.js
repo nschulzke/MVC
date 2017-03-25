@@ -16,7 +16,7 @@ $( function () {
 function initDynamicOnReady() {
     // Wait for doc to load
     $( function () {
-        $( '.ajax-link' ).click( function ( event ) {
+        $( '.ajax-link[href]' ).click( function ( event ) {
             event.preventDefault();
             loadWorkspace( $( this ).attr( 'href' ) );
         } );
