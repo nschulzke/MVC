@@ -27,7 +27,7 @@ class NavItem
         $this->action = $action;
         $this->controller = $controller;
         if ( !isset( $url ) || $url == '' )
-            $this->url = $this->controller . '/' . $this->action;
+            $this->url = url( [ $this->controller, $this->action ] );
         else if ( $url == '/' )
             $this->url = '';
         else

@@ -13,8 +13,21 @@ function directory( $array = [], $root = false )
         $start = __DIR__ . DIRECTORY_SEPARATOR;
     else
         $start = '';
-
+    
     return $start . implode( DIRECTORY_SEPARATOR, $array );
+}
+
+function url( $array = [], $getVars = [] )
+{
+    $url = implode( '/', $array );
+    
+    if ( sizeof( $getVars ) > 0 )
+        $url .= '?';
+    foreach ( $getVars as $key => $value )
+        $url .= $key . '=' . $value . '&';
+    $url = rtrim( $url, '&' );
+    
+    return $url;
 }
 
 /**
@@ -35,7 +48,7 @@ spl_autoload_register( function ( $className ) {
         $fileName .= str_replace( '\\', DIRECTORY_SEPARATOR, $namespace ) . DIRECTORY_SEPARATOR; // Convert to path
     }
     $fileName .= $className . '.php';   // Append ClassName.php
-
+    
     // Only require the file if it exists, otherwise just let the class error get thrown
     // This is needed for our controller checks in Route
     if ( file_exists( $fileName ) )
