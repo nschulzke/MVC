@@ -42,11 +42,11 @@ class View
             'controller' => $route->getController(),
             'viewPath'   => $route->getDefaultPath(),
             'title'      => Application::APP_NAME,
+            'footer'   => 'footer.php',
+            'modal'    => 'modal.php',
         ];
         $this->vars += [
             'subtitle' => ucfirst( $this->vars['action'] ),
-            'footer'   => 'footer.php',
-            'modal'    => 'modal.php',
             'head'     => [
                 'head.php',
                 directory( [ $this->vars['controller'], '_components', '_head.php' ] ),
