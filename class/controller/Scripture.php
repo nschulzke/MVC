@@ -29,12 +29,11 @@ class Scripture
 
     static public function action_view( $route, $params )
     {
-        if ( isset( $params[0] ) ) {
+        if ( isset( $params[0] ) && ( $book = MScripture::findBook( $params[0] ) ) != null ) {
             $view = new View( $route );
             $crumbRoot = Application::getAppPath() . '/scripture/view';
             $verses = [];
 
-            $book = MScripture::findBook( $params[0] );
             $volume = MScripture::getVolumesRepo()->find( $book->getVolumeId() );
             $chapters = MScripture::getChaptersRepo()->findBy( [ 'bookId' => $book->getId() ] );
             /* @var Chapters[] $chapters */
@@ -46,8 +45,7 @@ class Scripture
                 if ( sizeof( $chapters ) == 1 && !isset( $params[2] ) ) {
                     $scripture = new MScripture( $book, $chapters[0]->getNumber() );
                     $verses = MScripture::explodeVerses( $params[1] );
-                }
-                else {
+                } else if ( $params[1] <= sizeof( $chapters ) && $params[1] > 0 ) {
                     $chapter = $params[1];
                     $scripture = new MScripture( $book, $chapter );
                     $breadcrumb[] = [ 'name' => 'Chapter ' . $chapter, 'path' => $crumbRoot . '/' . $book->getLdsUrl() . '/' . $chapter ];
