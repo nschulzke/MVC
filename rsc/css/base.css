@@ -53,4 +53,15 @@ a.footnote {
 footer#footer-container {
   margin-top: 1rem; }
 
+.breadcrumb-arrows {
+  height: 100%; }
+  .breadcrumb-arrows a {
+    width: 1em;
+    height: 100%;
+    line-height: 1em;
+    text-align: center;
+    text-decoration: none; }
+    .breadcrumb-arrows a.fa-arrow-left {
+      margin-right: 1rem; }
+
 /*# sourceMappingURL=base.css.map */

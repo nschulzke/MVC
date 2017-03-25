@@ -5,3 +5,17 @@ $light-background: #f7f7f9;
 footer#footer-container {
   margin-top: 1rem;
 }
+
+.breadcrumb-arrows {
+  height: 100%;
+  a {
+    &.fa-arrow-left {
+      margin-right: 1rem;
+    }
+    width: 1em;
+    height: 100%;
+    line-height: 1em;
+    text-align: center;
+    text-decoration: none;
+  }
+}
