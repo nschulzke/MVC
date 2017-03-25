@@ -92,6 +92,12 @@ class MScripture
         if ( is_numeric( $bookName ) )
             return self::getBooksRepo()->find( $bookName );
         $criteria = Criteria::create();
+        $criteria->where( Criteria::expr()->contains( 'ldsUrl', $bookName ) );
+        $books = self::getBooksRepo()->matching( $criteria );
+        if ( $books->count() > 0 )
+            return $books->get( 0 );
+
+        $criteria = Criteria::create();
         $criteria->where(
             Criteria::expr()->orX(
                 Criteria::expr()->contains( 'title', $bookName ),
