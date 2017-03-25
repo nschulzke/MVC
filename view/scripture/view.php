@@ -25,4 +25,3 @@ include __DIR__ . '/../_components/breadcrumb.php'
         <?php endforeach ?>
     </ul>
 </div>
-<script src="<?= \config\Application::getAppPath() ?>/rsc/js/highlight.js"></script>

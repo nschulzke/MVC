@@ -27,4 +27,3 @@
     Followed by a whole lot of text.
     Followed by a whole lot of text.
 </p>
-<script src="<?= \config\Application::getAppPath() ?>/rsc/js/highlight.js"></script>
