@@ -44,16 +44,15 @@ function initHighlighter() {
     } );
 
     // Scroll to active verses
-    setTimeout( function () {
-        var padding = 10;
-        var first = $( '.verse.highlight' ).first();
-        var offset = first.offset().top;
-        console.log( first.css( 'margin-bottom' ) );
-        var scrollTo = offset - padding - $( '.breadcrumb' ).height() - parseInt( first.css( 'margin-bottom' ) );
-
-        console.log( scrollTo );
-        $( 'html, body' ).animate( { scrollTop: scrollTo }, 500 );
-    }, 500 );
+    var $activeVerse = $( '.verse.highlight' ).first();
+    if ($activeVerse.length > 0) {
+        setTimeout( function () {
+            var padding = 10;
+            var offset = $activeVerse.offset().top;
+            var scrollTo = offset - padding - $( '.breadcrumb' ).height() - parseInt( $activeVerse.css( 'margin-bottom' ) );
+            $( 'html, body' ).animate( { scrollTop: scrollTo }, 500 );
+        }, 500 );
+    }
 
     document.onmouseup = function () {
         detectSelection();
