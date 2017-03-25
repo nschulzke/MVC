@@ -43,12 +43,17 @@ class Scripture
                 [ 'name' => $book->getTitle(), 'path' => $crumbRoot . '/' . $book->getLdsUrl() ],
             ];
             if ( isset( $params[1] ) ) {
-                $chapter = $params[1];
-                $scripture = new MScripture( $book, $chapter );
-                $breadcrumb[] = [ 'name' => 'Chapter ' . $chapter, 'path' => $crumbRoot . '/' . $book->getLdsUrl() . '/' . $chapter ];
-                if ( isset( $params[2] ) && $params[2] != '' ) {
-                    $verses = explode( ',', $params[2] );
-                    $verses = MScripture::explodeRanges( $verses );
+                if ( sizeof( $chapters ) == 1 && !isset( $params[2] ) ) {
+                    $scripture = new MScripture( $book, $chapters[0]->getNumber() );
+                    $verses = MScripture::explodeVerses( $params[1] );
+                }
+                else {
+                    $chapter = $params[1];
+                    $scripture = new MScripture( $book, $chapter );
+                    $breadcrumb[] = [ 'name' => 'Chapter ' . $chapter, 'path' => $crumbRoot . '/' . $book->getLdsUrl() . '/' . $chapter ];
+                    if ( isset( $params[2] ) && $params[2] != '' ) {
+                        $verses = MScripture::explodeVerses( $params[2] );
+                    }
                 }
             } else if ( sizeof( $chapters ) == 1 )
                 $scripture = new MScripture( $book, $chapters[0]->getNumber() );

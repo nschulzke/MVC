@@ -58,6 +58,11 @@ class MScripture
         return self::$versesRepo;
     }
 
+    public static function explodeVerses( $verseString )
+    {
+        return self::explodeRanges(explode( ',', $verseString ));
+    }
+
     /**
      * @param array $verseNums Array of integers in one of these formats: '#', '#-#'
      *
