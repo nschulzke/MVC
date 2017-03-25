@@ -1,4 +1,4 @@
-<?php /* @var util\component\NavBar $this */
+<?php /* @var component\NavBar $this */
 extract( $this->vars );
 /**
  * variables needed here:

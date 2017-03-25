@@ -1,5 +1,5 @@
 <?php /* @var util\View $this */
-use util\component\NavBar;
+use component\NavBar;
 
 $components = __DIR__ . '/_components/';
 extract( $this->vars );

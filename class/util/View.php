@@ -1,7 +1,7 @@
 <?php namespace util;
 
 use config\Application;
-use util\component\NavBar;
+use component\NavBar;
 
 class View
 {
