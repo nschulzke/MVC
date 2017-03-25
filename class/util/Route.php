@@ -55,29 +55,34 @@ class Route
         $uri = str_replace( Application::getAppPath( true ), '', $this->uri );
         $uri = preg_replace( '#\?(.*)$#', '', $uri );
         // Explode it like so: ( $controller, $action, $params )
-        $uri = explode( '/', $uri, 3 );
-        // Set $params
-        $this->params = [];
-        if ( isset( $uri[2] ) && $uri[2] != null ) {
-            $this->params = explode( '/', $uri[2] );
-        }
+        $split = explode( '/', $uri, 3 );
+        $oneWide = false;
 
         // Set $this->controller and $this->action
-        if ( ( isset( $uri[0] ) && $uri[0] != null ) && ( isset( $uri[1] ) && $uri[1] != null ) ) {   // if the URI was '/controller/action'
-            $this->controller = $uri[0];
-            $this->action = $uri[1];
-        } else if ( isset( $uri[0] ) && $uri[0] != null ) {   // if the URI was just '/controller'
-            if ( self::isAction( $uri[0], 'default' ) ) {   // if there's a default action, use it
-                $this->controller = $uri[0];
+        if ( ( isset( $split[0] ) && $split[0] != null ) && ( isset( $split[1] ) && $split[1] != null ) ) {   // if the URI was '/controller/action'
+            $this->controller = $split[0];
+            if ( !self::isAction( $this->controller, $split[1] ) && self::isAction( $this->controller, 'default' ) ) {
                 $this->action = 'default';
-            } else {   // if there's no default, assume we're looking for a static page by that name
+                $oneWide = true;
+            } else
+                $this->action = $split[1];
+        } else if ( isset( $split[0] ) && $split[0] != null ) {   // if there's no default, assume we're looking for a static page by that name
+            if ( self::isAction( $split[0], 'default' ) ) {
+                $this->controller = $split[0];
+                $this->action = 'default';
+            } else {
                 $this->controller = 'static-pages';
-                $this->action = $uri[0];
+                $this->action = $split[0];
             }
         } else {   // if the URI was '/'
             $this->controller = 'static-pages';
             $this->action = 'home';
         }
+
+        if ( $oneWide )
+            $this->params = explode( '/', explode( '/', $uri, 2 )[1] );
+        else if ( isset($split[2]) )
+            $this->params = explode( '/', $split[2] );
 
         if ( !self::isAction( $this->controller, $this->action ) ) {
             $this->params = [ 'code' => '404', 'msg' => 'File not found: /' . $this->controller . '/' . $this->action ];

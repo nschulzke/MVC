@@ -18,6 +18,7 @@ class ScriptureAnalysis
 
         $threshold = 0.007;
 
+        echo print_r($params);
         if ( isset( $params[0] ) )
             $volumes = MScripture::getVolumesRepo()->findBy( [ 'ldsUrl' => $params[0] ] );
         else

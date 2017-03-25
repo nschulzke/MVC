@@ -2,7 +2,7 @@
 use model\orm\entity\Books;
 use model\orm\entity\Chapters;
 
-$url = \config\Application::getAppPath() . '/scripture/view';
+$url = \config\Application::getAppPath() . '/scripture';
 
 extract( $this->vars );
 /**

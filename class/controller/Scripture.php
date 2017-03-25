@@ -27,11 +27,12 @@ class Scripture
         $view->display();
     }
 
-    static public function action_view( $route, $params )
+    static public function action_default( $route, $params )
     {
+        // Set the variables we need to use based on input values
         if ( isset( $params[0] ) && ( $book = MScripture::findBook( $params[0] ) ) != null ) {
             $view = new View( $route );
-            $crumbRoot = Application::getAppPath() . '/scripture/view';
+            $crumbRoot = Application::getAppPath() . '/scripture';
             $verses = [];
 
             $volume = MScripture::getVolumesRepo()->find( $book->getVolumeId() );
@@ -57,11 +58,13 @@ class Scripture
                 $scripture = new MScripture( $book, $chapters[0]->getNumber() );
         }
 
+        // Based on the variables set, load te appropriate view
         if ( isset( $breadcrumb ) ) {
             $view->setVar( 'breadcrumb', $breadcrumb );
             if ( isset( $scripture ) ) {
                 $view->setVar( 'scripture', $scripture )
-                     ->setVar( 'verses', $verses );
+                     ->setVar( 'verses', $verses )
+                     ->setVar( 'viewPath', 'scripture/view.php' );
             } else if ( isset( $book ) && isset( $volume ) && isset( $chapters ) ) {
                 $view->setVar( 'book', $book )
                      ->setVar( 'volume', $volume )
