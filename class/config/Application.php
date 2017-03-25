@@ -4,6 +4,7 @@ class Application
 {
     const APP_PATH = '/framework';
     const APP_NAME = 'Framework Demo';
+
     const NAV_ITEMS = [
         [ 'name' => 'Home',       'controller' => 'static-pages', 'action' => 'home',    'url' => '/' ],
         [ 'name' => 'About',      'controller' => 'static-pages', 'action' => 'about',   'url' => 'about' ],
