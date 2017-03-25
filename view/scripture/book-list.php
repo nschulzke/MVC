@@ -1,5 +1,5 @@
 <?php
-$url = \config\Application::getAppPath() . '/scripture';
+$url = \config\Application::APP_PATH . '/scripture';
 
 extract( $this->vars );
 /**

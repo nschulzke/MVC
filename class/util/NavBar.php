@@ -1,5 +1,7 @@
 <?php namespace util;
 
+use config\Application;
+
 class NavBar
 {
     public static $usedIds = [];
@@ -8,8 +10,12 @@ class NavBar
     private $id = '';
     private $vars = [];
 
-    public function __construct( $navId, $vars )
+    public function __construct( $navId, $vars, $default = false )
     {
+        if ( $default ) {
+            foreach ( Application::NAV_ITEMS as $item )
+                $this->addItem( $item['name'], $item['controller'], $item['action'], $item['url'] );
+        }
         $this->vars = $vars;
         $this->uniqueId( $navId );
     }

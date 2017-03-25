@@ -11,7 +11,7 @@ extract( $this->vars );
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#<?= $this->getId() ?>-collapse" aria-controls="<?= $this->getId() ?>-collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand"><?= \config\Application::getAppName() ?></a>
+        <a class="navbar-brand"><?= \config\Application::APP_NAME ?></a>
         <div id="<?= $this->getId() ?>-collapse" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <?php foreach ( $this->getItems() as $item ):

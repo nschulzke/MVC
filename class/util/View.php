@@ -41,7 +41,7 @@ class View
             'action'     => $route->getAction(),
             'controller' => $route->getController(),
             'viewPath'   => $route->getDefaultPath(),
-            'title'      => Application::getAppName(),
+            'title'      => Application::APP_NAME,
         ];
         $this->vars += [
             'subtitle' => ucfirst( $this->vars['action'] ),
@@ -53,12 +53,7 @@ class View
                 directory( [ $this->vars['controller'], '_components', $this->vars['action'] . '_head.php' ] ),
             ],
         ];
-        $this->vars['navbar'] = new NavBar( 'nav-main', [ 'controller' => $this->vars['controller'], 'action' => $this->vars['action'] ] );
-        $this->vars['navbar']->addItem( 'Home', 'static-pages', 'home', '/' );
-        $this->vars['navbar']->addItem( 'About', 'static-pages', 'about', 'about' );
-        $this->vars['navbar']->addItem( 'Scriptures', 'scripture', 'view' );
-        $this->vars['navbar']->addItem( 'Test', 'static-pages', 'test', 'test' );
-
+        $this->vars['navbar'] = new NavBar( 'nav-main', [ 'controller' => $this->vars['controller'], 'action' => $this->vars['action'] ], true );
     }
 
     /**

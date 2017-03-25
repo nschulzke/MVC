@@ -32,7 +32,7 @@ class Scripture
         // Set the variables we need to use based on input values
         if ( isset( $params[0] ) && ( $book = MScripture::findBook( $params[0] ) ) != null ) {
             $view = new View( $route );
-            $crumbRoot = Application::getAppPath() . '/scripture';
+            $crumbRoot = Application::APP_PATH . '/scripture';
             $verses = [];
 
             $volume = MScripture::getVolumesRepo()->find( $book->getVolumeId() );
@@ -66,7 +66,7 @@ class Scripture
         // Based on the variables set, load te appropriate view
         if ( isset( $breadcrumb ) ) {
             $view->setVar( 'breadcrumb', $breadcrumb );
-            if ( isset( $scripture )  && isset( $arrows ) ) {
+            if ( isset( $scripture ) && isset( $arrows ) ) {
                 $view->setVar( 'scripture', $scripture )
                      ->setVar( 'verses', $verses )
                      ->setVar( 'arrows', $arrows )

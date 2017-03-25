@@ -2,8 +2,14 @@
 
 class Application
 {
-    private static $APP_PATH = '/framework';
-    private static $APP_NAME = 'Framework Demo';
+    const APP_PATH = '/framework';
+    const APP_NAME = 'Framework Demo';
+    const NAV_ITEMS = [
+        [ 'name' => 'Home',       'controller' => 'static-pages', 'action' => 'home',    'url' => '/' ],
+        [ 'name' => 'About',      'controller' => 'static-pages', 'action' => 'about',   'url' => 'about' ],
+        [ 'name' => 'Scriptures', 'controller' => 'scripture',    'action' => 'default', 'url' => 'scripture' ],
+        [ 'name' => 'Test',       'controller' => 'static-pages', 'action' => 'test',    'url' => 'test' ],
+    ];
 
     /**
      * @param bool $finalSlash Whether to include a final slash in the path.
@@ -13,17 +19,9 @@ class Application
     public static function getAppPath( $finalSlash = false )
     {
         if ( $finalSlash )
-            return self::$APP_PATH . '/';
+            return self::APP_PATH . '/';
         else
-            return self::$APP_PATH;
-    }
-
-    /**
-     * @return string The name of the application, for display.
-     */
-    public static function getAppName()
-    {
-        return self::$APP_NAME;
+            return self::APP_PATH;
     }
 
     private function __construct()
