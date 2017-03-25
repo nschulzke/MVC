@@ -6,7 +6,7 @@ extract( $this->vars );
  * @var string $action
  */
 ?>
-<header id="navbar-container" class="container bg-faded">
+<header id="navbar-container" class="container">
     <nav id="<?= $this->getId() ?>" class="navbar navbar-toggleable-sm navbar-light">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#<?= $this->getId() ?>-collapse" aria-controls="<?= $this->getId() ?>-collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

@@ -1,4 +1,6 @@
-@import "base.less";
+$highlight: #f6fcc4;
+
+@import 'colors.scss';
 
 span.footnote {
 }
@@ -16,7 +18,7 @@ span.footnote {
   a {
     margin: .5rem;
     display: inline-block;
-    background-color: @light-background;
+    background-color: $color-teal-3;
     border-radius: .5rem;
     width: 2em;
     height: 2em;
@@ -50,7 +52,16 @@ span.footnote {
       }
     }
     li.highlight {
-      background-color: @highlight;
+      background-color: $highlight;
     }
+  }
+}
+
+.card#highlight-menu {
+  position: absolute;
+  width: 4em;
+  text-align: center;
+  a.fa {
+    display: inline-block;
   }
 }

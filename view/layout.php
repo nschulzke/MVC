@@ -24,20 +24,22 @@ extract( $this->vars );
             : <?= htmlspecialchars( $subtitle ) ?></title>
     </head>
     <body>
-        <?php $navbar->display() ?>
+        <div class="container-fluid">
+            <?php $navbar->display() ?>
 
-        <article id="main-container" class="container">
-            <?php $this->includeFile( $viewPath ) ?>
-        </article>
+            <article id="main-container" class="container">
+                <?php $this->includeFile( $viewPath ) ?>
+            </article>
 
-        <?php $this->includeFile( $components . $footer ) ?>
-        <?php $this->includeFile( $components . $modal ) ?>
+            <?php $this->includeFile( $components . $footer ) ?>
+            <?php $this->includeFile( $components . $modal ) ?>
 
-        <div id="scripts-container" class="hidden">
-            <?php
-            foreach ( $foot as $item )
-                      $this->includeFile( $components . $item )
-            ?>
+            <div id="scripts-container" class="hidden">
+                <?php
+                foreach ( $foot as $item )
+                          $this->includeFile( $components . $item )
+                ?>
+            </div>
         </div>
     </body>
 </html>
