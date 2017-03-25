@@ -1,9 +1,11 @@
 <?php /* @var util\View $this */
+use util\component\NavBar;
+
 $components = __DIR__ . '/_components/';
 extract( $this->vars );
 /**
  * extracted variables used here:
- * @var util\NavBar $navbar
+ * @var NavBar $navbar
  * @var string[]    $head
  * @var string      $title
  * @var string      $subtitle

@@ -1,4 +1,4 @@
-<?php namespace util;
+<?php namespace util\component;
 
 use config\Application;
 

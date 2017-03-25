@@ -1,6 +1,7 @@
 <?php namespace util;
 
 use config\Application;
+use util\component\NavBar;
 
 class View
 {
@@ -42,8 +43,8 @@ class View
             'controller' => $route->getController(),
             'viewPath'   => $route->getDefaultPath(),
             'title'      => Application::APP_NAME,
-            'footer'   => 'footer.php',
-            'modal'    => 'modal.php',
+            'footer'     => 'footer.php',
+            'modal'      => 'modal.php',
         ];
         $this->vars += [
             'subtitle' => ucfirst( $this->vars['action'] ),
