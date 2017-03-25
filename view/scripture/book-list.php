@@ -21,7 +21,7 @@ extract( $this->vars );
             <div class="collapse<?= $active == $volId ? ' show' : '' ?>" role="tabpanel" id="books_<?= $volId ?>" aria-labelledby="volume_<?= $volId ?>">
                 <div class="card-block books-list">
                     <?php foreach ( $data['books'] as $id => $book ): ?>
-                        <a href="<?= $url ?>/<?= $id ?>"><?= $book ?></a>
+                        <a href="<?= $url ?>/<?= $id ?>" class="ajax-link"><?= $book ?></a>
                     <?php endforeach ?>
                 </div>
             </div>

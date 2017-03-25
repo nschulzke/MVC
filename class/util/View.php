@@ -52,11 +52,6 @@ class View
                 directory( [ $this->vars['controller'], '_components', '_head.php' ] ),
                 directory( [ $this->vars['controller'], '_components', $this->vars['action'] . '_head.php' ] ),
             ],
-            'foot'     => [
-                'foot.php',
-                directory( [ $this->vars['controller'], '_components', '_foot.php' ] ),
-                directory( [ $this->vars['controller'], '_components', $this->vars['action'] . '_foot.php' ] ),
-            ],
         ];
         $this->vars['navbar'] = new NavBar( 'nav-main', [ 'controller' => $this->vars['controller'], 'action' => $this->vars['action'] ] );
         $this->vars['navbar']->addItem( 'Home', 'static-pages', 'home', '/' );

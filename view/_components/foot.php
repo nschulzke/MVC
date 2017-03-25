@@ -1,1 +1,0 @@
-<script src="<?= \config\Application::getAppPath() ?>/rsc/js/base.js"></script>

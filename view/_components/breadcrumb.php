@@ -11,7 +11,7 @@ $activeCrumb = sizeof($breadcrumb) - 1;
         $active = $activeCrumb == $num;
         ?>
         <li class="breadcrumb-item<?= $active ? ' active' : '' ?>">
-            <?= $active ? '' : '<a href="' . $crumb['path'] . '">' ?><?= $crumb['name'] ?><?= $active ? '' : '</a>' ?>
+            <?= $active ? '' : '<a href="' . $crumb['path'] . '" class="ajax-link">' ?><?= $crumb['name'] ?><?= $active ? '' : '</a>' ?>
         </li>
     <?php endforeach ?>
 </ol>

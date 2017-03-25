@@ -33,13 +33,6 @@ extract( $this->vars );
 
             <?php $this->includeFile( $components . $footer ) ?>
             <?php $this->includeFile( $components . $modal ) ?>
-
-            <div id="scripts-container" class="hidden">
-                <?php
-                foreach ( $foot as $item )
-                          $this->includeFile( $components . $item )
-                ?>
-            </div>
         </div>
     </body>
 </html>

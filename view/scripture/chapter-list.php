@@ -22,7 +22,7 @@ require_once __DIR__ . '/../_components/breadcrumb.php'
     </div>
     <div class="card-block">
         <?php foreach ( $this->vars['chapters'] as $chapter ): /* @var Chapters $chapter */ ?>
-            <a href="<?= $url ?>/<?= $book->getLdsUrl() ?>/<?= $chapter->getNumber() ?>"><?= $chapter->getNumber() ?></a>
+            <a href="<?= $url ?>/<?= $book->getLdsUrl() ?>/<?= $chapter->getNumber() ?>" class="ajax-link"><?= $chapter->getNumber() ?></a>
         <?php endforeach ?>
     </div>
 </div>
