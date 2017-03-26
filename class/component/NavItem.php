@@ -5,13 +5,13 @@ use config\Application;
 class NavItem
 {
     public static $usedIds = [];
-
+    
     private $name = '';
     private $action = '';
     private $controller = '';
     private $url = '';
     private $id = '';
-
+    
     /**
      * NavItem constructor.
      *
@@ -32,10 +32,10 @@ class NavItem
             $this->url = '';
         else
             $this->url = $url;
-
+        
         $this->uniqueId( $name, $idPrefix );
     }
-
+    
     /**
      * @param integer $id       The id to use
      * @param string  $idPrefix The prefix to attach to the id, if any
@@ -51,7 +51,7 @@ class NavItem
         }
         self::$usedIds[] = $this->id;
     }
-
+    
     /**
      * @return string The id
      */
@@ -59,7 +59,7 @@ class NavItem
     {
         return $this->id;
     }
-
+    
     /**
      * @return string The display name for the NavItem
      */
@@ -67,7 +67,7 @@ class NavItem
     {
         return $this->name;
     }
-
+    
     /**
      * @return string The target controller
      */
@@ -75,7 +75,7 @@ class NavItem
     {
         return $this->action;
     }
-
+    
     /**
      * @return string The target action
      */
@@ -83,15 +83,15 @@ class NavItem
     {
         return $this->controller;
     }
-
+    
     /**
      * @return string The target URL
      */
     public function getURL()
     {
-        return Application::getAppPath( true ) . $this->url;
+        return url( [ Application::APP_PATH, $this->url ] );
     }
-
+    
     /**
      * @param string $controller The controller to compare to
      * @param string $action     The action to compare to
