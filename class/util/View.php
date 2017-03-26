@@ -29,14 +29,17 @@ class View
      * View constructor.
      *
      * @param Route $route The Route object for this page
+     * @param mixed $layout
      */
-    public function __construct( $route )
+    public function __construct( $route, $layout = self::VALID_LAYOUTS[0] )
     {
         $this->viewRoot = directory( [ 'view' ], true );
+        
+        // Give precedence to the GET var, but if none set, then use the parameter
         if ( isset( $_GET['layout'] ) && in_array( $_GET['layout'], self::VALID_LAYOUTS ) )
             $this->layout = $_GET['layout'];
         else
-            $this->layout = 'layout';
+            $this->layout = $layout;
         
         $this->vars = Application::VIEW_VARS;
         $this->vars += [
@@ -120,6 +123,6 @@ class View
         if ( $this->layout == 'none' )
             include $this->vars['viewPath'];
         else
-            include directory( [ $this->viewRoot, $this->layout . '.php' ] );
+            include directory( [ $this->viewRoot, $this->layout ] );
     }
 }
