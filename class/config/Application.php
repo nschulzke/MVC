@@ -20,19 +20,6 @@ class Application
         'head'   => 'head.php',
     ];
 
-    /**
-     * @param bool $finalSlash Whether to include a final slash in the path.
-     *
-     * @return string The path of the application (after the domain). Example: localhost/framework
-     */
-    public static function getAppPath( $finalSlash = false )
-    {
-        if ( $finalSlash )
-            return self::APP_PATH . '/';
-        else
-            return self::APP_PATH;
-    }
-
     private function __construct()
     {
     }
