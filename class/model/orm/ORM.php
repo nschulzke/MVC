@@ -10,6 +10,7 @@ use Doctrine\ORM\Tools\Setup;
 
 class ORM
 {
+    const ENTITY_FOLDER = __DIR__ . '/entity/';
     const ENTITY_NAMESPACE = __NAMESPACE__ . '\entity';
     
     private static $entityManager;
@@ -19,7 +20,7 @@ class ORM
      */
     private static function initManager()
     {
-        $paths = [ __DIR__ . '/entity/' ];
+        $paths = [ self::ENTITY_FOLDER ];
         $isDevMode = false;
         
         // the connection configuration
