@@ -34,10 +34,10 @@ class ORM
         // the connection configuration
         $dbParams = [
             'driver'   => 'pdo_mysql',
-            'user'     => Database::getUser(),
-            'host'     => Database::getHost(),
-            'password' => Database::getPass(),
-            'dbname'   => Database::getName(),
+            'user'     => Database::USER,
+            'host'     => Database::HOST,
+            'password' => Database::PASS,
+            'dbname'   => Database::NAME,
         ];
 
         $config = Setup::createXMLMetadataConfiguration( $paths, $isDevMode );
