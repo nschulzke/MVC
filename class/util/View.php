@@ -21,13 +21,6 @@ class View
         'footer.php', 'none',
     ];
     
-    const DEFAULT_VARS = [
-        'title'  => Application::APP_TITLE,
-        'footer' => 'footer.php',
-        'modal'  => 'modal.php',
-        'head'   => 'head.php',
-    ];
-    
     private $viewRoot;
     private $layout;
     private $vars;
@@ -45,7 +38,7 @@ class View
         else
             $this->layout = 'layout';
         
-        $this->vars = self::DEFAULT_VARS;
+        $this->vars = Application::VIEW_VARS;
         $this->vars += [
             'action'     => $route->getAction(),
             'controller' => $route->getController(),

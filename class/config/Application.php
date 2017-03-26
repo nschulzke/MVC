@@ -12,6 +12,13 @@ class Application
         [ 'name' => 'Scriptures', 'controller' => 'scripture',    'action' => 'default', 'url' => 'scripture' ],
         [ 'name' => 'Test',       'controller' => 'static-pages', 'action' => 'test',    'url' => 'test' ],
     ];
+    
+    const VIEW_VARS = [
+        'title'  => Application::APP_TITLE,
+        'footer' => 'footer.php',
+        'modal'  => 'modal.php',
+        'head'   => 'head.php',
+    ];
 
     /**
      * @param bool $finalSlash Whether to include a final slash in the path.
