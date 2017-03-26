@@ -9,7 +9,7 @@ extract( $this->vars );
 include __DIR__ . '/../_components/breadcrumb.php'
 ?>
 
-<div id="highlight-menu" class="card">
+<div id="highlight-menu" class="card" style="display: none">
     <div class="card-block">
         <a class="fa fa-link"></a>
         <a class="fa fa-bookmark"></a>
