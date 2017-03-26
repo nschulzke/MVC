@@ -21,6 +21,13 @@ class View
         'footer.php', 'none',
     ];
     
+    const DEFAULT_VARS = [
+        'title'  => Application::APP_NAME,
+        'footer' => 'footer.php',
+        'modal'  => 'modal.php',
+        'head'   => 'head.php',
+    ];
+    
     private $viewRoot;
     private $layout;
     private $vars;
@@ -38,16 +45,13 @@ class View
         else
             $this->layout = 'layout';
         
-        $this->vars = [
+        $this->vars = self::DEFAULT_VARS;
+        $this->vars += [
             'action'     => $route->getAction(),
             'controller' => $route->getController(),
             'viewPath'   => $route->getDefaultPath(),
-            'title'      => Application::APP_NAME,
-            'footer'     => 'footer.php',
-            'modal'      => 'modal.php',
-            'head'       => 'head.php',
         ];
-        $this->vars += [ 'subtitle' => ucfirst( $this->vars['action'] ) ];
+        $this->vars['subtitle'] = ucfirst( $this->vars['action'] );
         $this->vars['navbar'] = new NavBar( 'nav-main', [ 'controller' => $this->vars['controller'], 'action' => $this->vars['action'] ], true );
     }
     
