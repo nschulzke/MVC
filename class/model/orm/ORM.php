@@ -10,18 +10,9 @@ use Doctrine\ORM\Tools\Setup;
 
 class ORM
 {
-    private static $entityManager;
+    const ENTITY_NAMESPACE = __NAMESPACE__ . '\entity';
     
-    /**
-     * @return EntityManager
-     */
-    public static function getManager()
-    {
-        if ( !isset ( self::$entityManager ) )
-            self::initManager();
-        
-        return self::$entityManager;
-    }
+    private static $entityManager;
     
     /**
      * Private function that sets up the manager, called by getManager() if none found
@@ -42,7 +33,18 @@ class ORM
         
         $config = Setup::createXMLMetadataConfiguration( $paths, $isDevMode );
         self::$entityManager = EntityManager::create( $dbParams, $config );
-        self::$entityManager->getConfiguration()->addEntityNamespace( 'entity', 'model\orm\entity' );
+        self::$entityManager->getConfiguration()->addEntityNamespace( 'entity', self::ENTITY_NAMESPACE );
+    }
+    
+    /**
+     * @return EntityManager
+     */
+    public static function getManager()
+    {
+        if ( !isset ( self::$entityManager ) )
+            self::initManager();
+        
+        return self::$entityManager;
     }
     
     private function __construct()
