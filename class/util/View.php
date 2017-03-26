@@ -45,15 +45,9 @@ class View
             'title'      => Application::APP_NAME,
             'footer'     => 'footer.php',
             'modal'      => 'modal.php',
+            'head'       => 'head.php',
         ];
-        $this->vars += [
-            'subtitle' => ucfirst( $this->vars['action'] ),
-            'head'     => [
-                'head.php',
-                directory( [ $this->vars['controller'], '_components', '_head.php' ] ),
-                directory( [ $this->vars['controller'], '_components', $this->vars['action'] . '_head.php' ] ),
-            ],
-        ];
+        $this->vars += [ 'subtitle' => ucfirst( $this->vars['action'] ) ];
         $this->vars['navbar'] = new NavBar( 'nav-main', [ 'controller' => $this->vars['controller'], 'action' => $this->vars['action'] ], true );
     }
     
