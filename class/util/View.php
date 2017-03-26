@@ -76,11 +76,11 @@ class View
         $this->vars[$key] = $value;
         
         if ( $key == 'navbar' && !in_array( $value, self::VALID_NAVBARS ) )
-            $this->vars['navbar'] = 'navbar.php';
+            $this->vars['navbar'] = self::VALID_NAVBARS[0];
         else if ( $key == 'footer' && !in_array( $value, self::VALID_FOOTERS ) )
-            $this->vars['footer'] = 'footer.php';
+            $this->vars['footer'] = self::VALID_FOOTERS[0];
         else if ( $key == 'modal' && !in_array( $value, self::VALID_MODALS ) )
-            $this->vars['modal'] = 'modal.php';
+            $this->vars['modal'] = self::VALID_MODALS[0];
         else if ( $key == 'viewPath' )
             $this->vars['viewPath'] = directory( [ $this->viewRoot, $value ] );
         
