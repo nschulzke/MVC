@@ -2,10 +2,11 @@
 
 class Database
 {
+    const DRIVER = 'driver';
+    const DBNAME = 'scriptures';
     const HOST = 'localhost';
-    const NAME = 'scriptures';
     const USER = 'root';
-    const PASS = '';
+    const PASSWORD = '';
 
     private function __construct()
     {

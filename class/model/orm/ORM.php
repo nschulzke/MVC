@@ -11,7 +11,7 @@ use Doctrine\ORM\Tools\Setup;
 class ORM
 {
     private static $entityManager;
-
+    
     /**
      * @return EntityManager
      */
@@ -19,10 +19,10 @@ class ORM
     {
         if ( !isset ( self::$entityManager ) )
             self::initManager();
-
+        
         return self::$entityManager;
     }
-
+    
     /**
      * Private function that sets up the manager, called by getManager() if none found
      */
@@ -30,27 +30,27 @@ class ORM
     {
         $paths = [ __DIR__ . '/entity/' ];
         $isDevMode = false;
-
+        
         // the connection configuration
         $dbParams = [
-            'driver'   => 'pdo_mysql',
-            'user'     => Database::USER,
+            'driver'   => Database::DRIVER,
             'host'     => Database::HOST,
-            'password' => Database::PASS,
-            'dbname'   => Database::NAME,
+            'dbname'   => Database::DBNAME,
+            'user'     => Database::USER,
+            'password' => Database::PASSWORD,
         ];
-
+        
         $config = Setup::createXMLMetadataConfiguration( $paths, $isDevMode );
         self::$entityManager = EntityManager::create( $dbParams, $config );
         self::$entityManager->getConfiguration()->addEntityNamespace( 'entity', 'model\orm\entity' );
     }
-
+    
     private function __construct()
     {
     }
-
+    
     private function __clone()
     {
-
+        
     }
 }
