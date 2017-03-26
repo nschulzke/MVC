@@ -22,7 +22,7 @@ class View
     ];
     
     const DEFAULT_VARS = [
-        'title'  => Application::APP_NAME,
+        'title'  => Application::APP_TITLE,
         'footer' => 'footer.php',
         'modal'  => 'modal.php',
         'head'   => 'head.php',

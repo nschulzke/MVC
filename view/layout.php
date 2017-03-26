@@ -18,8 +18,8 @@ extract( $this->vars );
 <html lang="en">
     <head>
         <?php $this->includeFile( $components . $head ) ?>
-        <title><?= htmlspecialchars( $title ) ?>
-            : <?= htmlspecialchars( $subtitle ) ?></title>
+        <title><?= htmlspecialchars( $title ) ?>:
+            <?= htmlspecialchars( $subtitle ) ?></title>
     </head>
     <body>
         <div class="container-fluid">
