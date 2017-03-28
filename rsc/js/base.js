@@ -50,11 +50,9 @@ function initHighlighter() {
             var padding = 30;
             var offset = $activeVerse.offset().top;
             var scrollTo = offset - padding - $( '.breadcrumb' ).height();
-            $( 'html, body' ).animate( { scrollTop: scrollTo }, 500 );
-        }, 500 );
-        setTimeout( function () {
             setActiveVerse( $activeVerse );
-        }, 1000 );
+            $( 'html, body' ).animate( { scrollTop: scrollTo }, 500 );
+        } );
     }
 
     $( 'li.verse' ).click( function () {
@@ -65,7 +63,7 @@ function initHighlighter() {
         var offset = $verse.offset().top;
         offset = offset - highlightMenu.parent().offset().top;
         highlightMenu.animate( { top: offset } );
-        highlightMenu.data( 'verse', $verse.data( 'verse' ) );
+        highlightMenu.find('#activeVerse').val( $verse.data( 'verse' ) );
     }
 
     function getPopover() {
@@ -102,7 +100,7 @@ function initModals() {
 
         if ( params != undefined ) {
             for ( var i = 0; i < params.length; i++ ) {
-                url += '/' + $( '#' + params[i] ).val();
+                url += '/' + $( "[name*='" + params[i] + "']" ).val();
             }
         }
 
