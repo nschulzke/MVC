@@ -52,35 +52,46 @@ body {
   color: #CCCCCC; }
   body a {
     color: #CCCCCC; }
-  body header {
-    background-color: #333333;
-    border-radius: 0.25rem;
-    margin-bottom: 1rem; }
-  body section#main-container .breadcrumb {
+  body .form-control, body .custom-select {
+    background-color: #444444;
+    color: #CCCCCC; }
+    body .form-control:focus, body .custom-select:focus {
+      background-color: #444444;
+      color: #CCCCCC;
+      border-color: #1A1643; }
+  body .btn-primary {
+    border-color: #1A1643;
+    background-color: #1A1643;
+    color: #CCCCCC; }
+  body .breadcrumb {
     background-color: #333333; }
-    body section#main-container .breadcrumb .breadcrumb-item.active {
+    body .breadcrumb .breadcrumb-item.active {
       color: #777777; }
-    body section#main-container .breadcrumb .pagination .page-link {
+    body .breadcrumb .pagination .page-link {
       padding-top: 0;
       padding-bottom: 0.15rem; }
-  body section#main-container .pagination .page-item {
+  body .pagination .page-item {
     background-color: #444444; }
-    body section#main-container .pagination .page-item .page-link {
+    body .pagination .page-item .page-link {
       color: #CCCCCC;
       border: 1px solid #222222;
       background-color: #444444;
       font-size: 1em; }
-    body section#main-container .pagination .page-item.disabled .page-link {
+    body .pagination .page-item.disabled .page-link {
       color: #222222; }
-  body section#main-container .card {
+  body .card {
     background-color: #333333; }
-    body section#main-container .card .card-header {
+    body .card .card-header {
       border-color: #222222;
       background-color: #19172B; }
-  body section#main-container .accordion {
+  body .accordion {
     background-color: #222222; }
-    body section#main-container .accordion .card-header {
+    body .accordion .card-header {
       cursor: pointer; }
+  body header {
+    background-color: #333333;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem; }
   body footer {
     background-color: #333333;
     border-radius: 0.25rem;

@@ -7,49 +7,61 @@ body {
   a {
     color: $text-link;
   }
+  .form-control, .custom-select {
+    background-color: $background-2;
+    color: $text-bright;
+    &:focus {
+      background-color: $background-2;
+      color: $text-bright;
+      border-color: $highlight-bg-1;
+    }
+  }
+  .btn-primary {
+    border-color: $highlight-bg-1;
+    background-color: $highlight-bg-1;
+    color: $text-bright;
+  }
+  .breadcrumb {
+    background-color: $background-1;
+    .breadcrumb-item.active {
+      color: $text-medium;
+    }
+    .pagination .page-link {
+      padding-top: 0;
+      padding-bottom: 0.15rem;
+    }
+  }
+  .pagination {
+    .page-item {
+      background-color: $background-2;
+      .page-link {
+        color: $text-link;
+        border: 1px solid $background-0;
+        background-color: $background-2;
+        font-size: 1em;
+      }
+      &.disabled .page-link {
+        color: $background-0;
+      }
+    }
+  }
+  .card {
+    background-color: $background-1;
+    .card-header {
+      border-color: $background-0;
+      background-color: $highlight-bg-0;
+    }
+  }
+  .accordion {
+    background-color: $background-0;
+    .card-header {
+      cursor: pointer;
+    }
+  }
   header {
     background-color: $background-1;
     border-radius: 0.25rem;
     margin-bottom: 1rem;
-  }
-  section#main-container {
-    .breadcrumb {
-      background-color: $background-1;
-      .breadcrumb-item.active {
-        color: $text-medium;
-      }
-      .pagination .page-link {
-        padding-top: 0;
-        padding-bottom: 0.15rem;
-      }
-    }
-    .pagination {
-      .page-item {
-        background-color: $background-2;
-        .page-link {
-          color: $text-link;
-          border: 1px solid $background-0;
-          background-color: $background-2;
-          font-size: 1em;
-        }
-        &.disabled .page-link {
-          color: $background-0;
-        }
-      }
-    }
-    .card {
-      background-color: $background-1;
-      .card-header {
-        border-color: $background-0;
-        background-color: $highlight-bg-0;
-      }
-    }
-    .accordion {
-      background-color: $background-0;
-      .card-header {
-        cursor: pointer;
-      }
-    }
   }
   footer {
     background-color: $background-1;
