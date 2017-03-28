@@ -10,7 +10,7 @@ include __DIR__ . '/../_components/breadcrumb.php'
 ?>
 <div class="container chapter-view card">
     <div class="card-block">
-        <div id="highlight-menu" class="card" data-verse="1">
+        <div id="highlight-menu" class="card">
             <input type="hidden" name="book" value="<?= $scripture->getBook()->getLdsUrl() ?>">
             <input type="hidden" name="chapter" value="<?= $scripture->getChapterNumber() ?>">
             <input type="hidden" id="activeVerse" name="verse" value="1">
