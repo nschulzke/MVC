@@ -40,13 +40,13 @@ body {
     .card {
       background-color: $background-1;
       .card-header {
+        border-color: $background-0;
         background-color: $highlight-bg-0;
       }
     }
     .accordion {
       background-color: $background-0;
       .card-header {
-        border-color: black;
         cursor: pointer;
       }
     }

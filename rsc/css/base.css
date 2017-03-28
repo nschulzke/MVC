@@ -75,11 +75,11 @@ body {
   body section#main-container .card {
     background-color: #333333; }
     body section#main-container .card .card-header {
+      border-color: #222222;
       background-color: #19172B; }
   body section#main-container .accordion {
     background-color: #222222; }
     body section#main-container .accordion .card-header {
-      border-color: black;
       cursor: pointer; }
   body footer {
     background-color: #333333;
