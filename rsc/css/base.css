@@ -59,10 +59,17 @@ body {
       background-color: #444444;
       color: #CCCCCC;
       border-color: #1A1643; }
-  body .btn-primary {
-    border-color: #1A1643;
-    background-color: #1A1643;
+  body .btn {
+    border-color: #555555;
+    background-color: #555555;
     color: #CCCCCC; }
+    body .btn.btn-primary {
+      border-color: #1A1643;
+      background-color: #1A1643;
+      color: #CCCCCC; }
+      body .btn.btn-primary:hover {
+        border-color: #2B2570;
+        background-color: #2B2570; }
   body .breadcrumb {
     background-color: #333333; }
     body .breadcrumb .breadcrumb-item.active {
@@ -79,6 +86,13 @@ body {
       font-size: 1em; }
     body .pagination .page-item.disabled .page-link {
       color: #222222; }
+  body button.close, body button.close:hover {
+    color: #CCCCCC;
+    opacity: 1; }
+  body .modal-content {
+    background-color: #333333; }
+    body .modal-content .modal-header, body .modal-content .modal-footer {
+      border-color: #555555; }
   body .card {
     background-color: #333333; }
     body .card .card-header {

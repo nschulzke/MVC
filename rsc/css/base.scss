@@ -16,10 +16,19 @@ body {
       border-color: $highlight-bg-1;
     }
   }
-  .btn-primary {
-    border-color: $highlight-bg-1;
-    background-color: $highlight-bg-1;
+  .btn {
+    border-color: $background-3;
+    background-color: $background-3;
     color: $text-bright;
+    &.btn-primary {
+      border-color: $highlight-bg-1;
+      background-color: $highlight-bg-1;
+      color: $text-bright;
+      &:hover {
+        border-color: $highlight-bg-2;
+        background-color: $highlight-bg-2;
+      }
+    }
   }
   .breadcrumb {
     background-color: $background-1;
@@ -44,6 +53,16 @@ body {
         color: $background-0;
       }
     }
+  }
+  button.close, button.close:hover {
+    color: $text-bright;
+    opacity: 1;
+  }
+  .modal-content {
+    .modal-header, .modal-footer {
+      border-color: $background-3;
+    }
+    background-color: $background-1;
   }
   .card {
     background-color: $background-1;
