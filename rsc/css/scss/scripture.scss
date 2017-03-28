@@ -3,13 +3,16 @@ $highlight: rgba(92, 117, 61, 0.5);
 @import 'colors.scss';
 
 .books-list {
+  column-width: 12rem;
   a {
     display: block;
   }
-  column-width: 12rem;
 }
 
 .chapters-list {
+  max-width: 40rem;
+  text-align: center;
+  margin: 0 auto;
   a {
     margin: 0.5rem;
     display: inline-block;
@@ -19,9 +22,6 @@ $highlight: rgba(92, 117, 61, 0.5);
     height: 2em;
     line-height: 2em;
   }
-  max-width: 40rem;
-  text-align: center;
-  margin: 0 auto;
 }
 
 .chapter-view {
