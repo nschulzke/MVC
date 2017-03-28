@@ -28,6 +28,7 @@ function initDynamicOnReady() {
 }
 
 function initHighlighter() {
+    var highlightMenu = $( '#highlight-menu' );
     var aChar = 97;
     $( 'span.verse-text' ).each( function () {
         var footnotes = 0;
@@ -44,50 +45,27 @@ function initHighlighter() {
 
     // Scroll to active verses
     var $activeVerse = $( '.verse.highlight' ).first();
-    if ($activeVerse.length > 0) {
+    if ( $activeVerse.length > 0 ) {
         setTimeout( function () {
-            var padding = 10;
+            var padding = 30;
             var offset = $activeVerse.offset().top;
-            var scrollTo = offset - padding - $( '.breadcrumb' ).height() - parseInt( $activeVerse.css( 'margin-bottom' ) );
+            var scrollTo = offset - padding - $( '.breadcrumb' ).height();
             $( 'html, body' ).animate( { scrollTop: scrollTo }, 500 );
         }, 500 );
+        setTimeout( function () {
+            setActiveVerse( $activeVerse );
+        }, 1000 );
     }
 
-    document.onmouseup = function () {
-        detectSelection();
-    };
+    $( 'li.verse' ).click( function () {
+        setActiveVerse( $( this ) );
+    } );
 
-    document.onkeyup = function ( e ) {
-        if ( Number( e.keyCode ) <= 40 && Number( e.keyCode ) >= 37 )
-            detectSelection();
-    };
-
-    function detectSelection() {
-        var range;
-        var selection;
-        var respond = true;
-        var highlightMenu = $( '#highlight-menu' );
-        if ( window.getSelection ) {
-            selection = window.getSelection();
-            if ( selection.anchorNode == null )
-                respond = false;
-            else if ( selection.getRangeAt( 0 ).toString().length == 0 )
-                respond = false;
-            else
-                range = selection.getRangeAt( 0 );
-        } else if ( document.selection && document.selection.type != "Control" ) {
-            selection = document.selection;
-            range = selection.createRange();
-        }
-        // Only deal with ranges in the same node
-        if ( respond && range.startContainer != range.endContainer )
-            respond = false;
-        else if ( respond && range.toString().match( /^ *[^ ]+ *$/g ) == null )
-            respond = false;
-
-        if ( respond ) {
-            highlightMenu.offset( { top: $( range.startContainer ).closest( 'li' ).offset().top } );
-        }
+    function setActiveVerse( $verse ) {
+        var offset = $verse.offset().top;
+        offset = offset - highlightMenu.parent().offset().top;
+        highlightMenu.animate( { top: offset } );
+        highlightMenu.data( 'verse', $verse.data( 'verse' ) );
     }
 
     function getPopover() {

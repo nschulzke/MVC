@@ -10,7 +10,7 @@ include __DIR__ . '/../_components/breadcrumb.php'
 ?>
 <div class="container chapter-view card">
     <div class="card-block">
-        <div id="highlight-menu" class="card" style="display: none">
+        <div id="highlight-menu" class="card" data-verse="1">
             <div class="card-block">
                 <a class="fa fa-link"></a>
                 <a class="fa fa-bookmark"></a>
@@ -18,7 +18,7 @@ include __DIR__ . '/../_components/breadcrumb.php'
         </div>
         <ul class="chapter-text">
             <?php foreach ( $scripture->getText() as $num => $text ): ?>
-                <li id="<?= $num ?>" class="verse<?= in_array( $num, $verses ) ? ' highlight' : '' ?>">
+                <li id="verse_<?= $num ?>" data-verse="<?= $num ?>" class="verse<?= in_array( $num, $verses ) ? ' highlight' : '' ?>">
                     <span class="verse-num"><?= $num ?></span>
                     <span class="verse-text"><?= $text ?></span>
                 </li>
