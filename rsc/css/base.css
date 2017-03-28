@@ -17,6 +17,16 @@
     line-height: 2em;
     text-align: center; }
 
+.breadcrumb .pagination {
+  background-color: #444444; }
+  .breadcrumb .pagination .page-link {
+    border: 1px solid #222222;
+    background-color: #444444;
+    color: #CCCCCC;
+    font-size: 1em;
+    padding-top: 0;
+    padding-bottom: 0.15rem; }
+
 .chapter-view {
   max-width: 35em;
   min-width: 25em;

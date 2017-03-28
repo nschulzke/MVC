@@ -11,7 +11,6 @@ extract( $this->vars );
  */
 
 require_once __DIR__ . '/../_components/breadcrumb.php'
-
 ?>
 
 <div class="card chapters-list">
