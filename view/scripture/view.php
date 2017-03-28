@@ -8,20 +8,21 @@ extract( $this->vars );
 
 include __DIR__ . '/../_components/breadcrumb.php'
 ?>
-
-<div id="highlight-menu" class="card" style="display: none">
+<div class="container chapter-view card">
     <div class="card-block">
-        <a class="fa fa-link"></a>
-        <a class="fa fa-bookmark"></a>
+        <div id="highlight-menu" class="card" style="display: none">
+            <div class="card-block">
+                <a class="fa fa-link"></a>
+                <a class="fa fa-bookmark"></a>
+            </div>
+        </div>
+        <ul class="chapter-text">
+            <?php foreach ( $scripture->getText() as $num => $text ): ?>
+                <li id="<?= $num ?>" class="verse<?= in_array( $num, $verses ) ? ' highlight' : '' ?>">
+                    <span class="verse-num"><?= $num ?></span>
+                    <span class="verse-text"><?= $text ?></span>
+                </li>
+            <?php endforeach ?>
+        </ul>
     </div>
-</div>
-<div class="container chapter-view">
-    <ul class="chapter-text">
-        <?php foreach ( $scripture->getText() as $num => $text ): ?>
-            <li id="<?=$num?>" class="verse<?= in_array( $num, $verses ) ? ' highlight' : '' ?>">
-                <span class="verse-num"><?= $num ?></span>
-                <span class="verse-text"><?= $text ?></span>
-            </li>
-        <?php endforeach ?>
-    </ul>
 </div>

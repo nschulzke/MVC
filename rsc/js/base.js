@@ -29,7 +29,6 @@ function initDynamicOnReady() {
 
 function initHighlighter() {
     var aChar = 97;
-    $( '#highlight-menu' ).hide();
     $( 'span.verse-text' ).each( function () {
         var footnotes = 0;
         var char;
@@ -87,11 +86,8 @@ function initHighlighter() {
             respond = false;
 
         if ( respond ) {
-            highlightMenu.fadeIn();
             highlightMenu.offset( { top: $( range.startContainer ).closest( 'li' ).offset().top } );
         }
-        else
-            highlightMenu.hide();
     }
 
     function getPopover() {

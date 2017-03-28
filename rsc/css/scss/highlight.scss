@@ -61,8 +61,10 @@ a.footnote {
 
 .card#highlight-menu {
   position: absolute;
+  left: 1em;
   width: 4em;
   text-align: center;
+  background-color: $background;
   a.fa {
     display: inline-block;
   }
