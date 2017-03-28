@@ -18,6 +18,24 @@ body {
       .breadcrumb-item.active {
         color: $text-medium;
       }
+      .pagination .page-link {
+        padding-top: 0;
+        padding-bottom: 0.15rem;
+      }
+    }
+    .pagination {
+      .page-item {
+        background-color: $background-2;
+        .page-link {
+          color: $text-link;
+          border: 1px solid $background-0;
+          background-color: $background-2;
+          font-size: 1em;
+        }
+        &.disabled .page-link {
+          color: $background-0;
+        }
+      }
     }
     .card {
       background-color: $background-1;

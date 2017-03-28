@@ -14,18 +14,7 @@
     border-radius: 0.5rem;
     width: 2em;
     height: 2em;
-    line-height: 2em;
-    text-align: center; }
-
-.breadcrumb .pagination {
-  background-color: #444444; }
-  .breadcrumb .pagination .page-link {
-    border: 1px solid #222222;
-    background-color: #444444;
-    color: #CCCCCC;
-    font-size: 1em;
-    padding-top: 0;
-    padding-bottom: 0.15rem; }
+    line-height: 2em; }
 
 .chapter-view {
   max-width: 35em;
@@ -71,6 +60,18 @@ body {
     background-color: #333333; }
     body section#main-container .breadcrumb .breadcrumb-item.active {
       color: #777777; }
+    body section#main-container .breadcrumb .pagination .page-link {
+      padding-top: 0;
+      padding-bottom: 0.15rem; }
+  body section#main-container .pagination .page-item {
+    background-color: #444444; }
+    body section#main-container .pagination .page-item .page-link {
+      color: #CCCCCC;
+      border: 1px solid #222222;
+      background-color: #444444;
+      font-size: 1em; }
+    body section#main-container .pagination .page-item.disabled .page-link {
+      color: #222222; }
   body section#main-container .card {
     background-color: #333333; }
     body section#main-container .card .card-header {
