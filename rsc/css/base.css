@@ -63,8 +63,8 @@ body {
       color: #777777; }
   body section#main-container .card {
     background-color: #333333; }
-    body section#main-container .card .card-header {
-      background-color: #19172B; }
+  body section#main-container .card-header {
+    background-color: #19172B; }
   body section#main-container .accordion {
     background-color: #222222; }
     body section#main-container .accordion .card-header {
