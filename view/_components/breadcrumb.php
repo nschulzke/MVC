@@ -6,6 +6,7 @@ extract( $this->vars );
  * @var array $arrows
  */
 $activeCrumb = sizeof($breadcrumb) - 1;
+$arrows = null;
 ?>
 <ol class="breadcrumb sticky-top">
     <?php foreach ( $breadcrumb as $num => $crumb ):

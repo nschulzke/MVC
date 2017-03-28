@@ -1,28 +1,52 @@
-$light-background: #f7f7f9;
 @import 'scss/colors';
 @import 'scss/highlight';
 
 body {
+  color: $text-bright;
   header {
-    background-color: $color-gray-0;
-    color: $color-text-light;
+    background-color: $background-1;
+    color: $text-bright;
     border-radius: 0.25rem;
+    margin-bottom: 1rem;
     a.nav-link {
-      color: $color-text-medium;
+      color: $text-bright;
     }
   }
   section#main-container {
+    a {
+      color: $text-bright;
+    }
+    .breadcrumb {
+      background-color: $background-1;
+      .breadcrumb-item.active {
+        color: $text-medium;
+      }
+    }
     .card {
-      background-color: $color-blue-4;
+      background-color: $background-1;
+      .card-header {
+        background-color: $color-blue-0;
+        color: $text-bright;
+      }
+    }
+    .accordion {
+      .card {
+        background-color: $background-0;
+        .card-header {
+          background-color: $color-blue-0;
+          border-color: black;
+          cursor: pointer;
+        }
+      }
     }
   }
-  background-color: $color-gray-2;
-}
-
-
-
-footer#footer-container {
-  margin-top: 1rem;
+  background-color: $background-3;
+  footer {
+    background-color: $background-1;
+    color: $text-bright;
+    border-radius: 0.25rem;
+    margin-top: 1rem;
+  }
 }
 
 .breadcrumb-arrows {

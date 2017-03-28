@@ -10,7 +10,7 @@ extract( $this->vars );
 ?>
 <div class="card">
     <div class="card-block">
-        <div id="books-accordion" role="tablist" aria-multiselectable="true">
+        <div id="books-accordion" class="accordion" role="tablist" aria-multiselectable="true">
             <?php foreach ( $volumes as $volId => $data ): ?>
                 <div class="card">
                     <div class="card-header" role="tab" id="volume_<?= $volId ?>" href="#books_<?= $volId ?>" data-toggle="collapse" data-parent="#books-accordion" aria-controls="books_<?= $volId ?>">

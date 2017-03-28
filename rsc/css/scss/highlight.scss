@@ -1,5 +1,4 @@
-$highlight: #f6fcc4;
-$background: #eceeef;
+$highlight: rgba(92, 117, 61, 0.5);
 
 @import 'colors.scss';
 
@@ -20,7 +19,8 @@ a.footnote {
   a {
     margin: .5rem;
     display: inline-block;
-    background-color: $background;
+    color: $text-bright;
+    background-color: $color-blue-0;
     border-radius: .5rem;
     width: 2em;
     height: 2em;
@@ -37,6 +37,18 @@ a.footnote {
   min-width: 25em;
   padding-left: 5em;
   padding-right: 5em;
+  .card#highlight-menu {
+    position: absolute;
+    left: 1em;
+    width: 4em;
+    text-align: center;
+    color: $text-bright;
+    background-color: $color-blue-0;
+    a.fa {
+      color: $text-bright;
+      display: inline-block;
+    }
+  }
   ul.chapter-text {
     max-width: 25em;
     min-width: 15em;
@@ -46,6 +58,10 @@ a.footnote {
       margin-bottom: 1em;
       padding: .5em;
       border-radius: .2em;
+      &.highlight {
+        color: $text-dark;
+        background-color: $highlight;
+      }
       span.verse-num {
         margin-right: .2em;
       }
@@ -53,19 +69,5 @@ a.footnote {
         content: '.';
       }
     }
-    li.highlight {
-      background-color: $highlight;
-    }
-  }
-}
-
-.card#highlight-menu {
-  position: absolute;
-  left: 1em;
-  width: 4em;
-  text-align: center;
-  background-color: $background;
-  a.fa {
-    display: inline-block;
   }
 }

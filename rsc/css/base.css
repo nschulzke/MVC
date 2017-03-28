@@ -15,7 +15,8 @@ a.footnote {
   .chapters-list a {
     margin: .5rem;
     display: inline-block;
-    background-color: #eceeef;
+    color: #CCCCCC;
+    background-color: #19172B;
     border-radius: .5rem;
     width: 2em;
     height: 2em;
@@ -27,6 +28,16 @@ a.footnote {
   min-width: 25em;
   padding-left: 5em;
   padding-right: 5em; }
+  .chapter-view .card#highlight-menu {
+    position: absolute;
+    left: 1em;
+    width: 4em;
+    text-align: center;
+    color: #CCCCCC;
+    background-color: #19172B; }
+    .chapter-view .card#highlight-menu a.fa {
+      color: #CCCCCC;
+      display: inline-block; }
   .chapter-view ul.chapter-text {
     max-width: 25em;
     min-width: 15em;
@@ -36,35 +47,46 @@ a.footnote {
       margin-bottom: 1em;
       padding: .5em;
       border-radius: .2em; }
+      .chapter-view ul.chapter-text li.verse.highlight {
+        color: #222222;
+        background-color: rgba(92, 117, 61, 0.5); }
       .chapter-view ul.chapter-text li.verse span.verse-num {
         margin-right: .2em; }
       .chapter-view ul.chapter-text li.verse span.verse-num::after {
         content: '.'; }
-    .chapter-view ul.chapter-text li.highlight {
-      background-color: #f6fcc4; }
-
-.card#highlight-menu {
-  position: absolute;
-  left: 1em;
-  width: 4em;
-  text-align: center;
-  background-color: #eceeef; }
-  .card#highlight-menu a.fa {
-    display: inline-block; }
 
 body {
-  background-color: #404040; }
+  color: #CCCCCC;
+  background-color: #444444; }
   body header {
-    background-color: #292929;
-    color: #FFFFFF;
-    border-radius: 0.25rem; }
+    background-color: #333333;
+    color: #CCCCCC;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem; }
     body header a.nav-link {
-      color: #999999; }
+      color: #CCCCCC; }
+  body section#main-container a {
+    color: #CCCCCC; }
+  body section#main-container .breadcrumb {
+    background-color: #333333; }
+    body section#main-container .breadcrumb .breadcrumb-item.active {
+      color: #777777; }
   body section#main-container .card {
-    background-color: #1A1643; }
-
-footer#footer-container {
-  margin-top: 1rem; }
+    background-color: #333333; }
+    body section#main-container .card .card-header {
+      background-color: #19172B;
+      color: #CCCCCC; }
+  body section#main-container .accordion .card {
+    background-color: #222222; }
+    body section#main-container .accordion .card .card-header {
+      background-color: #19172B;
+      border-color: black;
+      cursor: pointer; }
+  body footer {
+    background-color: #333333;
+    color: #CCCCCC;
+    border-radius: 0.25rem;
+    margin-top: 1rem; }
 
 .breadcrumb-arrows {
   height: 100%; }
