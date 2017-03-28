@@ -2,6 +2,25 @@ $light-background: #f7f7f9;
 @import 'scss/colors';
 @import 'scss/highlight';
 
+body {
+  header {
+    background-color: $color-gray-0;
+    color: $color-text-light;
+    border-radius: 0.25rem;
+    a.nav-link {
+      color: $color-text-medium;
+    }
+  }
+  section#main-container {
+    .card {
+      background-color: $color-blue-4;
+    }
+  }
+  background-color: $color-gray-2;
+}
+
+
+
 footer#footer-container {
   margin-top: 1rem;
 }

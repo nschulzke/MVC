@@ -52,6 +52,17 @@ a.footnote {
   .card#highlight-menu a.fa {
     display: inline-block; }
 
+body {
+  background-color: #404040; }
+  body header {
+    background-color: #292929;
+    color: #FFFFFF;
+    border-radius: 0.25rem; }
+    body header a.nav-link {
+      color: #999999; }
+  body section#main-container .card {
+    background-color: #1A1643; }
+
 footer#footer-container {
   margin-top: 1rem; }
 

@@ -25,9 +25,9 @@ extract( $this->vars );
         <div class="container-fluid">
             <?php $navbar->display() ?>
             
-            <article id="main-container" class="container">
+            <section id="main-container" class="container">
                 <?php $this->includeFile( $viewPath ) ?>
-            </article>
+            </section>
             
             <?php $this->includeFile( $components . $footer ) ?>
             <?php $this->includeFile( $components . $modal ) ?>
