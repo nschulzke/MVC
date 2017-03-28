@@ -2,20 +2,17 @@
 @import 'scss/highlight';
 
 body {
+  background-color: $background-0;
   color: $text-bright;
+  a {
+    color: $text-link;
+  }
   header {
     background-color: $background-1;
-    color: $text-bright;
     border-radius: 0.25rem;
     margin-bottom: 1rem;
-    a.nav-link {
-      color: $text-bright;
-    }
   }
   section#main-container {
-    a {
-      color: $text-bright;
-    }
     .breadcrumb {
       background-color: $background-1;
       .breadcrumb-item.active {
@@ -25,40 +22,23 @@ body {
     .card {
       background-color: $background-1;
       .card-header {
-        background-color: $color-blue-0;
-        color: $text-bright;
+        background-color: $highlight-bg-0;
       }
     }
     .accordion {
       .card {
         background-color: $background-0;
         .card-header {
-          background-color: $color-blue-0;
+          background-color: $highlight-bg-0;
           border-color: black;
           cursor: pointer;
         }
       }
     }
   }
-  background-color: $background-3;
   footer {
     background-color: $background-1;
-    color: $text-bright;
     border-radius: 0.25rem;
     margin-top: 1rem;
-  }
-}
-
-.breadcrumb-arrows {
-  height: 100%;
-  a {
-    &.fa-arrow-left {
-      margin-right: 1rem;
-    }
-    width: 1em;
-    height: 100%;
-    line-height: 1em;
-    text-align: center;
-    text-decoration: none;
   }
 }

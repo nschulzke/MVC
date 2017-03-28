@@ -2,26 +2,19 @@ $highlight: rgba(92, 117, 61, 0.5);
 
 @import 'colors.scss';
 
-a.footnote {
-  text-decoration: none;
-}
-
 .books-list {
   a {
     display: block;
   }
-  -moz-column-width: 12rem;
-  -webkit-column-width: 12rem;
   column-width: 12rem;
 }
 
 .chapters-list {
   a {
-    margin: .5rem;
+    margin: 0.5rem;
     display: inline-block;
-    color: $text-bright;
-    background-color: $color-blue-0;
-    border-radius: .5rem;
+    background-color: $highlight-bg-0;
+    border-radius: 0.5rem;
     width: 2em;
     height: 2em;
     line-height: 2em;
@@ -43,11 +36,7 @@ a.footnote {
     width: 4em;
     text-align: center;
     color: $text-bright;
-    background-color: $color-blue-0;
-    a.fa {
-      color: $text-bright;
-      display: inline-block;
-    }
+    background-color: $highlight-bg-0;
   }
   ul.chapter-text {
     max-width: 25em;
@@ -64,9 +53,12 @@ a.footnote {
       }
       span.verse-num {
         margin-right: .2em;
+        &::after {
+          content: '.';
+        }
       }
-      span.verse-num::after {
-        content: '.';
+      a.footnote {
+        text-decoration: none;
       }
     }
   }

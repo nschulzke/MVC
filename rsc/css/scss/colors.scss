@@ -1,41 +1,44 @@
-$color-gray-1:  #111111;
-$color-gray-2:  #222222;
-$color-gray-3:  #333333;
-$color-gray-4:  #444444;
-$color-gray-5:  #555555;
-$color-gray-6:  #666666;
-$color-gray-7:  #777777;
-$color-gray-8:  #888888;
-$color-gray-9:  #999999;
-$color-gray-A:  #AAAAAA;
-$color-gray-B:  #BBBBBB;
-$color-gray-C:  #CCCCCC;
-$color-gray-D:  #DDDDDD;
-$color-gray-E:  #EEEEEE;
+$color-gray-1:   #111111;
+$color-gray-2:   #222222;
+$color-gray-3:   #333333;
+$color-gray-4:   #444444;
+$color-gray-5:   #555555;
+$color-gray-6:   #666666;
+$color-gray-7:   #777777;
+$color-gray-8:   #888888;
+$color-gray-9:   #999999;
+$color-gray-A:   #AAAAAA;
+$color-gray-B:   #BBBBBB;
+$color-gray-C:   #CCCCCC;
+$color-gray-D:   #DDDDDD;
+$color-gray-E:   #EEEEEE;
 
-$color-blue-0:  #19172B; // Main Primary color
-$color-blue-1:  #373459;
-$color-blue-2:  #282541;
-$color-blue-3:  #1C193A;
-$color-blue-4:  #1A1643;
+$color-blue-0:   #19172B; // Main Primary color
+$color-blue-1:   #373459;
+$color-blue-2:   #282541;
+$color-blue-3:   #1C193A;
+$color-blue-4:   #1A1643;
 
-$color-green-0: #2A381A; // Main Secondary color (1)
-$color-green-1: #5C753D;
-$color-green-2: #42552B;
-$color-green-3: #354C1A;
-$color-green-4: #395713;
+$color-green-0:  #2A381A; // Main Secondary color (1)
+$color-green-1:  #5C753D;
+$color-green-2:  #42552B;
+$color-green-3:  #354C1A;
+$color-green-4:  #395713;
 
-$color-red-0:   #3D1D1D; // Main Secondary color (2)
-$color-red-1:   #804343;
-$color-red-2:   #5E2F2F;
-$color-red-3:   #541C1C;
-$color-red-4:   #601515;
+$color-red-0:    #3D1D1D; // Main Secondary color (2)
+$color-red-1:    #804343;
+$color-red-2:    #5E2F2F;
+$color-red-3:    #541C1C;
+$color-red-4:    #601515;
 
-$text-bright:   $color-gray-C;
-$text-medium:   $color-gray-7;
-$text-dark:     $color-gray-2;
+$text-link:      $color-gray-C;
+$text-bright:    $color-gray-C;
+$text-medium:    $color-gray-7;
+$text-dark:      $color-gray-2;
 
-$background-0:  $color-gray-2;
-$background-1:  $color-gray-3;
-$background-3:  $color-gray-4;
-$background-4:  $color-gray-5;
+$background-0:   $color-gray-2;
+$background-1:   $color-gray-3;
+$background-2:   $color-gray-4;
+$background-3:   $color-gray-5;
+
+$highlight-bg-0: $color-blue-0;
