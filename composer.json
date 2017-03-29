@@ -1,5 +1,6 @@
 {
   "require": {
-    "doctrine/orm": "*"
+    "doctrine/orm": "*",
+    "wamania/php-stemmer": "dev-master"
   }
 }

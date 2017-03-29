@@ -10,56 +10,109 @@ use util\WordAnalysis;
 
 class ScriptureAnalysis
 {
-    public static function action_mostCommonWords( $route, $params )
+    public static function action_wordFrequency( $route, $params )
     {
         $booksRepo = MScripture::getBooksRepo();
         $chaptersRepo = MScripture::getChaptersRepo();
         $versesRepo = MScripture::getVersesRepo();
-
-        $threshold = 0.007;
-
-        echo print_r($params);
+        
         if ( isset( $params[0] ) )
             $volumes = MScripture::getVolumesRepo()->findBy( [ 'ldsUrl' => $params[0] ] );
         else
             $volumes = MScripture::getVolumesRepo()->findAll();
-
-        $wordsArray = [];
+        
+        $preMerge = [];
         $wordCount = 0;
         foreach ( $volumes as $volume ) /* @var Volumes $volume */ {
             $books = $booksRepo->findBy( [ 'volumeId' => $volume->getId() ] );
-
+            
             foreach ( $books as $book ) /* @var Books $book */ {
                 $chapters = $chaptersRepo->findBy( [ 'bookId' => $book->getId() ] );
-
+                
                 foreach ( $chapters as $chapter ) /* @var Chapters $chapter */ {
                     $verses = $versesRepo->findBy( [ 'chapterId' => $chapter->getId() ] );
-
+                    
                     foreach ( $verses as $verse ) /* @var Verses $verse */ {
                         $words = WordAnalysis::explodeWords( $verse->getText() );
                         foreach ( $words as $word ) {
-                            if ( array_key_exists( $word, $wordsArray ) )
-                                $wordsArray[$word]++;
+                            if ( array_key_exists( $word, $preMerge ) )
+                                $preMerge[$word]++;
                             else
-                                $wordsArray[$word] = 1;
+                                $preMerge[$word] = 1;
                             $wordCount++;
                         }
                     }
                 }
             }
         }
-        echo 'words:' . $wordCount . ' ';
-        arsort( $wordsArray );
-        foreach ( $wordsArray as $word => $count ) {
-            if ( $count / $wordCount < $threshold )
-                break;
+        $wordsArray = [];
+        foreach ( $preMerge as $word => $count ) {
+            $stem = WordAnalysis::stem($word);
+            if ( array_key_exists( $stem, $wordsArray ) )
+                $wordsArray[$stem] += $count;
             else
-                echo $word . ', ';
+                $wordsArray[$stem] = $count;
         }
-
-        print_r( $wordsArray );
+        
+        arsort( $wordsArray );
+        
+        foreach ( $wordsArray as $word => $count )
+            echo $word . ' => ' . $count . '<br>';
+        
+        $file = fopen('wordFrequency.json', 'w');
+        fwrite($file, json_encode($wordsArray));
+        fclose($file);
     }
-
+    
+    public static function action_connectionsBetweenWords( $route, $params )
+    {
+        $booksRepo = MScripture::getBooksRepo();
+        $chaptersRepo = MScripture::getChaptersRepo();
+        $versesRepo = MScripture::getVersesRepo();
+        
+        if ( isset( $params[0] ) )
+            $volumes = MScripture::getVolumesRepo()->findBy( [ 'ldsUrl' => $params[0] ] );
+        else
+            $volumes = MScripture::getVolumesRepo()->findAll();
+    
+        $preMerge = [];
+        foreach ( $volumes as $volume ) /* @var Volumes $volume */ {
+            $books = $booksRepo->findBy( [ 'volumeId' => $volume->getId() ] );
+            
+            foreach ( $books as $book ) /* @var Books $book */ {
+                $chapters = $chaptersRepo->findBy( [ 'bookId' => $book->getId() ] );
+                
+                foreach ( $chapters as $chapter ) /* @var Chapters $chapter */ {
+                    $verses = $versesRepo->findBy( [ 'chapterId' => $chapter->getId() ] );
+                    
+                    foreach ( $verses as $verse ) /* @var Verses $verse */ {
+                        $words = WordAnalysis::explodeWords( $verse->getText(), true );
+                        foreach ( $words as $source ) {
+                            if ( !array_key_exists( $source, $preMerge ) )
+                                $preMerge[$source] = [];
+                            foreach ( $words as $target ) {
+                                if ( $source != $target ) {
+                                    if ( array_key_exists( $target, $preMerge[$source] ) )
+                                        $preMerge[$source][$target]++;
+                                    else
+                                        $preMerge[$source][$target] = 1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        foreach ( $preMerge as $source => $array )
+            arsort( $preMerge[$source] );
+        
+        foreach ( $preMerge as $source => $targetArr ) {
+            echo '<br><br>' . $source . ' => ';
+            print_r( $targetArr );
+        }
+    }
+    
     public static function action_findConnections( $route, $params )
     {
         if ( isset( $params[0] ) && isset( $params[1] ) ) {
@@ -69,10 +122,10 @@ class ScriptureAnalysis
                 $verses = explode( ',', $params[2] );
             else
                 $verses = null;
-
+            
             $versesRepo = MScripture::getVersesRepo();
             $scripture = new MScripture( $book, $chapter, $verses );
-
+            
             $references = [];
             foreach ( $scripture->getVerses() as $verse ) /* @var Verses $verse */ {
                 $words = WordAnalysis::countWords( $verse->getText() );
@@ -100,11 +153,16 @@ class ScriptureAnalysis
             }
         }
     }
-
+    
+    public static function action_test( $route, $params )
+    {
+        echo WordAnalysis::stem('testedst');
+    }
+    
     private function __construct()
     {
     }
-
+    
     private function __clone()
     {
     }
