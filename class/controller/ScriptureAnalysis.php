@@ -104,10 +104,26 @@ class ScriptureAnalysis
             }
         }
         
-        foreach ( $preMerge as $source => $array )
-            arsort( $preMerge[$source] );
+        $wordsArray = [];
+        foreach ( $preMerge as $source => $words ) {
+            $sourceStem = WordAnalysis::stem($source);
+            if ( !array_key_exists( $sourceStem, $wordsArray ) )
+                $wordsArray[$sourceStem] = [];
+            foreach ( $words as $target => $count ) {
+                $targetStem = WordAnalysis::stem($target);
+                if ( $sourceStem != $targetStem ) {
+                    if ( array_key_exists( $targetStem, $wordsArray[$sourceStem] ) )
+                        $wordsArray[$sourceStem][$targetStem] += $count;
+                    else
+                        $wordsArray[$sourceStem][$targetStem] = $count;
+                }
+            }
+        }
         
-        foreach ( $preMerge as $source => $targetArr ) {
+        foreach ( $wordsArray as $source => $array )
+            arsort( $wordsArray[$source] );
+        
+        foreach ( $wordsArray as $source => $targetArr ) {
             echo '<br><br>' . $source . ' => ';
             print_r( $targetArr );
         }
