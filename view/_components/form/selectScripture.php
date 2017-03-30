@@ -17,7 +17,7 @@ $chapterRepo = MScripture::getChapterRepo();
             <?php foreach ( $volumeRepo->findAll() as $volume ): /* @var Volume $volume */ ?>
                 <optgroup label="<?= $volume->getTitle() ?>">
                     <?php foreach ( $bookRepo->findBy( [ 'volumeId' => $volume->getId() ] ) as $book ): /* @var Book $book */ ?>
-                        <option value="<?= $book->getLdsUrl() ?>" data-chapters="<?= sizeof( $chapterRepo->findBy( [ 'bookId' => $book->getId() ] ) ) ?>"><?= $book->getTitle() ?></option>
+                        <option value="<?= $book->getLdsUrl() ?>" data-chapters="<?= sizeof( $chapterRepo->findBy( [ 'book' => $book ] ) ) ?>"><?= $book->getTitle() ?></option>
                     <?php endforeach; ?>
                 </optgroup>
             <?php endforeach; ?>

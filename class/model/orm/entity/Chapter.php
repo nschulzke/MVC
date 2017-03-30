@@ -6,57 +6,28 @@
 class Chapter
 {
     /**
-     * @var integer
+     * @var Book
      */
-    private $bookId = '0';
+    private $book;
 
     /**
      * @var integer
      */
-    private $number = '0';
+    private $number;
 
     /**
      * @var integer
      */
     private $id;
 
-
     /**
-     * Set bookId
+     * Get book
      *
-     * @param integer $bookId
-     *
-     * @return Chapter
+     * @return Book
      */
-    public function setBookId( $bookId )
+    public function getBook()
     {
-        $this->bookId = $bookId;
-
-        return $this;
-    }
-
-    /**
-     * Get bookId
-     *
-     * @return integer
-     */
-    public function getBookId()
-    {
-        return $this->bookId;
-    }
-
-    /**
-     * Set chapterNumber
-     *
-     * @param integer $number
-     *
-     * @return Chapter
-     */
-    public function setNumber( $number )
-    {
-        $this->number = $number;
-
-        return $this;
+        return $this->book;
     }
 
     /**

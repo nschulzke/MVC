@@ -131,7 +131,7 @@ class MScripture
         else
             $this->book = self::findBook( $book );
 
-        $this->chapter = self::getChapterRepo()->findOneBy( [ 'bookId' => $this->book->getId(), 'number' => $chapterNum ] );
+        $this->chapter = self::getChapterRepo()->findOneBy( [ 'book' => $this->book, 'number' => $chapterNum ] );
 
         if ( is_numeric( $verseNums ) )
             $this->verses = [ self::getVerseRepo()->findOneBy( [ 'chapterId' => $this->chapter->getId(), 'number' => $verseNums ] ) ];

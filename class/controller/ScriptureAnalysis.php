@@ -27,7 +27,7 @@ class ScriptureAnalysis
             $books = $bookRepo->findBy( [ 'volumeId' => $volume->getId() ] );
             
             foreach ( $books as $book ) /* @var Book $book */ {
-                $chapters = $chapterRepo->findBy( [ 'bookId' => $book->getId() ] );
+                $chapters = $chapterRepo->findBy( [ 'book' => $book ] );
                 
                 foreach ( $chapters as $chapter ) /* @var Chapter $chapter */ {
                     $verses = $verseRepo->findBy( [ 'chapterId' => $chapter->getId() ] );
@@ -80,7 +80,7 @@ class ScriptureAnalysis
             $books = $bookRepo->findBy( [ 'volumeId' => $volume->getId() ] );
             
             foreach ( $books as $book ) /* @var Book $book */ {
-                $chapters = $chapterRepo->findBy( [ 'bookId' => $book->getId() ] );
+                $chapters = $chapterRepo->findBy( [ 'book' => $book ] );
                 
                 foreach ( $chapters as $chapter ) /* @var Chapter $chapter */ {
                     $verses = $verseRepo->findBy( [ 'chapterId' => $chapter->getId() ] );
