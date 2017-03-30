@@ -29,5 +29,6 @@
                 <option name="fixed"/>
             </options>
         </field>
+        <one-to-many target-entity="Book" mapped-by="volume" field="books" />
     </entity>
 </doctrine-mapping>

@@ -101,18 +101,9 @@ class Scripture
                 $active = $_GET['volume'];
             
             $volumes = MScripture::getVolumeRepo()->findAll();
-            $books = MScripture::getBookRepo();
-            
-            $array = [];
-            foreach ( $volumes as $volume ) /* @var Volume $volume */ {
-                $array[$volume->getLdsUrl()] = [ 'name' => $volume->getTitle() ];
-                foreach ( $books->findBy( [ 'volume' => $volume ] ) as $book ) /* @var Book $book */ {
-                    $array[$volume->getLdsUrl()]['books'][$book->getLdsUrl()] = $book->getTitle();
-                }
-            }
             
             $view->setVars( [
-                'volumes'  => $array,
+                'volumes'  => $volumes,
                 'active'   => isset( $active ) ? $active : '',
                 'viewPath' => self::VIEW_BOOKS,
             ] );

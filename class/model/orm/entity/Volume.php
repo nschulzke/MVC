@@ -1,4 +1,5 @@
 <?php namespace model\orm\entity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Volume
@@ -9,7 +10,12 @@ class Volume
      * @var string
      */
     private $title;
-
+    
+    /**
+     * @var ArrayCollection
+     */
+    private $books;
+    
     /**
      * @var string
      */
@@ -35,21 +41,6 @@ class Volume
      */
     private $id;
 
-
-    /**
-     * Set volumeTitle
-     *
-     * @param string $title
-     *
-     * @return Volume
-     */
-    public function setTitle( $title )
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
     /**
      * Get volumeTitle
      *
@@ -59,19 +50,15 @@ class Volume
     {
         return $this->title;
     }
-
+    
     /**
-     * Set volumeLongTitle
+     * get chapters
      *
-     * @param string $longTitle
-     *
-     * @return Volume
+     * @return ArrayCollection
      */
-    public function setLongTitle( $longTitle )
+    public function getBooks()
     {
-        $this->longTitle = $longTitle;
-
-        return $this;
+        return $this->books;
     }
 
     /**
@@ -85,20 +72,6 @@ class Volume
     }
 
     /**
-     * Set volumeSubtitle
-     *
-     * @param string $subtitle
-     *
-     * @return Volume
-     */
-    public function setSubtitle( $subtitle )
-    {
-        $this->subtitle = $subtitle;
-
-        return $this;
-    }
-
-    /**
      * Get volumeSubtitle
      *
      * @return string
@@ -109,20 +82,6 @@ class Volume
     }
 
     /**
-     * Set volumeShortTitle
-     *
-     * @param string $shortTitle
-     *
-     * @return Volume
-     */
-    public function setShortTitle( $shortTitle )
-    {
-        $this->shortTitle = $shortTitle;
-
-        return $this;
-    }
-
-    /**
      * Get volumeShortTitle
      *
      * @return string
@@ -130,20 +89,6 @@ class Volume
     public function getShortTitle()
     {
         return $this->shortTitle;
-    }
-
-    /**
-     * Set volumeLdsUrl
-     *
-     * @param string $ldsUrl
-     *
-     * @return Volume
-     */
-    public function setLdsUrl( $ldsUrl )
-    {
-        $this->ldsUrl = $ldsUrl;
-
-        return $this;
     }
 
     /**
