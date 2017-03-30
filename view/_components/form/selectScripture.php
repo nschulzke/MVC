@@ -6,7 +6,7 @@ use model\orm\entity\Volumes;
 
 $volumesRepo = MScripture::getVolumesRepo();
 $booksRepo = MScripture::getBookRepo();
-$chaptersRepo = MScripture::getChaptersRepo();
+$chaptersRepo = MScripture::getChapterRepo();
 ?>
 
 

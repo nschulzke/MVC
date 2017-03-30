@@ -3,7 +3,7 @@
 use config\Application;
 use model\MScripture;
 use model\orm\entity\Book;
-use model\orm\entity\Chapters;
+use model\orm\entity\Chapter;
 use model\orm\entity\Volumes;
 use util\View;
 
@@ -40,8 +40,8 @@ class Scripture
             $view = new View( $route );
             
             $volume = MScripture::getVolumesRepo()->find( $book->getVolumeId() );
-            $chapters = MScripture::getChaptersRepo()->findBy( [ 'bookId' => $book->getId() ] );
-            /* @var Chapters[] $chapters */
+            $chapters = MScripture::getChapterRepo()->findBy( [ 'bookId' => $book->getId() ] );
+            /* @var Chapter[] $chapters */
             $breadcrumb = [
                 [ 'name' => $volume->getTitle(), 'path' => url( [ self::ROOT ], [ 'volume' => $volume->getLdsUrl() ] ) ],
                 [ 'name' => $book->getTitle(), 'path' => url( [ self::ROOT, $book->getLdsUrl() ] ) ],

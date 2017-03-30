@@ -3,8 +3,8 @@
 use Doctrine\Common\Collections\Criteria;
 use model\MScripture;
 use model\orm\entity\Book;
-use model\orm\entity\Chapters;
-use model\orm\entity\Verses;
+use model\orm\entity\Chapter;
+use model\orm\entity\Verse;
 use model\orm\entity\Volumes;
 use util\WordAnalysis;
 
@@ -13,8 +13,8 @@ class ScriptureAnalysis
     public static function action_wordFrequency( $route, $params )
     {
         $booksRepo = MScripture::getBookRepo();
-        $chaptersRepo = MScripture::getChaptersRepo();
-        $versesRepo = MScripture::getVersesRepo();
+        $chaptersRepo = MScripture::getChapterRepo();
+        $versesRepo = MScripture::getVerseRepo();
         
         if ( isset( $params[0] ) )
             $volumes = MScripture::getVolumesRepo()->findBy( [ 'ldsUrl' => $params[0] ] );
@@ -29,10 +29,10 @@ class ScriptureAnalysis
             foreach ( $books as $book ) /* @var Book $book */ {
                 $chapters = $chaptersRepo->findBy( [ 'bookId' => $book->getId() ] );
                 
-                foreach ( $chapters as $chapter ) /* @var Chapters $chapter */ {
+                foreach ( $chapters as $chapter ) /* @var Chapter $chapter */ {
                     $verses = $versesRepo->findBy( [ 'chapterId' => $chapter->getId() ] );
                     
-                    foreach ( $verses as $verse ) /* @var Verses $verse */ {
+                    foreach ( $verses as $verse ) /* @var Verse $verse */ {
                         $words = WordAnalysis::explodeWords( $verse->getText() );
                         foreach ( $words as $word ) {
                             if ( array_key_exists( $word, $preMerge ) )
@@ -67,8 +67,8 @@ class ScriptureAnalysis
     public static function action_connectionsBetweenWords( $route, $params )
     {
         $booksRepo = MScripture::getBookRepo();
-        $chaptersRepo = MScripture::getChaptersRepo();
-        $versesRepo = MScripture::getVersesRepo();
+        $chaptersRepo = MScripture::getChapterRepo();
+        $versesRepo = MScripture::getVerseRepo();
         
         if ( isset( $params[0] ) )
             $volumes = MScripture::getVolumesRepo()->findBy( [ 'ldsUrl' => $params[0] ] );
@@ -82,10 +82,10 @@ class ScriptureAnalysis
             foreach ( $books as $book ) /* @var Book $book */ {
                 $chapters = $chaptersRepo->findBy( [ 'bookId' => $book->getId() ] );
                 
-                foreach ( $chapters as $chapter ) /* @var Chapters $chapter */ {
+                foreach ( $chapters as $chapter ) /* @var Chapter $chapter */ {
                     $verses = $versesRepo->findBy( [ 'chapterId' => $chapter->getId() ] );
                     
-                    foreach ( $verses as $verse ) /* @var Verses $verse */ {
+                    foreach ( $verses as $verse ) /* @var Verse $verse */ {
                         $words = WordAnalysis::explodeWords( $verse->getText(), true );
                         foreach ( $words as $source ) {
                             if ( !array_key_exists( $source, $preMerge ) )
@@ -139,11 +139,11 @@ class ScriptureAnalysis
             else
                 $verses = null;
             
-            $versesRepo = MScripture::getVersesRepo();
+            $versesRepo = MScripture::getVerseRepo();
             $scripture = new MScripture( $book, $chapter, $verses );
             
             $references = [];
-            foreach ( $scripture->getVerses() as $verse ) /* @var Verses $verse */ {
+            foreach ( $scripture->getVerses() as $verse ) /* @var Verse $verse */ {
                 $words = WordAnalysis::countWords( $verse->getText() );
                 WordAnalysis::filterWords( $words );
                 foreach ( $words as $word => $count ) {

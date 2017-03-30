@@ -1,9 +1,9 @@
 <?php namespace model\orm\entity;
 
 /**
- * Chapters
+ * Chapter
  */
-class Chapters
+class Chapter
 {
     /**
      * @var integer
@@ -26,7 +26,7 @@ class Chapters
      *
      * @param integer $bookId
      *
-     * @return Chapters
+     * @return Chapter
      */
     public function setBookId( $bookId )
     {
@@ -50,7 +50,7 @@ class Chapters
      *
      * @param integer $number
      *
-     * @return Chapters
+     * @return Chapter
      */
     public function setNumber( $number )
     {

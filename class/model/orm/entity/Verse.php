@@ -1,9 +1,9 @@
 <?php namespace model\orm\entity;
 
 /**
- * Verses
+ * Verse
  */
-class Verses
+class Verse
 {
     /**
      * @var integer
@@ -31,7 +31,7 @@ class Verses
      *
      * @param integer $chapterId
      *
-     * @return Verses
+     * @return Verse
      */
     public function setChapterId( $chapterId )
     {
@@ -55,7 +55,7 @@ class Verses
      *
      * @param integer $number
      *
-     * @return Verses
+     * @return Verse
      */
     public function setNumber( $number )
     {
@@ -79,7 +79,7 @@ class Verses
      *
      * @param string $text
      *
-     * @return Verses
+     * @return Verse
      */
     public function setText( $text )
     {

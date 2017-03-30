@@ -3,8 +3,8 @@
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 use model\orm\entity\Book;
-use model\orm\entity\Chapters;
-use model\orm\entity\Verses;
+use model\orm\entity\Chapter;
+use model\orm\entity\Verse;
 use model\orm\ORM;
 
 class MScripture
@@ -39,10 +39,10 @@ class MScripture
     /**
      * @return EntityRepository The repository of chapters
      */
-    public static function getChaptersRepo()
+    public static function getChapterRepo()
     {
         if ( !isset( $chaptersRepo ) )
-            self::$chaptersRepo = ORM::getManager()->getRepository( 'entity:Chapters' );
+            self::$chaptersRepo = ORM::getManager()->getRepository( 'entity:Chapter' );
 
         return self::$chaptersRepo;
     }
@@ -50,10 +50,10 @@ class MScripture
     /**
      * @return EntityRepository The repository of verses
      */
-    public static function getVersesRepo()
+    public static function getVerseRepo()
     {
         if ( !isset( $versesRepo ) )
-            self::$versesRepo = ORM::getManager()->getRepository( 'entity:Verses' );
+            self::$versesRepo = ORM::getManager()->getRepository( 'entity:Verse' );
 
         return self::$versesRepo;
     }
@@ -131,25 +131,25 @@ class MScripture
         else
             $this->book = self::findBook( $book );
 
-        $this->chapter = self::getChaptersRepo()->findOneBy( [ 'bookId' => $this->book->getId(), 'number' => $chapterNum ] );
+        $this->chapter = self::getChapterRepo()->findOneBy( [ 'bookId' => $this->book->getId(), 'number' => $chapterNum ] );
 
         if ( is_numeric( $verseNums ) )
-            $this->verses = [ self::getVersesRepo()->findOneBy( [ 'chapterId' => $this->chapter->getId(), 'number' => $verseNums ] ) ];
+            $this->verses = [ self::getVerseRepo()->findOneBy( [ 'chapterId' => $this->chapter->getId(), 'number' => $verseNums ] ) ];
         else {
             $verseNums = self::explodeRanges( $verseNums );
-            $verses = self::getVersesRepo()->findBy( [ 'chapterId' => $this->chapter->getId() ] );
+            $verses = self::getVerseRepo()->findBy( [ 'chapterId' => $this->chapter->getId() ] );
             if ( isset( $verseNums ) && sizeof( $verseNums ) > 0 ) {
                 if ( isset( $verseNums['start'] ) && isset( $verseNums['end'] ) ) {
-                    foreach ( $verses as $verse ) /* @var Verses $verse */
+                    foreach ( $verses as $verse ) /* @var Verse $verse */
                         if ( $verse->getNumber() >= $verseNums['start'] && $verse->getNumber() <= $verseNums['end'] )
                             $this->verses[$verse->getNumber()] = $verse;
                 } else {
-                    foreach ( $verses as $verse ) /* @var Verses $verse */
+                    foreach ( $verses as $verse ) /* @var Verse $verse */
                         if ( in_array( $verse->getNumber(), $verseNums ) )
                             $this->verses[$verse->getNumber()] = $verse;
                 }
             } else {
-                foreach ( $verses as $verse ) /* @var Verses $verse */
+                foreach ( $verses as $verse ) /* @var Verse $verse */
                     $this->verses[$verse->getNumber()] = $verse;
             }
         }
@@ -161,14 +161,14 @@ class MScripture
     public function getText()
     {
         $retArr = [];
-        foreach ( $this->verses as $verse ) /* @var Verses $verse */
+        foreach ( $this->verses as $verse ) /* @var Verse $verse */
             $retArr[$verse->getNumber()] = $verse->getText();
 
         return $retArr;
     }
 
     /**
-     * @return Verses[] The objects for each verse stored
+     * @return Verse[] The objects for each verse stored
      */
     public function getVerses()
     {
@@ -205,7 +205,7 @@ class MScripture
     }
 
     /**
-     * @return object|Chapters The Chapters object for the scripture
+     * @return object|Chapter The Chapter object for the scripture
      */
     public function getChapter()
     {

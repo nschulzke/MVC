@@ -1,6 +1,6 @@
 <?php
 use model\orm\entity\Book;
-use model\orm\entity\Chapters;
+use model\orm\entity\Chapter;
 
 $url = \config\Application::APP_PATH . '/scripture';
 
@@ -20,7 +20,7 @@ require_once __DIR__ . '/../_components/breadcrumb.php'
         </h5>
     </div>
     <div class="card-block">
-        <?php foreach ( $this->vars['chapters'] as $chapter ): /* @var Chapters $chapter */ ?>
+        <?php foreach ( $this->vars['chapters'] as $chapter ): /* @var Chapter $chapter */ ?>
             <a href="<?= $url ?>/<?= $book->getLdsUrl() ?>/<?= $chapter->getNumber() ?>" class="ajax-link"><?= $chapter->getNumber() ?></a>
         <?php endforeach ?>
     </div>
