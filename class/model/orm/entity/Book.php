@@ -128,7 +128,7 @@ class Book
     }
     
     /**
-     * Find a chapter based on $num
+     * Find chapter number $num
      *
      * @param int $num The chapter number
      *

@@ -64,5 +64,18 @@ class Chapter
     {
         return $this->verses;
     }
+    
+    /**
+     * Find verse number $num
+     *
+     * @param int $num The verse number
+     *
+     * @return Verse
+     */
+    public function findVerse( $num )
+    {
+        return $this->verses[$num - 1];
+    }
+    
 }
 

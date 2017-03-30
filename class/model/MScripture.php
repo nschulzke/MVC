@@ -148,7 +148,7 @@ class MScripture
         $this->chapter = $book->findChapter( $chapterNum );
         
         if ( is_numeric( $verseNums ) )
-            $this->verses = [ self::getVerseRepo()->findOneBy( [ 'chapter' => $this->chapter, 'number' => $verseNums ] ) ];
+            $this->verses = [ $this->chapter->findVerse( $verseNums ) ];
         else {
             $verseNums = self::explodeRanges( $verseNums );
             $verses = $this->chapter->getVerses();
