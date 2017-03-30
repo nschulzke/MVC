@@ -84,11 +84,9 @@ class Scripture
                     'arrows'    => $arrows,
                     'viewPath'  => self::VIEW_VERSES,
                 ] );
-            } else if ( isset( $book ) && isset( $volume ) && isset( $chapters ) ) {
+            } else if ( isset( $book ) ) {
                 $view->setVars( [
                     'book'     => $book,
-                    'volume'   => $volume,
-                    'chapters' => $chapters,
                     'viewPath' => self::VIEW_CHAPTERS,
                 ] );
             }
