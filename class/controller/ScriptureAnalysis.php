@@ -47,7 +47,7 @@ class ScriptureAnalysis
         }
         $wordsArray = [];
         foreach ( $preMerge as $word => $count ) {
-            $stem = WordAnalysis::stem($word);
+            $stem = WordAnalysis::stem( $word );
             if ( array_key_exists( $stem, $wordsArray ) )
                 $wordsArray[$stem] += $count;
             else
@@ -59,9 +59,9 @@ class ScriptureAnalysis
         foreach ( $wordsArray as $word => $count )
             echo $word . ' => ' . $count . '<br>';
         
-        $file = fopen('wordFrequency.json', 'w');
-        fwrite($file, json_encode($wordsArray));
-        fclose($file);
+        $file = fopen( 'wordFrequency.json', 'w' );
+        fwrite( $file, json_encode( $wordsArray ) );
+        fclose( $file );
     }
     
     public static function action_connectionsBetweenWords( $route, $params )
@@ -74,7 +74,7 @@ class ScriptureAnalysis
             $volumes = MScripture::getVolumeRepo()->findBy( [ 'ldsUrl' => $params[0] ] );
         else
             $volumes = MScripture::getVolumeRepo()->findAll();
-    
+        
         $preMerge = [];
         foreach ( $volumes as $volume ) /* @var Volume $volume */ {
             $books = $bookRepo->findBy( [ 'volumeId' => $volume->getId() ] );
@@ -106,11 +106,11 @@ class ScriptureAnalysis
         
         $wordsArray = [];
         foreach ( $preMerge as $source => $words ) {
-            $sourceStem = WordAnalysis::stem($source);
+            $sourceStem = WordAnalysis::stem( $source );
             if ( !array_key_exists( $sourceStem, $wordsArray ) )
                 $wordsArray[$sourceStem] = [];
             foreach ( $words as $target => $count ) {
-                $targetStem = WordAnalysis::stem($target);
+                $targetStem = WordAnalysis::stem( $target );
                 if ( $sourceStem != $targetStem ) {
                     if ( array_key_exists( $targetStem, $wordsArray[$sourceStem] ) )
                         $wordsArray[$sourceStem][$targetStem] += $count;
@@ -168,11 +168,6 @@ class ScriptureAnalysis
                 echo '<br/>';
             }
         }
-    }
-    
-    public static function action_test( $route, $params )
-    {
-        echo WordAnalysis::stem('testedst');
     }
     
     private function __construct()
