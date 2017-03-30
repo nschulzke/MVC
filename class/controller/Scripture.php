@@ -145,9 +145,9 @@ class Scripture
             HTTP::json_exit( HTTP::BAD_REQUEST, 'There are not ' . $wordNumber . ' words in verse with id ' . $verseId );
         
         $footnote = new Footnote();
-        $footnote->setVerseId($verseId);
+        $footnote->setVerse($verse);
         $footnote->setWordNumber($wordNumber);
-        $footnote->setTargetVerseId($targetVerseId);
+        $footnote->setTargetVerse($targetVerse);
         
         echo HTTP::json( HTTP::OK, 'Success' );
     }

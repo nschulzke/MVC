@@ -4,20 +4,16 @@
         <id name="id" type="integer" column="id">
             <generator strategy="IDENTITY"/>
         </id>
-        <field name="verseId" type="integer" column="verse_id" nullable="false">
-            <options>
-                <option name="unsigned">1</option>
-            </options>
-        </field>
         <field name="wordNumber" type="integer" column="word_number" nullable="false">
             <options>
                 <option name="unsigned">1</option>
             </options>
         </field>
-        <field name="targetVerseId" type="integer" column="target_verse_id" nullable="false">
-            <options>
-                <option name="unsigned">1</option>
-            </options>
-        </field>
+        <many-to-one field="verse" target-entity="\model\orm\entity\Verse">
+            <join-column name="verse_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
+        <many-to-one field="targetVerse" target-entity="\model\orm\entity\Verse">
+            <join-column name="target_verse_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
     </entity>
 </doctrine-mapping>

@@ -7,48 +7,75 @@ class Footnote
      */
     private $id;
     /**
-     * @var integer
+     * @var Verse
      */
-    private $verseId = '0';
+    private $verse;
     /**
      * @var integer
      */
-    private $wordNumber = '0';
+    private $wordNumber;
     /**
-     * @var integer
+     * @var Verse
      */
-    private $targetVerseId = '0';
+    private $targetVerse;
     
+    /**
+     * @return int
+     */
     public function getId() {
         return $this->id;
     }
     
+    /**
+     * @return Verse
+     */
     public function getVerseId() {
-        return $this->verseId;
+        return $this->verse;
     }
     
-    public function setVerseId( $verseId ) {
-        $this->verseId = $verseId;
+    /**
+     * @param Verse $verse
+     *
+     * @return $this
+     */
+    public function setVerse( $verse ) {
+        $this->verse = $verse;
         
         return $this;
     }
     
+    /**
+     * @return int
+     */
     public function getWordNumber() {
         return $this->wordNumber;
     }
     
+    /**
+     * @param int $wordNumber
+     *
+     * @return $this
+     */
     public function setWordNumber( $wordNumber ) {
         $this->wordNumber = $wordNumber;
         
         return $this;
     }
     
-    public function getTargetVerseId() {
-        return $this->targetVerseId;
+    /**
+     * @return Verse
+     */
+    public function getTargetVerse() {
+        return $this->targetVerse;
     }
     
-    public function setTargetVerseId( $targetVerseId ) {
-        $this->targetVerseId = $targetVerseId;
+    /**
+     * @param $targetVerse
+     *
+     * @return $this
+     */
+    public function setTargetVerse( $targetVerse ) {
+        $this->targetVerse = $targetVerse;
         
         return $this;
     }
