@@ -9,20 +9,20 @@ use model\orm\ORM;
 
 class MScripture
 {
-    private static $volumesRepo;
-    private static $booksRepo;
-    private static $chaptersRepo;
-    private static $versesRepo;
+    private static $volumeRepo;
+    private static $bookRepo;
+    private static $chapterRepo;
+    private static $verseRepo;
 
     /**
      * @return EntityRepository The repository of volumes
      */
-    public static function getVolumesRepo()
+    public static function getVolumeRepo()
     {
-        if ( !isset( $volumesRepo ) )
-            self::$volumesRepo = ORM::getManager()->getRepository( 'entity:Volumes' );
+        if ( !isset( self::$volumeRepo ) )
+            self::$volumeRepo = ORM::getManager()->getRepository( 'entity:Volume' );
 
-        return self::$volumesRepo;
+        return self::$volumeRepo;
     }
 
     /**
@@ -30,10 +30,10 @@ class MScripture
      */
     public static function getBookRepo()
     {
-        if ( !isset( $booksRepo ) )
-            self::$booksRepo = ORM::getManager()->getRepository( 'entity:Book' );
+        if ( !isset( self::$bookRepo ) )
+            self::$bookRepo = ORM::getManager()->getRepository( 'entity:Book' );
 
-        return self::$booksRepo;
+        return self::$bookRepo;
     }
 
     /**
@@ -41,10 +41,10 @@ class MScripture
      */
     public static function getChapterRepo()
     {
-        if ( !isset( $chaptersRepo ) )
-            self::$chaptersRepo = ORM::getManager()->getRepository( 'entity:Chapter' );
+        if ( !isset( self::$chapterRepo ) )
+            self::$chapterRepo = ORM::getManager()->getRepository( 'entity:Chapter' );
 
-        return self::$chaptersRepo;
+        return self::$chapterRepo;
     }
 
     /**
@@ -52,10 +52,10 @@ class MScripture
      */
     public static function getVerseRepo()
     {
-        if ( !isset( $versesRepo ) )
-            self::$versesRepo = ORM::getManager()->getRepository( 'entity:Verse' );
+        if ( !isset( self::$verseRepo ) )
+            self::$verseRepo = ORM::getManager()->getRepository( 'entity:Verse' );
 
-        return self::$versesRepo;
+        return self::$verseRepo;
     }
 
     public static function explodeVerses( $verseString )

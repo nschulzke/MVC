@@ -2,11 +2,11 @@
 
 use model\MScripture;
 use model\orm\entity\Book;
-use model\orm\entity\Volumes;
+use model\orm\entity\Volume;
 
-$volumesRepo = MScripture::getVolumesRepo();
-$booksRepo = MScripture::getBookRepo();
-$chaptersRepo = MScripture::getChapterRepo();
+$volumeRepo = MScripture::getVolumeRepo();
+$bookRepo = MScripture::getBookRepo();
+$chapterRepo = MScripture::getChapterRepo();
 ?>
 
 
@@ -14,10 +14,10 @@ $chaptersRepo = MScripture::getChapterRepo();
     <div class="form-group">
         <label for="book">Book:</label>
         <select class="custom-select" id="book" name="book">
-            <?php foreach ( $volumesRepo->findAll() as $volume ): /* @var Volumes $volume */ ?>
+            <?php foreach ( $volumeRepo->findAll() as $volume ): /* @var Volume $volume */ ?>
                 <optgroup label="<?= $volume->getTitle() ?>">
-                    <?php foreach ( $booksRepo->findBy( [ 'volumeId' => $volume->getId() ] ) as $book ): /* @var Book $book */ ?>
-                        <option value="<?= $book->getLdsUrl() ?>" data-chapters="<?= sizeof( $chaptersRepo->findBy( [ 'bookId' => $book->getId() ] ) ) ?>"><?= $book->getTitle() ?></option>
+                    <?php foreach ( $bookRepo->findBy( [ 'volumeId' => $volume->getId() ] ) as $book ): /* @var Book $book */ ?>
+                        <option value="<?= $book->getLdsUrl() ?>" data-chapters="<?= sizeof( $chapterRepo->findBy( [ 'bookId' => $book->getId() ] ) ) ?>"><?= $book->getTitle() ?></option>
                     <?php endforeach; ?>
                 </optgroup>
             <?php endforeach; ?>

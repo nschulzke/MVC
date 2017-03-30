@@ -1,9 +1,9 @@
 <?php namespace model\orm\entity;
 
 /**
- * Volumes
+ * Volume
  */
-class Volumes
+class Volume
 {
     /**
      * @var string
@@ -41,7 +41,7 @@ class Volumes
      *
      * @param string $title
      *
-     * @return Volumes
+     * @return Volume
      */
     public function setTitle( $title )
     {
@@ -65,7 +65,7 @@ class Volumes
      *
      * @param string $longTitle
      *
-     * @return Volumes
+     * @return Volume
      */
     public function setLongTitle( $longTitle )
     {
@@ -89,7 +89,7 @@ class Volumes
      *
      * @param string $subtitle
      *
-     * @return Volumes
+     * @return Volume
      */
     public function setSubtitle( $subtitle )
     {
@@ -113,7 +113,7 @@ class Volumes
      *
      * @param string $shortTitle
      *
-     * @return Volumes
+     * @return Volume
      */
     public function setShortTitle( $shortTitle )
     {
@@ -137,7 +137,7 @@ class Volumes
      *
      * @param string $ldsUrl
      *
-     * @return Volumes
+     * @return Volume
      */
     public function setLdsUrl( $ldsUrl )
     {

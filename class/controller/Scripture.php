@@ -4,7 +4,7 @@ use config\Application;
 use model\MScripture;
 use model\orm\entity\Book;
 use model\orm\entity\Chapter;
-use model\orm\entity\Volumes;
+use model\orm\entity\Volume;
 use util\View;
 
 class Scripture
@@ -39,7 +39,7 @@ class Scripture
         if ( isset( $params[0] ) && ( $book = MScripture::findBook( $params[0] ) ) != null ) {
             $view = new View( $route );
             
-            $volume = MScripture::getVolumesRepo()->find( $book->getVolumeId() );
+            $volume = MScripture::getVolumeRepo()->find( $book->getVolumeId() );
             $chapters = MScripture::getChapterRepo()->findBy( [ 'bookId' => $book->getId() ] );
             /* @var Chapter[] $chapters */
             $breadcrumb = [
@@ -98,11 +98,11 @@ class Scripture
             if ( isset( $_GET['volume'] ) )
                 $active = $_GET['volume'];
             
-            $volumes = MScripture::getVolumesRepo()->findAll();
+            $volumes = MScripture::getVolumeRepo()->findAll();
             $books = MScripture::getBookRepo();
             
             $array = [];
-            foreach ( $volumes as $volume ) /* @var Volumes $volume */ {
+            foreach ( $volumes as $volume ) /* @var Volume $volume */ {
                 $array[$volume->getLdsUrl()] = [ 'name' => $volume->getTitle() ];
                 foreach ( $books->findBy( [ 'volumeId' => $volume->getId() ] ) as $book ) /* @var Book $book */ {
                     $array[$volume->getLdsUrl()]['books'][$book->getLdsUrl()] = $book->getTitle();
