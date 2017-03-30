@@ -12,10 +12,6 @@ class ScriptureAnalysis
 {
     public static function action_wordFrequency( $route, $params )
     {
-        $bookRepo = MScripture::getBookRepo();
-        $chapterRepo = MScripture::getChapterRepo();
-        $verseRepo = MScripture::getVerseRepo();
-        
         if ( isset( $params[0] ) )
             $volumes = MScripture::getVolumeRepo()->findBy( [ 'ldsUrl' => $params[0] ] );
         else
@@ -24,15 +20,15 @@ class ScriptureAnalysis
         $preMerge = [];
         $wordCount = 0;
         foreach ( $volumes as $volume ) /* @var Volume $volume */ {
-            $books = $bookRepo->findBy( [ 'volumeId' => $volume->getId() ] );
+            $books = $volume->getBooks();
             
-            foreach ( $books as $book ) /* @var Book $book */ {
-                $chapters = $chapterRepo->findBy( [ 'book' => $book ] );
+            foreach ( $books as $book ) {
+                $chapters = $book->getChapters();
                 
-                foreach ( $chapters as $chapter ) /* @var Chapter $chapter */ {
-                    $verses = $verseRepo->findBy( [ 'chapter' => $chapter ] );
+                foreach ( $chapters as $chapter ) {
+                    $verses = $chapter->getVerses();
                     
-                    foreach ( $verses as $verse ) /* @var Verse $verse */ {
+                    foreach ( $verses as $verse ) {
                         $words = WordAnalysis::explodeWords( $verse->getText() );
                         foreach ( $words as $word ) {
                             if ( array_key_exists( $word, $preMerge ) )
@@ -66,10 +62,6 @@ class ScriptureAnalysis
     
     public static function action_connectionsBetweenWords( $route, $params )
     {
-        $bookRepo = MScripture::getBookRepo();
-        $chapterRepo = MScripture::getChapterRepo();
-        $verseRepo = MScripture::getVerseRepo();
-        
         if ( isset( $params[0] ) )
             $volumes = MScripture::getVolumeRepo()->findBy( [ 'ldsUrl' => $params[0] ] );
         else
@@ -77,15 +69,15 @@ class ScriptureAnalysis
         
         $preMerge = [];
         foreach ( $volumes as $volume ) /* @var Volume $volume */ {
-            $books = $bookRepo->findBy( [ 'volumeId' => $volume->getId() ] );
+            $books = $volume->getBooks();
             
-            foreach ( $books as $book ) /* @var Book $book */ {
-                $chapters = $chapterRepo->findBy( [ 'book' => $book ] );
+            foreach ( $books as $book ) {
+                $chapters = $book->getChapters();
                 
-                foreach ( $chapters as $chapter ) /* @var Chapter $chapter */ {
-                    $verses = $verseRepo->findBy( [ 'chapter' => $chapter ] );
+                foreach ( $chapters as $chapter ) {
+                    $verses = $chapter->getVerses();
                     
-                    foreach ( $verses as $verse ) /* @var Verse $verse */ {
+                    foreach ( $verses as $verse ) {
                         $words = WordAnalysis::explodeWords( $verse->getText(), true );
                         foreach ( $words as $source ) {
                             if ( !array_key_exists( $source, $preMerge ) )

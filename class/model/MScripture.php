@@ -137,7 +137,7 @@ class MScripture
             $this->verses = [ self::getVerseRepo()->findOneBy( [ 'chapter' => $this->chapter, 'number' => $verseNums ] ) ];
         else {
             $verseNums = self::explodeRanges( $verseNums );
-            $verses = self::getVerseRepo()->findBy( [ 'chapter' => $this->chapter ] );
+            $verses = $this->chapter->getVerses();
             if ( isset( $verseNums ) && sizeof( $verseNums ) > 0 ) {
                 if ( isset( $verseNums['start'] ) && isset( $verseNums['end'] ) ) {
                     foreach ( $verses as $verse ) /* @var Verse $verse */

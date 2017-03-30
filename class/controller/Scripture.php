@@ -43,7 +43,7 @@ class Scripture
             $view = new View( $route );
             
             $volume = $book->getVolume();
-            $chapters = MScripture::getChapterRepo()->findBy( [ 'book' => $book ] );
+            $chapters = $book->getChapters();
             /* @var Chapter[] $chapters */
             $breadcrumb = [
                 [ 'name' => $volume->getTitle(), 'path' => url( [ self::ROOT ], [ 'volume' => $volume->getLdsUrl() ] ) ],
