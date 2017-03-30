@@ -6,14 +6,14 @@
 class Verse
 {
     /**
-     * @var integer
+     * @var Chapter
      */
-    private $chapterId = '0';
+    private $chapter;
 
     /**
      * @var integer
      */
-    private $number = '0';
+    private $number;
 
     /**
      * @var string
@@ -24,44 +24,15 @@ class Verse
      * @var integer
      */
     private $id;
-
-
+    
     /**
-     * Set chapterId
-     *
-     * @param integer $chapterId
-     *
-     * @return Verse
-     */
-    public function setChapterId( $chapterId )
-    {
-        $this->chapterId = $chapterId;
-
-        return $this;
-    }
-
-    /**
-     * Get chapterId
+     * Get chapter
      *
      * @return integer
      */
-    public function getChapterId()
+    public function getChapter()
     {
-        return $this->chapterId;
-    }
-
-    /**
-     * Set verseNumber
-     *
-     * @param integer $number
-     *
-     * @return Verse
-     */
-    public function setNumber( $number )
-    {
-        $this->number = $number;
-
-        return $this;
+        return $this->chapter;
     }
 
     /**
@@ -72,20 +43,6 @@ class Verse
     public function getNumber()
     {
         return $this->number;
-    }
-
-    /**
-     * Set scriptureText
-     *
-     * @param string $text
-     *
-     * @return Verse
-     */
-    public function setText( $text )
-    {
-        $this->text = $text;
-
-        return $this;
     }
 
     /**

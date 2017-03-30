@@ -10,12 +10,6 @@
         <id name="id" type="integer" column="id">
             <generator strategy="IDENTITY"/>
         </id>
-        <field name="chapterId" type="smallint" column="chapter_id" nullable="false">
-            <options>
-                <option name="unsigned">1</option>
-                <option name="default">0</option>
-            </options>
-        </field>
         <field name="number" type="smallint" column="verse_number" nullable="false">
             <options>
                 <option name="unsigned">1</option>
@@ -27,5 +21,8 @@
                 <option name="fixed"/>
             </options>
         </field>
+        <many-to-one field="chapter" target-entity="\model\orm\entity\Chapter">
+            <join-column name="chapter_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
     </entity>
 </doctrine-mapping>

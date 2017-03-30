@@ -30,7 +30,7 @@ class ScriptureAnalysis
                 $chapters = $chapterRepo->findBy( [ 'book' => $book ] );
                 
                 foreach ( $chapters as $chapter ) /* @var Chapter $chapter */ {
-                    $verses = $verseRepo->findBy( [ 'chapterId' => $chapter->getId() ] );
+                    $verses = $verseRepo->findBy( [ 'chapter' => $chapter ] );
                     
                     foreach ( $verses as $verse ) /* @var Verse $verse */ {
                         $words = WordAnalysis::explodeWords( $verse->getText() );
@@ -83,7 +83,7 @@ class ScriptureAnalysis
                 $chapters = $chapterRepo->findBy( [ 'book' => $book ] );
                 
                 foreach ( $chapters as $chapter ) /* @var Chapter $chapter */ {
-                    $verses = $verseRepo->findBy( [ 'chapterId' => $chapter->getId() ] );
+                    $verses = $verseRepo->findBy( [ 'chapter' => $chapter ] );
                     
                     foreach ( $verses as $verse ) /* @var Verse $verse */ {
                         $words = WordAnalysis::explodeWords( $verse->getText(), true );

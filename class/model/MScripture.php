@@ -134,10 +134,10 @@ class MScripture
         $this->chapter = self::getChapterRepo()->findOneBy( [ 'book' => $this->book, 'number' => $chapterNum ] );
 
         if ( is_numeric( $verseNums ) )
-            $this->verses = [ self::getVerseRepo()->findOneBy( [ 'chapterId' => $this->chapter->getId(), 'number' => $verseNums ] ) ];
+            $this->verses = [ self::getVerseRepo()->findOneBy( [ 'chapter' => $this->chapter, 'number' => $verseNums ] ) ];
         else {
             $verseNums = self::explodeRanges( $verseNums );
-            $verses = self::getVerseRepo()->findBy( [ 'chapterId' => $this->chapter->getId() ] );
+            $verses = self::getVerseRepo()->findBy( [ 'chapter' => $this->chapter ] );
             if ( isset( $verseNums ) && sizeof( $verseNums ) > 0 ) {
                 if ( isset( $verseNums['start'] ) && isset( $verseNums['end'] ) ) {
                     foreach ( $verses as $verse ) /* @var Verse $verse */
