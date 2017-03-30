@@ -4,9 +4,11 @@ use config\Application;
 use model\MScripture;
 use model\orm\entity\Book;
 use model\orm\entity\Chapter;
+use model\orm\entity\Footnote;
 use model\orm\entity\Volume;
 use util\HTTP;
 use util\View;
+use util\WordAnalysis;
 
 class Scripture
 {
@@ -40,7 +42,7 @@ class Scripture
         if ( isset( $params[0] ) && ( $book = MScripture::findBook( $params[0] ) ) != null ) {
             $view = new View( $route );
             
-            $volume = MScripture::getVolumeRepo()->find( $book->getVolumeId() );
+            $volume = $book->getVolume();
             $chapters = MScripture::getChapterRepo()->findBy( [ 'bookId' => $book->getId() ] );
             /* @var Chapter[] $chapters */
             $breadcrumb = [
@@ -104,7 +106,7 @@ class Scripture
             $array = [];
             foreach ( $volumes as $volume ) /* @var Volume $volume */ {
                 $array[$volume->getLdsUrl()] = [ 'name' => $volume->getTitle() ];
-                foreach ( $books->findBy( [ 'volumeId' => $volume->getId() ] ) as $book ) /* @var Book $book */ {
+                foreach ( $books->findBy( [ 'volume' => $volume ] ) as $book ) /* @var Book $book */ {
                     $array[$volume->getLdsUrl()]['books'][$book->getLdsUrl()] = $book->getTitle();
                 }
             }
@@ -123,13 +125,31 @@ class Scripture
         $vars = [ 'verseId' => 'Verse', 'wordNumber' => 'Word', 'targetVerseId' => 'Target Verse' ];
         HTTP::requireVars( $vars );
         HTTP::numericVars( $vars );
-        HTTP::constrainVars(
-            [
-                'Verse ID must be a positive number' => $_REQUEST['verseId'] >= 0,
-                'Word number must be a positive number' => $_REQUEST['wordNumber'] >= 0,
-                'Target Verse ID must be a positive number' => $_REQUEST['targetVerseId'] >= 0
-            ]
-        );
+        
+        extract( $_REQUEST );
+        /** Request variables:
+         * @var integer $verseId
+         * @var integer $wordNumber
+         * @var integer $targetVerseId
+         */
+        
+        // Validate variables before saving
+        $verse = MScripture::getVerseRepo()->find( $verseId );
+        if ( $verse == null )
+            HTTP::json_exit( HTTP::BAD_REQUEST, 'No verse with id ' . $verseId . ' exists.' );
+        $targetVerse = MScripture::getVerseRepo()->find( $targetVerseId );
+        if ( $targetVerse == null )
+            HTTP::json_exit( HTTP::BAD_REQUEST, 'No target verse with id ' . $targetVerseId . ' exists.' );
+        $words = WordAnalysis::explodeWords( $verse->getText() );
+        if ( $wordNumber > sizeof($words) )
+            HTTP::json_exit( HTTP::BAD_REQUEST, 'There are not ' . $wordNumber . ' words in verse with id ' . $verseId );
+        
+        $footnote = new Footnote();
+        $footnote->setVerseId($verseId);
+        $footnote->setWordNumber($wordNumber);
+        $footnote->setTargetVerseId($targetVerseId);
+        
+        echo HTTP::json( HTTP::OK, 'Success' );
     }
     
     private function __construct()

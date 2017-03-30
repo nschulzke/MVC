@@ -17,6 +17,12 @@ class HTTP
         return json_encode( [ 'code' => $code, 'msg' => $msg ] );
     }
     
+    public static function json_exit( $code = 400, $msg = '' )
+    {
+        echo self::json( $code, $msg );
+        exit;
+    }
+    
     public static function requireVars( $requestVars )
     {
         $msg = 'Missing required fields: ';
@@ -27,10 +33,8 @@ class HTTP
                 $fail = true;
             }
         }
-        if ( $fail ) {
-            echo self::json( self::BAD_REQUEST, $msg );
-            exit;
-        }
+        if ( $fail )
+            self::json_exit( self::BAD_REQUEST, $msg );
     }
     
     public static function numericVars( $requestVars )
@@ -43,10 +47,8 @@ class HTTP
                 $fail = true;
             }
         }
-        if ( $fail ) {
-            echo self::json( self::BAD_REQUEST, $msg );
-            exit;
-        }
+        if ( $fail )
+            self::json_exit( self::BAD_REQUEST, $msg );
     }
     
     public static function constrainVars( $constraints )
@@ -62,10 +64,8 @@ class HTTP
                 $fail = true;
             }
         }
-        if ( $fail ) {
-            echo self::json( self::BAD_REQUEST, $msg );
-            exit;
-        }
+        if ( $fail )
+            self::json_exit( self::BAD_REQUEST, $msg );
     }
     
     private function __construct()

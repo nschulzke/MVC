@@ -5,6 +5,7 @@
 require_once directory( [ 'vendor', 'autoload.php' ], true );
 
 use config\Database;
+use Doctrine\Common\Proxy\AbstractProxyFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
 
@@ -33,6 +34,7 @@ class ORM
         ];
         
         $config = Setup::createXMLMetadataConfiguration( $paths, $isDevMode );
+        $config->setAutoGenerateProxyClasses(AbstractProxyFactory::AUTOGENERATE_FILE_NOT_EXISTS);
         self::$entityManager = EntityManager::create( $dbParams, $config );
         self::$entityManager->getConfiguration()->addEntityNamespace( 'entity', self::ENTITY_NAMESPACE );
     }

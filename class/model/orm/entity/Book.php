@@ -6,9 +6,9 @@
 class Book
 {
     /**
-     * @var integer
+     * @var Volume
      */
-    private $volumeId;
+    private $volume;
 
     /**
      * @var string
@@ -39,44 +39,15 @@ class Book
      * @var integer
      */
     private $id;
-
-
+    
     /**
-     * Set volumeId
+     * Get volume
      *
-     * @param integer $volumeId
-     *
-     * @return Book
+     * @return Volume
      */
-    public function setVolumeId( $volumeId )
+    public function getVolume()
     {
-        $this->volumeId = $volumeId;
-
-        return $this;
-    }
-
-    /**
-     * Get volumeId
-     *
-     * @return integer
-     */
-    public function getVolumeId()
-    {
-        return $this->volumeId;
-    }
-
-    /**
-     * Set bookTitle
-     *
-     * @param string $title
-     *
-     * @return Book
-     */
-    public function setTitle( $title )
-    {
-        $this->title = $title;
-
-        return $this;
+        return $this->volume;
     }
 
     /**
@@ -90,20 +61,6 @@ class Book
     }
 
     /**
-     * Set bookLongTitle
-     *
-     * @param string $longTitle
-     *
-     * @return Book
-     */
-    public function setLongTitle( $longTitle )
-    {
-        $this->longTitle = $longTitle;
-
-        return $this;
-    }
-
-    /**
      * Get bookLongTitle
      *
      * @return string
@@ -111,20 +68,6 @@ class Book
     public function getLongTitle()
     {
         return $this->longTitle;
-    }
-
-    /**
-     * Set bookSubtitle
-     *
-     * @param string $subtitle
-     *
-     * @return Book
-     */
-    public function setSubtitle( $subtitle )
-    {
-        $this->subtitle = $subtitle;
-
-        return $this;
     }
 
     /**
@@ -138,20 +81,6 @@ class Book
     }
 
     /**
-     * Set bookShortTitle
-     *
-     * @param string $shortTitle
-     *
-     * @return Book
-     */
-    public function setShortTitle( $shortTitle )
-    {
-        $this->shortTitle = $shortTitle;
-
-        return $this;
-    }
-
-    /**
      * Get bookShortTitle
      *
      * @return string
@@ -160,21 +89,7 @@ class Book
     {
         return $this->shortTitle;
     }
-
-    /**
-     * Set bookLdsUrl
-     *
-     * @param string $ldsUrl
-     *
-     * @return Book
-     */
-    public function setLdsUrl( $ldsUrl )
-    {
-        $this->ldsUrl = $ldsUrl;
-
-        return $this;
-    }
-
+    
     /**
      * Get bookLdsUrl
      *
