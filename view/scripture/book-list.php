@@ -19,7 +19,7 @@ extract( $this->vars );
                 <?= $volume->getTitle(); ?>
             </h5>
         </div>
-        <div class="collapse<?= $active == $volume->getId() ? ' show' : '' ?> card-block books-list" role="tabpanel" id="books_<?= $volume->getId() ?>" aria-labelledby="volume_<?= $volume->getId() ?>">
+        <div class="collapse<?= $active == $volume->getLdsUrl() ? ' show' : '' ?> card-block books-list" role="tabpanel" id="books_<?= $volume->getId() ?>" aria-labelledby="volume_<?= $volume->getId() ?>">
         <?php foreach ( $volume->getBooks() as $book ): /* @var Book $book */ ?>
             <a href="<?= $url ?>/<?= $book->getLdsUrl() ?>" class="ajax-link"><?= $book->getTitle() ?></a>
         <?php endforeach ?>
