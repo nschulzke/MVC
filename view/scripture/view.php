@@ -12,7 +12,7 @@ include __DIR__ . '/../_components/breadcrumb.php'
     <div class="card-block">
         <div id="highlight-menu" class="card">
             <input type="hidden" name="book" value="<?= $scripture->getBook()->getLdsUrl() ?>">
-            <input type="hidden" name="chapter" value="<?= $scripture->getChapterNumber() ?>">
+            <input type="hidden" name="chapter" value="<?= $scripture->getChapter()->getNumber() ?>">
             <input type="hidden" id="activeVerse" name="verse" value="1">
             <div class="card-block">
                 <a class="fa fa-link" data-toggle="modal" data-target="#dynamic-modal" data-url="<?= \config\Application::APP_PATH ?>/scripture/lookup" data-title="Scripture" data-params='["book","chapter","verse"]'></a>

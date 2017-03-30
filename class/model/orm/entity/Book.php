@@ -1,5 +1,7 @@
 <?php namespace model\orm\entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Book
  */
@@ -41,7 +43,7 @@ class Book
     private $id;
     
     /**
-     * @var Chapter[]
+     * @var Chapter[]|ArrayCollection
      */
     private $chapters;
     
@@ -123,6 +125,18 @@ class Book
     public function getChapters()
     {
         return $this->chapters;
+    }
+    
+    /**
+     * Find a chapter based on $num
+     *
+     * @param int $num The chapter number
+     *
+     * @return Chapter
+     */
+    public function findChapter( $num )
+    {
+        return $this->chapters[$num - 1];
     }
 }
 

@@ -58,6 +58,11 @@ class MScripture
         return self::$verseRepo;
     }
     
+    /**
+     * @param string $verseString A string of the format "#-#,#-#"
+     *
+     * @return array An array in which each number appears as its own entry, including ranges split.
+     */
     public static function explodeVerses( $verseString )
     {
         return self::explodeRanges( explode( ',', $verseString ) );
@@ -91,26 +96,24 @@ class MScripture
     {
         if ( is_numeric( $bookName ) )
             return self::getBookRepo()->find( $bookName );
-        $criteria = Criteria::create();
-        $criteria->where( Criteria::expr()->contains( 'ldsUrl', $bookName ) );
+        
+        $criteria = Criteria::create()->where( Criteria::expr()->contains( 'ldsUrl', $bookName ) );
         $books = self::getBookRepo()->matching( $criteria );
         if ( $books->count() > 0 )
             return $books->get( 0 );
         
-        $criteria = Criteria::create();
-        $criteria->where(
+        $criteria = Criteria::create()->where(
             Criteria::expr()->orX(
                 Criteria::expr()->contains( 'title', $bookName ),
                 Criteria::expr()->contains( 'longTitle', $bookName ),
-                Criteria::expr()->contains( 'shortTitle', $bookName ),
-                Criteria::expr()->contains( 'ldsUrl', $bookName )
+                Criteria::expr()->contains( 'shortTitle', $bookName )
             )
         );
         $books = self::getBookRepo()->matching( $criteria );
         if ( $books->count() > 0 )
             return $books->get( 0 );
-        else
-            return null;
+        
+        return null;
     }
     
     private $book;
@@ -131,13 +134,14 @@ class MScripture
         else
             $this->book = self::findBook( $book );
         
-        $this->chapter = self::getChapterRepo()->findOneBy( [ 'book' => $this->book, 'number' => $chapterNum ] );
+        $this->chapter = $book->findChapter( $chapterNum );
         
         if ( is_numeric( $verseNums ) )
             $this->verses = [ self::getVerseRepo()->findOneBy( [ 'chapter' => $this->chapter, 'number' => $verseNums ] ) ];
         else {
             $verseNums = self::explodeRanges( $verseNums );
-            $verses = $this->chapter->getVerses(); /* @var Verse[] $verses */
+            $verses = $this->chapter->getVerses();
+            /* @var Verse[] $verses */
             if ( isset( $verseNums ) && sizeof( $verseNums ) > 0 ) {
                 foreach ( $verses as $verse )
                     if ( in_array( $verse->getNumber(), $verseNums ) )
@@ -158,19 +162,6 @@ class MScripture
     }
     
     /**
-     * @param bool $long Whether to use the long title or the short title
-     *
-     * @return string The title of the book
-     */
-    public function getBookTitle( $long = false )
-    {
-        if ( $long )
-            return $this->book->getLongTitle();
-        else
-            return $this->book->getShortTitle();
-    }
-    
-    /**
      * @return Book The Book object for the scripture
      */
     public function getBook()
@@ -179,15 +170,7 @@ class MScripture
     }
     
     /**
-     * @return integer The number of the chapter
-     */
-    public function getChapterNumber()
-    {
-        return $this->chapter->getNumber();
-    }
-    
-    /**
-     * @return object|Chapter The Chapter object for the scripture
+     * @return Chapter The Chapter object for the scripture
      */
     public function getChapter()
     {

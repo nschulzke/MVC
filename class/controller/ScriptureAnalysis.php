@@ -138,8 +138,7 @@ class ScriptureAnalysis
                 WordAnalysis::filterWords( $words );
                 foreach ( $words as $word => $count ) {
                     echo "$word, ";
-                    $criteria = Criteria::create();
-                    $criteria->where( Criteria::expr()->contains( 'text', $word ) );
+                    $criteria = Criteria::create()->where( Criteria::expr()->contains( 'text', $word ) );
                     $verses = $verseRepo->matching( $criteria );
                     foreach ( $verses as $verse ) {
                         if ( array_key_exists( $verse->getId(), $references ) )
