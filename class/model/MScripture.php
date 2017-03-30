@@ -13,7 +13,7 @@ class MScripture
     private static $bookRepo;
     private static $chapterRepo;
     private static $verseRepo;
-
+    
     /**
      * @return EntityRepository The repository of volumes
      */
@@ -21,10 +21,10 @@ class MScripture
     {
         if ( !isset( self::$volumeRepo ) )
             self::$volumeRepo = ORM::getManager()->getRepository( 'entity:Volume' );
-
+        
         return self::$volumeRepo;
     }
-
+    
     /**
      * @return EntityRepository The repository of books
      */
@@ -32,10 +32,10 @@ class MScripture
     {
         if ( !isset( self::$bookRepo ) )
             self::$bookRepo = ORM::getManager()->getRepository( 'entity:Book' );
-
+        
         return self::$bookRepo;
     }
-
+    
     /**
      * @return EntityRepository The repository of chapters
      */
@@ -43,10 +43,10 @@ class MScripture
     {
         if ( !isset( self::$chapterRepo ) )
             self::$chapterRepo = ORM::getManager()->getRepository( 'entity:Chapter' );
-
+        
         return self::$chapterRepo;
     }
-
+    
     /**
      * @return EntityRepository The repository of verses
      */
@@ -54,15 +54,15 @@ class MScripture
     {
         if ( !isset( self::$verseRepo ) )
             self::$verseRepo = ORM::getManager()->getRepository( 'entity:Verse' );
-
+        
         return self::$verseRepo;
     }
-
+    
     public static function explodeVerses( $verseString )
     {
-        return self::explodeRanges(explode( ',', $verseString ));
+        return self::explodeRanges( explode( ',', $verseString ) );
     }
-
+    
     /**
      * @param array $verseNums Array of integers in one of these formats: '#', '#-#'
      *
@@ -78,10 +78,10 @@ class MScripture
                     $verseNums[] = $j;
             }
         }
-
+        
         return $verseNums;
     }
-
+    
     /**
      * @param string $bookName The name of the book, either the title, abbreviation, or ldsUrl
      *
@@ -96,7 +96,7 @@ class MScripture
         $books = self::getBookRepo()->matching( $criteria );
         if ( $books->count() > 0 )
             return $books->get( 0 );
-
+        
         $criteria = Criteria::create();
         $criteria->where(
             Criteria::expr()->orX(
@@ -112,11 +112,11 @@ class MScripture
         else
             return null;
     }
-
+    
     private $book;
     private $chapter;
     private $verses = [];
-
+    
     /**
      * MScripture constructor.
      *
@@ -130,43 +130,25 @@ class MScripture
             $this->book = $book;
         else
             $this->book = self::findBook( $book );
-
+        
         $this->chapter = self::getChapterRepo()->findOneBy( [ 'book' => $this->book, 'number' => $chapterNum ] );
-
+        
         if ( is_numeric( $verseNums ) )
             $this->verses = [ self::getVerseRepo()->findOneBy( [ 'chapter' => $this->chapter, 'number' => $verseNums ] ) ];
         else {
             $verseNums = self::explodeRanges( $verseNums );
-            $verses = $this->chapter->getVerses();
+            $verses = $this->chapter->getVerses(); /* @var Verse[] $verses */
             if ( isset( $verseNums ) && sizeof( $verseNums ) > 0 ) {
-                if ( isset( $verseNums['start'] ) && isset( $verseNums['end'] ) ) {
-                    foreach ( $verses as $verse ) /* @var Verse $verse */
-                        if ( $verse->getNumber() >= $verseNums['start'] && $verse->getNumber() <= $verseNums['end'] )
-                            $this->verses[$verse->getNumber()] = $verse;
-                } else {
-                    foreach ( $verses as $verse ) /* @var Verse $verse */
-                        if ( in_array( $verse->getNumber(), $verseNums ) )
-                            $this->verses[$verse->getNumber()] = $verse;
-                }
+                foreach ( $verses as $verse )
+                    if ( in_array( $verse->getNumber(), $verseNums ) )
+                        $this->verses[$verse->getNumber()] = $verse;
             } else {
-                foreach ( $verses as $verse ) /* @var Verse $verse */
+                foreach ( $verses as $verse )
                     $this->verses[$verse->getNumber()] = $verse;
             }
         }
     }
-
-    /**
-     * @return array An array mapped verseNum => verseText
-     */
-    public function getText()
-    {
-        $retArr = [];
-        foreach ( $this->verses as $verse ) /* @var Verse $verse */
-            $retArr[$verse->getNumber()] = $verse->getText();
-
-        return $retArr;
-    }
-
+    
     /**
      * @return Verse[] The objects for each verse stored
      */
@@ -174,7 +156,7 @@ class MScripture
     {
         return $this->verses;
     }
-
+    
     /**
      * @param bool $long Whether to use the long title or the short title
      *
@@ -187,7 +169,7 @@ class MScripture
         else
             return $this->book->getShortTitle();
     }
-
+    
     /**
      * @return Book The Book object for the scripture
      */
@@ -195,7 +177,7 @@ class MScripture
     {
         return $this->book;
     }
-
+    
     /**
      * @return integer The number of the chapter
      */
@@ -203,7 +185,7 @@ class MScripture
     {
         return $this->chapter->getNumber();
     }
-
+    
     /**
      * @return object|Chapter The Chapter object for the scripture
      */

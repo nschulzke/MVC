@@ -20,10 +20,10 @@ include __DIR__ . '/../_components/breadcrumb.php'
             </div>
         </div>
         <ul class="chapter-text">
-            <?php foreach ( $scripture->getText() as $num => $text ): ?>
-                <li id="verse_<?= $num ?>" data-verse="<?= $num ?>" class="verse<?= in_array( $num, $verses ) ? ' highlight' : '' ?>">
-                    <span class="verse-num"><?= $num ?></span>
-                    <span class="verse-text"><?= $text ?></span>
+            <?php foreach ( $scripture->getVerses() as $verse ): ?>
+                <li id="verse_<?= $verse->getNumber() ?>" data-verse="<?= $verse->getNumber() ?>" class="verse<?= in_array( $verse->getNumber(), $verses ) ? ' highlight' : '' ?>">
+                    <span class="verse-num"><?= $verse->getNumber() ?></span>
+                    <span class="verse-text"><?= $verse->getText() ?></span>
                 </li>
             <?php endforeach ?>
         </ul>

@@ -7,10 +7,10 @@ extract( $this->vars );
 ?>
 <?php if ( isset( $scripture ) ): ?>
     <div class="chapter-text">
-        <?php foreach ( $scripture->getText() as $num => $text ): ?>
+        <?php foreach ( $scripture->getVerses() as $verse ): ?>
             <div class="verse">
-                <span class="verse-num"><?= $num ?></span>
-                <span class="verse-text"><?= $text ?></span>
+                <span class="verse-num"><?= $verse->getNumber() ?></span>
+                <span class="verse-text"><?= $verse->getText() ?></span>
             </div>
         <?php endforeach ?>
     </div>
