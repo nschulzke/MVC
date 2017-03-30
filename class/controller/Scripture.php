@@ -120,9 +120,16 @@ class Scripture
     
     static public function action_saveFootnote( $route, $params )
     {
-        HTTP::requireVars( [ 'verseId' => 'Verse', 'wordNumber' => 'Word', 'targetVerseId' => 'Target Verse' ] );
-        
-        
+        $vars = [ 'verseId' => 'Verse', 'wordNumber' => 'Word', 'targetVerseId' => 'Target Verse' ];
+        HTTP::requireVars( $vars );
+        HTTP::numericVars( $vars );
+        HTTP::constrainVars(
+            [
+                'Verse ID must be a positive number' => $_REQUEST['verseId'] >= 0,
+                'Word number must be a positive number' => $_REQUEST['wordNumber'] >= 0,
+                'Target Verse ID must be a positive number' => $_REQUEST['targetVerseId'] >= 0
+            ]
+        );
     }
     
     private function __construct()
