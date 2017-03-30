@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="model\orm\entity\Footnote" table="footnote">
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <field name="verseId" type="integer" column="verse_id" nullable="false">
+            <options>
+                <option name="unsigned">1</option>
+            </options>
+        </field>
+        <field name="wordNumber" type="integer" column="word_number" nullable="false">
+            <options>
+                <option name="unsigned">1</option>
+            </options>
+        </field>
+        <field name="targetVerseId" type="integer" column="target_verse_id" nullable="false">
+            <options>
+                <option name="unsigned">1</option>
+            </options>
+        </field>
+    </entity>
+</doctrine-mapping>
