@@ -2,8 +2,6 @@
 
 use Doctrine\Common\Collections\Criteria;
 use model\MScripture;
-use model\orm\entity\Book;
-use model\orm\entity\Chapter;
 use model\orm\entity\Verse;
 use model\orm\entity\Volume;
 use util\WordAnalysis;

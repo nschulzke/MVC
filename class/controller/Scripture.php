@@ -2,10 +2,9 @@
 
 use config\Application;
 use model\MScripture;
-use model\orm\entity\Book;
 use model\orm\entity\Chapter;
 use model\orm\entity\Footnote;
-use model\orm\entity\Volume;
+use model\orm\entity\Verse;
 use util\HTTP;
 use util\View;
 use util\WordAnalysis;
@@ -126,19 +125,20 @@ class Scripture
         
         // Validate variables before saving
         $verse = MScripture::getVerseRepo()->find( $verseId );
+        /* @var Verse $verse */
         if ( $verse == null )
             HTTP::json_exit( HTTP::BAD_REQUEST, 'No verse with id ' . $verseId . ' exists.' );
         $targetVerse = MScripture::getVerseRepo()->find( $targetVerseId );
         if ( $targetVerse == null )
             HTTP::json_exit( HTTP::BAD_REQUEST, 'No target verse with id ' . $targetVerseId . ' exists.' );
         $words = WordAnalysis::explodeWords( $verse->getText() );
-        if ( $wordNumber > sizeof($words) )
+        if ( $wordNumber > sizeof( $words ) )
             HTTP::json_exit( HTTP::BAD_REQUEST, 'There are not ' . $wordNumber . ' words in verse with id ' . $verseId );
         
         $footnote = new Footnote();
-        $footnote->setVerse($verse);
-        $footnote->setWordNumber($wordNumber);
-        $footnote->setTargetVerse($targetVerse);
+        $footnote->setVerse( $verse );
+        $footnote->setWordNumber( $wordNumber );
+        $footnote->setTargetVerse( $targetVerse );
         
         echo HTTP::json( HTTP::OK, 'Success' );
     }

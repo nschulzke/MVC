@@ -1,5 +1,4 @@
 <?php namespace model\orm\entity;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Volume
@@ -15,22 +14,22 @@ class Volume
      * @var string
      */
     private $longTitle;
-
+    
     /**
      * @var string
      */
     private $subtitle;
-
+    
     /**
      * @var string
      */
     private $shortTitle;
-
+    
     /**
      * @var string
      */
     private $ldsUrl;
-
+    
     /**
      * @var integer
      */
@@ -40,7 +39,7 @@ class Volume
      * @var Book[]
      */
     private $books;
-
+    
     /**
      * Get volumeTitle
      *
@@ -50,7 +49,7 @@ class Volume
     {
         return $this->title;
     }
-
+    
     /**
      * Get volumeLongTitle
      *
@@ -60,7 +59,7 @@ class Volume
     {
         return $this->longTitle;
     }
-
+    
     /**
      * Get volumeSubtitle
      *
@@ -70,7 +69,7 @@ class Volume
     {
         return $this->subtitle;
     }
-
+    
     /**
      * Get volumeShortTitle
      *
@@ -80,7 +79,7 @@ class Volume
     {
         return $this->shortTitle;
     }
-
+    
     /**
      * Get volumeLdsUrl
      *
@@ -90,7 +89,7 @@ class Volume
     {
         return $this->ldsUrl;
     }
-
+    
     /**
      * Get id
      *

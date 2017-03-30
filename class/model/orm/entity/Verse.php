@@ -33,7 +33,7 @@ class Verse
     /**
      * Get chapter
      *
-     * @return integer
+     * @return Chapter
      */
     public function getChapter()
     {
