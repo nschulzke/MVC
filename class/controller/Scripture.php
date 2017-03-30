@@ -5,6 +5,7 @@ use model\MScripture;
 use model\orm\entity\Book;
 use model\orm\entity\Chapter;
 use model\orm\entity\Volume;
+use util\HTTP;
 use util\View;
 
 class Scripture
@@ -59,8 +60,7 @@ class Scripture
                         $verses = MScripture::explodeVerses( $params[2] );
                     }
                 }
-            } else if ( sizeof( $chapters ) == 1 )
-            {
+            } else if ( sizeof( $chapters ) == 1 ) {
                 $chapter = $chapters[0]->getNumber();
                 $scripture = new MScripture( $book, $chapter );
             }
@@ -116,6 +116,13 @@ class Scripture
             ] );
             $view->display();
         }
+    }
+    
+    static public function action_saveFootnote( $route, $params )
+    {
+        HTTP::requireVars( [ 'verseId' => 'Verse', 'wordNumber' => 'Word', 'targetVerseId' => 'Target Verse' ] );
+        
+        
     }
     
     private function __construct()
