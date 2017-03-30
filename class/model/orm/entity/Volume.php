@@ -12,11 +12,6 @@ class Volume
     private $title;
     
     /**
-     * @var ArrayCollection
-     */
-    private $books;
-    
-    /**
      * @var string
      */
     private $longTitle;
@@ -40,6 +35,11 @@ class Volume
      * @var integer
      */
     private $id;
+    
+    /**
+     * @var Book[]
+     */
+    private $books;
 
     /**
      * Get volumeTitle
@@ -49,16 +49,6 @@ class Volume
     public function getTitle()
     {
         return $this->title;
-    }
-    
-    /**
-     * get chapters
-     *
-     * @return ArrayCollection
-     */
-    public function getBooks()
-    {
-        return $this->books;
     }
 
     /**
@@ -109,6 +99,24 @@ class Volume
     public function getId()
     {
         return $this->id;
+    }
+    
+    /**
+     * get chapters
+     *
+     * @return Book[]
+     */
+    public function getBooks()
+    {
+        return $this->books;
+    }
+    
+    private function __construct()
+    {
+    }
+    
+    private function __clone()
+    {
     }
 }
 

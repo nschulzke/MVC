@@ -1,4 +1,5 @@
 <?php namespace model\orm\entity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Book
@@ -39,6 +40,11 @@ class Book
      * @var integer
      */
     private $id;
+    
+    /**
+     * @var Chapter[]
+     */
+    private $chapters;
     
     /**
      * Get volume
@@ -108,6 +114,16 @@ class Book
     public function getId()
     {
         return $this->id;
+    }
+    
+    /**
+     * Get chapters
+     *
+     * @return Chapter[]
+     */
+    public function getChapters()
+    {
+        return $this->chapters;
     }
 }
 
