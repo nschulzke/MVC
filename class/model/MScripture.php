@@ -2,7 +2,7 @@
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
-use model\orm\entity\Books;
+use model\orm\entity\Book;
 use model\orm\entity\Chapters;
 use model\orm\entity\Verses;
 use model\orm\ORM;
@@ -28,10 +28,10 @@ class MScripture
     /**
      * @return EntityRepository The repository of books
      */
-    public static function getBooksRepo()
+    public static function getBookRepo()
     {
         if ( !isset( $booksRepo ) )
-            self::$booksRepo = ORM::getManager()->getRepository( 'entity:Books' );
+            self::$booksRepo = ORM::getManager()->getRepository( 'entity:Book' );
 
         return self::$booksRepo;
     }
@@ -85,15 +85,15 @@ class MScripture
     /**
      * @param string $bookName The name of the book, either the title, abbreviation, or ldsUrl
      *
-     * @return Books|null|object The Book object (if found), else null
+     * @return Book|null|object The Book object (if found), else null
      */
     public static function findBook( $bookName )
     {
         if ( is_numeric( $bookName ) )
-            return self::getBooksRepo()->find( $bookName );
+            return self::getBookRepo()->find( $bookName );
         $criteria = Criteria::create();
         $criteria->where( Criteria::expr()->contains( 'ldsUrl', $bookName ) );
-        $books = self::getBooksRepo()->matching( $criteria );
+        $books = self::getBookRepo()->matching( $criteria );
         if ( $books->count() > 0 )
             return $books->get( 0 );
 
@@ -106,7 +106,7 @@ class MScripture
                 Criteria::expr()->contains( 'ldsUrl', $bookName )
             )
         );
-        $books = self::getBooksRepo()->matching( $criteria );
+        $books = self::getBookRepo()->matching( $criteria );
         if ( $books->count() > 0 )
             return $books->get( 0 );
         else
@@ -120,13 +120,13 @@ class MScripture
     /**
      * MScripture constructor.
      *
-     * @param string|Books $book
+     * @param string|Book  $book
      * @param              $chapterNum
      * @param array        $verseNums Array of verses, ranges are acceptable
      */
     public function __construct( $book, $chapterNum, $verseNums = [] )
     {
-        if ( is_object( $book ) && get_class( $book ) == 'model\orm\entity\Books' )
+        if ( is_object( $book ) && get_class( $book ) == 'model\orm\entity\Book' )
             $this->book = $book;
         else
             $this->book = self::findBook( $book );
@@ -189,7 +189,7 @@ class MScripture
     }
 
     /**
-     * @return Books The Books object for the scripture
+     * @return Book The Book object for the scripture
      */
     public function getBook()
     {

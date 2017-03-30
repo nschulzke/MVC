@@ -1,5 +1,5 @@
 <?php
-use model\orm\entity\Books;
+use model\orm\entity\Book;
 use model\orm\entity\Chapters;
 
 $url = \config\Application::APP_PATH . '/scripture';
@@ -7,7 +7,7 @@ $url = \config\Application::APP_PATH . '/scripture';
 extract( $this->vars );
 /**
  * variables needed here:
- * @var Books $book
+ * @var Book $book
  */
 
 require_once __DIR__ . '/../_components/breadcrumb.php'

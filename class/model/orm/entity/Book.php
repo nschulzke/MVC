@@ -1,9 +1,9 @@
 <?php namespace model\orm\entity;
 
 /**
- * Books
+ * Book
  */
-class Books
+class Book
 {
     /**
      * @var integer
@@ -46,7 +46,7 @@ class Books
      *
      * @param integer $volumeId
      *
-     * @return Books
+     * @return Book
      */
     public function setVolumeId( $volumeId )
     {
@@ -70,7 +70,7 @@ class Books
      *
      * @param string $title
      *
-     * @return Books
+     * @return Book
      */
     public function setTitle( $title )
     {
@@ -94,7 +94,7 @@ class Books
      *
      * @param string $longTitle
      *
-     * @return Books
+     * @return Book
      */
     public function setLongTitle( $longTitle )
     {
@@ -118,7 +118,7 @@ class Books
      *
      * @param string $subtitle
      *
-     * @return Books
+     * @return Book
      */
     public function setSubtitle( $subtitle )
     {
@@ -142,7 +142,7 @@ class Books
      *
      * @param string $shortTitle
      *
-     * @return Books
+     * @return Book
      */
     public function setShortTitle( $shortTitle )
     {
@@ -166,7 +166,7 @@ class Books
      *
      * @param string $ldsUrl
      *
-     * @return Books
+     * @return Book
      */
     public function setLdsUrl( $ldsUrl )
     {

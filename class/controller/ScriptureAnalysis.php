@@ -2,7 +2,7 @@
 
 use Doctrine\Common\Collections\Criteria;
 use model\MScripture;
-use model\orm\entity\Books;
+use model\orm\entity\Book;
 use model\orm\entity\Chapters;
 use model\orm\entity\Verses;
 use model\orm\entity\Volumes;
@@ -12,7 +12,7 @@ class ScriptureAnalysis
 {
     public static function action_wordFrequency( $route, $params )
     {
-        $booksRepo = MScripture::getBooksRepo();
+        $booksRepo = MScripture::getBookRepo();
         $chaptersRepo = MScripture::getChaptersRepo();
         $versesRepo = MScripture::getVersesRepo();
         
@@ -26,7 +26,7 @@ class ScriptureAnalysis
         foreach ( $volumes as $volume ) /* @var Volumes $volume */ {
             $books = $booksRepo->findBy( [ 'volumeId' => $volume->getId() ] );
             
-            foreach ( $books as $book ) /* @var Books $book */ {
+            foreach ( $books as $book ) /* @var Book $book */ {
                 $chapters = $chaptersRepo->findBy( [ 'bookId' => $book->getId() ] );
                 
                 foreach ( $chapters as $chapter ) /* @var Chapters $chapter */ {
@@ -66,7 +66,7 @@ class ScriptureAnalysis
     
     public static function action_connectionsBetweenWords( $route, $params )
     {
-        $booksRepo = MScripture::getBooksRepo();
+        $booksRepo = MScripture::getBookRepo();
         $chaptersRepo = MScripture::getChaptersRepo();
         $versesRepo = MScripture::getVersesRepo();
         
@@ -79,7 +79,7 @@ class ScriptureAnalysis
         foreach ( $volumes as $volume ) /* @var Volumes $volume */ {
             $books = $booksRepo->findBy( [ 'volumeId' => $volume->getId() ] );
             
-            foreach ( $books as $book ) /* @var Books $book */ {
+            foreach ( $books as $book ) /* @var Book $book */ {
                 $chapters = $chaptersRepo->findBy( [ 'bookId' => $book->getId() ] );
                 
                 foreach ( $chapters as $chapter ) /* @var Chapters $chapter */ {

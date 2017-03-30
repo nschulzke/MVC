@@ -2,7 +2,7 @@
 
 use config\Application;
 use model\MScripture;
-use model\orm\entity\Books;
+use model\orm\entity\Book;
 use model\orm\entity\Chapters;
 use model\orm\entity\Volumes;
 use util\View;
@@ -99,12 +99,12 @@ class Scripture
                 $active = $_GET['volume'];
             
             $volumes = MScripture::getVolumesRepo()->findAll();
-            $books = MScripture::getBooksRepo();
+            $books = MScripture::getBookRepo();
             
             $array = [];
             foreach ( $volumes as $volume ) /* @var Volumes $volume */ {
                 $array[$volume->getLdsUrl()] = [ 'name' => $volume->getTitle() ];
-                foreach ( $books->findBy( [ 'volumeId' => $volume->getId() ] ) as $book ) /* @var Books $book */ {
+                foreach ( $books->findBy( [ 'volumeId' => $volume->getId() ] ) as $book ) /* @var Book $book */ {
                     $array[$volume->getLdsUrl()]['books'][$book->getLdsUrl()] = $book->getTitle();
                 }
             }

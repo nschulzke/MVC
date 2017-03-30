@@ -1,11 +1,11 @@
 <?php
 
 use model\MScripture;
-use model\orm\entity\Books;
+use model\orm\entity\Book;
 use model\orm\entity\Volumes;
 
 $volumesRepo = MScripture::getVolumesRepo();
-$booksRepo = MScripture::getBooksRepo();
+$booksRepo = MScripture::getBookRepo();
 $chaptersRepo = MScripture::getChaptersRepo();
 ?>
 
@@ -16,7 +16,7 @@ $chaptersRepo = MScripture::getChaptersRepo();
         <select class="custom-select" id="book" name="book">
             <?php foreach ( $volumesRepo->findAll() as $volume ): /* @var Volumes $volume */ ?>
                 <optgroup label="<?= $volume->getTitle() ?>">
-                    <?php foreach ( $booksRepo->findBy( [ 'volumeId' => $volume->getId() ] ) as $book ): /* @var Books $book */ ?>
+                    <?php foreach ( $booksRepo->findBy( [ 'volumeId' => $volume->getId() ] ) as $book ): /* @var Book $book */ ?>
                         <option value="<?= $book->getLdsUrl() ?>" data-chapters="<?= sizeof( $chaptersRepo->findBy( [ 'bookId' => $book->getId() ] ) ) ?>"><?= $book->getTitle() ?></option>
                     <?php endforeach; ?>
                 </optgroup>
