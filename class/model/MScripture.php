@@ -5,6 +5,7 @@ use Doctrine\ORM\EntityRepository;
 use model\orm\entity\Book;
 use model\orm\entity\Chapter;
 use model\orm\entity\Verse;
+use model\orm\entity\Volume;
 use model\orm\ORM;
 
 class MScripture
@@ -114,6 +115,16 @@ class MScripture
             return $books->get( 0 );
         
         return null;
+    }
+    
+    /**
+     * @param $ldsUrl The abbreviated URL for the volume
+     *
+     * @return Volume|null|object The Volume object if found, else null
+     */
+    public static function findVolume( $ldsUrl )
+    {
+        return self::getVolumeRepo()->findOneBy( [ 'ldsUrl' => $ldsUrl ] );
     }
     
     private $book;

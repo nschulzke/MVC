@@ -11,7 +11,7 @@ class ScriptureAnalysis
     public static function action_wordFrequency( $route, $params )
     {
         if ( isset( $params[0] ) )
-            $volumes = MScripture::getVolumeRepo()->findBy( [ 'ldsUrl' => $params[0] ] );
+            $volumes = [ MScripture::findVolume( $params[0] ) ];
         else
             $volumes = MScripture::getVolumeRepo()->findAll();
         
@@ -61,7 +61,7 @@ class ScriptureAnalysis
     public static function action_connectionsBetweenWords( $route, $params )
     {
         if ( isset( $params[0] ) )
-            $volumes = MScripture::getVolumeRepo()->findBy( [ 'ldsUrl' => $params[0] ] );
+            $volumes = [ MScripture::findVolume( $params[0] ) ];
         else
             $volumes = MScripture::getVolumeRepo()->findAll();
         
