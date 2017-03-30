@@ -19,6 +19,11 @@ class Chapter
      * @var integer
      */
     private $id;
+    
+    /**
+     * @var Verse[]
+     */
+    private $verses;
 
     /**
      * Get book
@@ -48,6 +53,16 @@ class Chapter
     public function getId()
     {
         return $this->id;
+    }
+    
+    /**
+     * Get verses
+     *
+     * @return Verse[]
+     */
+    public function getVerses()
+    {
+        return $this->verses;
     }
 }
 

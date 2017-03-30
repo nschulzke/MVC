@@ -29,9 +29,9 @@
                 <option name="fixed"/>
             </options>
         </field>
+        <one-to-many target-entity="Chapter" mapped-by="book" field="chapters" />
         <many-to-one field="volume" target-entity="\model\orm\entity\Volume" inversed-by="books">
             <join-column name="volume_id" referenced-column-name="id" nullable="false"/>
         </many-to-one>
-        <one-to-many target-entity="Chapter" mapped-by="book" field="chapters" />
     </entity>
 </doctrine-mapping>

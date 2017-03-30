@@ -26,6 +26,11 @@ class Verse
     private $id;
     
     /**
+     * @var Footnote[]
+     */
+    private $footnotes;
+    
+    /**
      * Get chapter
      *
      * @return integer
@@ -63,6 +68,16 @@ class Verse
     public function getId()
     {
         return $this->id;
+    }
+    
+    /**
+     * Get footnotes
+     *
+     * @return Footnote[]
+     */
+    public function getFootnotes()
+    {
+        return $this->footnotes;
     }
 }
 

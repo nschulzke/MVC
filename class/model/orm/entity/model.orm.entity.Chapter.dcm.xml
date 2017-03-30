@@ -13,6 +13,7 @@
                 <option name="default">0</option>
             </options>
         </field>
+        <one-to-many target-entity="Verse" mapped-by="chapter" field="verses" />
         <many-to-one field="book" target-entity="\model\orm\entity\Book">
             <join-column name="book_id" referenced-column-name="id" nullable="false"/>
         </many-to-one>
