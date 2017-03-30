@@ -6,38 +6,23 @@
 class Pilcrow
 {
     /**
-     * @var integer
+     * @var Verse
      */
-    private $verseId;
+    private $verse;
 
     /**
      * @var integer
      */
     private $id;
-
-
+    
     /**
-     * Set verseId
+     * Get verse
      *
-     * @param integer $verseId
-     *
-     * @return Pilcrow
+     * @return Verse
      */
-    public function setVerseId( $verseId )
+    public function getVerse()
     {
-        $this->verseId = $verseId;
-
-        return $this;
-    }
-
-    /**
-     * Get verseId
-     *
-     * @return integer
-     */
-    public function getVerseId()
-    {
-        return $this->verseId;
+        return $this->verse;
     }
 
     /**

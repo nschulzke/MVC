@@ -7,10 +7,8 @@
         <id name="id" type="integer" column="id">
             <generator strategy="IDENTITY"/>
         </id>
-        <field name="verseId" type="integer" column="verse_id" nullable="false">
-            <options>
-                <option name="unsigned">1</option>
-            </options>
-        </field>
+        <many-to-one field="verse" target-entity="\model\orm\entity\Verse">
+            <join-column name="verse_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
     </entity>
 </doctrine-mapping>
