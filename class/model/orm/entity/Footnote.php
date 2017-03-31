@@ -1,5 +1,7 @@
 <?php namespace model\orm\entity;
 
+use model\orm\ORM;
+
 class Footnote
 {
     /**
@@ -78,5 +80,10 @@ class Footnote
         $this->targetVerse = $targetVerse;
         
         return $this;
+    }
+    
+    public function save() {
+        ORM::getManager()->persist($this);
+        ORM::getManager()->flush();
     }
 }

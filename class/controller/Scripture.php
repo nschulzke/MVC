@@ -137,6 +137,7 @@ class Scripture
         $footnote->setVerse( $verse );
         $footnote->setWordNumber( $wordNumber );
         $footnote->setTargetVerse( $targetVerse );
+        $footnote->save();
         
         echo HTTP::json( HTTP::OK, 'Success' );
     }
