@@ -129,7 +129,7 @@ class MScripture
     
     private $book;
     private $chapter;
-    private $verses = [];
+    private $verses;
     
     /**
      * MScripture constructor.
