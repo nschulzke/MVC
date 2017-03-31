@@ -14,8 +14,6 @@ class Scripture
     const VIEW_VERSES = 'scripture/view.php';
     const VIEW_CHAPTERS = 'scripture/chapter-list.php';
     const VIEW_BOOKS = 'scripture/book-list.php';
-    const FOOTNOTE_PICK_WORD = 'scripture/footnote-pick-word.php';
-    const FOOTNOTE_PICK_TARGET = 'scripture/footnote-pick-target.php';
     const ROOT = Application::APP_PATH . '/scripture';
     
     static public function action_lookup( $route, $params )
@@ -115,26 +113,10 @@ class Scripture
         // No source verse selected
         if ( empty( $params[0] ) )
             echo "No verse selected";
-        else
-            $verse = MScripture::getVerseRepo()->find( $params[0] );
-        if ( empty( $verse ) )
-            echo "Invalid verse ID!";
         else {
+            $verse = MScripture::getVerseRepo()->find( $params[0] );
             $view = new View( $route, 'none' );
-            // No word picked out yet
-            if ( empty( $params[1] ) )
-                $view->setVars( [
-                    'verse'    => $verse,
-                    'viewPath' => self::FOOTNOTE_PICK_WORD,
-                ] );
-            else
-                $view->setVars( [
-                    'verse'    => $verse,
-                    'word'     => $params[1],
-                    'viewPath' => self::FOOTNOTE_PICK_TARGET,
-                ] );
-            
-            $view->display();
+            $view->setVar( 'verse', $verse )->display();
         }
     }
     
