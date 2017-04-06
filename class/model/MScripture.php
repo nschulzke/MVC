@@ -66,7 +66,10 @@ class MScripture
      */
     public static function explodeVerses( $verseString )
     {
-        return self::explodeRanges( explode( ',', $verseString ) );
+        if ( is_array( $verseString ) )
+            return self::explodeRanges( $verseString );
+        else
+            return self::explodeRanges( explode( ',', $verseString ) );
     }
     
     /**
@@ -118,7 +121,7 @@ class MScripture
     }
     
     /**
-     * @param $ldsUrl The abbreviated URL for the volume
+     * @param string $ldsUrl The abbreviated URL for the volume
      *
      * @return Volume|null|object The Volume object if found, else null
      */
@@ -128,9 +131,9 @@ class MScripture
     }
     
     /**
-     * @param Book $book
+     * @param Book | string $book
      * @param Chapter | int $chapter
-     * @param array $verseNums
+     * @param array         $verseNums
      *
      * @return MScripture
      */
@@ -140,11 +143,14 @@ class MScripture
             $book = self::findBook( $book );
         if ( !is_object( $chapter ) || !get_class( $chapter ) == 'model\orm\entity\Chapter' )
             $chapter = $book->findChapter( $chapter );
-    
+        
+        if ( empty( $book ) || empty( $chapter ) )
+            return null;
+        
         if ( is_numeric( $verseNums ) )
             $verses = [ $chapter->findVerse( $verseNums ) ];
         else {
-            $verseNums = self::explodeRanges( $verseNums );
+            $verseNums = self::explodeVerses( $verseNums );
             $allVerses = $chapter->getVerses();
             /* @var Verse[] $verses */
             if ( !empty( $verseNums ) ) {
@@ -156,7 +162,11 @@ class MScripture
                     $verses[] = $verse;
             }
         }
-        return new MScripture( $verses );
+        $verses = array_filter( $verses );
+        if ( !empty( $verses ) )
+            return new MScripture( $verses );
+        else
+            return null;
     }
     
     private $verses;

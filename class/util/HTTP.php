@@ -12,8 +12,6 @@ class HTTP
     
     public static function json( $code = 200, $msg = '', $data = [] )
     {
-        http_response_code( $code );
-        
         $array = [ 'code' => $code, 'msg' => $msg ];
         $array += $data;
         

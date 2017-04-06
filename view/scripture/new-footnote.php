@@ -30,16 +30,15 @@ $split = preg_split( $delimiter, $verse->getText(), -1, PREG_SPLIT_DELIM_CAPTURE
     </div>
 </div>
 <div id="footnote-hidden" class="hidden">
-    <form id="footnote-form" class="hidden" aria-hidden="true" method="POST" action="<?= Config\Application::APP_PATH ?> /scripture/save-footnote">
-        <input type="hidden" name="verseId" value="<?= $verse->getId() ?>"/>
-        <input type="hidden" id="word-number" name="wordNumber"/>
-        <input type="hidden" id="target-verse" name="targetVerseId"/>
-    </form>
     <div id="pick-target" class="form-wrap">
-        <div class="explanation">
-            Pick the verse(s) to link to:
-        </div>
-        <?php include directory( [ 'view', '_components', 'form', 'selectScripture.php' ], true ); ?>
+        <form id="footnote-form" class="labels-inline" aria-hidden="true" method="POST" action="<?= Config\Application::APP_PATH ?>/scripture/save-footnote">
+            <input type="hidden" name="verseId" value="<?= $verse->getId() ?>"/>
+            <input type="hidden" id="word-number" name="wordNumber"/>
+            <div class="explanation">
+                Pick the verse(s) to link to:
+            </div>
+            <?php include directory( [ 'view', '_components', 'form', 'selectScripture.php' ], true ); ?>
+        </form>
     </div>
 </div>
 <script>
@@ -60,18 +59,15 @@ $split = preg_split( $delimiter, $verse->getText(), -1, PREG_SPLIT_DELIM_CAPTURE
                 if ( obj.code != 200 )
                     alert( obj.msg );
                 else {
-                    $( '#dynamic-modal' ).hideModal();
+                    $( '#dynamic-modal' ).modal( 'hide' );
                     alert( obj.msg );
                 }
             } );
             return false;
         } );
         saveBtn.click( function ( event ) {
-            
+            console.log( 'clicked' );
             form.submit();
         } );
     } );
-    function submitFootnote() {
-
-    }
 </script>

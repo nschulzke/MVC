@@ -11,7 +11,7 @@ include __DIR__ . '/../_components/breadcrumb.php'
 <div class="container chapter-view card">
     <div class="card-block">
         <div id="highlight-menu" class="card">
-            <input type="hidden" id="activeVerse" name="verse" value="<?= $scripture->getVerses()[1]->getId() ?>">
+            <input type="hidden" id="activeVerse" name="verse" value="<?= $scripture->getVerses()[0]->getId() ?>">
             <div class="card-block">
                 <a class="fa fa-link" data-toggle="modal" data-target="#dynamic-modal" data-url="<?= \config\Application::APP_PATH ?>/scripture/new-footnote" data-title="Scripture" data-params='["verse"]'></a>
                 <a class="fa fa-bookmark"></a>

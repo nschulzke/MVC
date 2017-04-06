@@ -122,15 +122,24 @@ class Scripture
     
     static public function action_saveFootnote( $route, $params )
     {
-        $vars = [ 'verseId' => 'Verse', 'wordNumber' => 'Word', 'targetVerseId' => 'Target Verse' ];
+        $vars = [
+            'verseId'    => 'Verse',
+            'wordNumber' => 'Word',
+            'book'       => 'Target Book',
+            'chapter'    => 'Target Chapter',
+            'verses'     => 'Target Verses',
+        ];
+        
         HTTP::requireVars( $vars );
-        HTTP::numericVars( $vars );
+        HTTP::numericVars( array_diff_key( $vars, [ 'book' => '', 'verses' => '' ] ) );
         
         extract( $_REQUEST );
         /** Request variables:
          * @var integer $verseId
          * @var integer $wordNumber
-         * @var integer $targetVerseId
+         * @var string  $book
+         * @var integer $chapter
+         * @var integer $verses
          */
         
         // Validate variables before saving
@@ -138,17 +147,17 @@ class Scripture
         /* @var Verse $verse */
         if ( $verse == null )
             HTTP::json_exit( HTTP::BAD_REQUEST, 'No verse with id ' . $verseId . ' exists.' );
-        $targetVerse = MScripture::getVerseRepo()->find( $targetVerseId );
-        if ( $targetVerse == null )
-            HTTP::json_exit( HTTP::BAD_REQUEST, 'No target verse with id ' . $targetVerseId . ' exists.' );
         $words = WordAnalysis::explodeWords( $verse->getText() );
         if ( $wordNumber > sizeof( $words ) )
             HTTP::json_exit( HTTP::BAD_REQUEST, 'There are not ' . $wordNumber . ' words in verse with id ' . $verseId );
+        $scripture = MScripture::lookup( $book, $chapter, $verses );
+        if ( $scripture == null )
+            HTTP::json_exit( HTTP::BAD_REQUEST, 'No matching scripture found.' );
         
         $footnote = new Footnote();
         $footnote->setVerse( $verse );
         $footnote->setWordNumber( $wordNumber );
-        $footnote->setTargetVerse( $targetVerse );
+        $footnote->setScripture( $scripture );
         $footnote->save();
         
         echo HTTP::json( HTTP::OK, 'Success' );
