@@ -1,5 +1,6 @@
 <?php namespace model\orm\entity;
 
+use model\MScripture;
 use model\orm\ORM;
 
 class Footnote
@@ -24,14 +25,16 @@ class Footnote
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
     
     /**
      * @return Verse
      */
-    public function getVerseId() {
+    public function getVerseId()
+    {
         return $this->verse;
     }
     
@@ -40,7 +43,8 @@ class Footnote
      *
      * @return $this
      */
-    public function setVerse( $verse ) {
+    public function setVerse( $verse )
+    {
         $this->verse = $verse;
         
         return $this;
@@ -49,7 +53,8 @@ class Footnote
     /**
      * @return int
      */
-    public function getWordNumber() {
+    public function getWordNumber()
+    {
         return $this->wordNumber;
     }
     
@@ -58,32 +63,36 @@ class Footnote
      *
      * @return $this
      */
-    public function setWordNumber( $wordNumber ) {
+    public function setWordNumber( $wordNumber )
+    {
         $this->wordNumber = $wordNumber;
         
         return $this;
     }
     
     /**
-     * @return Verse[]
+     * @return MScripture
      */
-    public function getTargetVerses() {
-        return $this->targetVerses;
+    public function getScripture()
+    {
+        return new MScripture( $this->targetVerses );
     }
     
     /**
-     * @param Verse[] $targetVerses
+     * @param MScripture $scripture
      *
      * @return $this
      */
-    public function setTargetVerses( $targetVerses ) {
-        $this->targetVerses = $targetVerses;
+    public function setScripture( $scripture )
+    {
+        $this->targetVerses = $scripture->getVerses();
         
         return $this;
     }
     
-    public function save() {
-        ORM::getManager()->persist($this);
+    public function save()
+    {
+        ORM::getManager()->persist( $this );
         ORM::getManager()->flush();
     }
 }
