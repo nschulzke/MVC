@@ -17,9 +17,9 @@ class Footnote
      */
     private $wordNumber;
     /**
-     * @var Verse
+     * @var Verse[]
      */
-    private $targetVerse;
+    private $targetVerses;
     
     /**
      * @return int
@@ -65,19 +65,19 @@ class Footnote
     }
     
     /**
-     * @return Verse
+     * @return Verse[]
      */
-    public function getTargetVerse() {
-        return $this->targetVerse;
+    public function getTargetVerses() {
+        return $this->targetVerses;
     }
     
     /**
-     * @param $targetVerse
+     * @param Verse[] $targetVerses
      *
      * @return $this
      */
-    public function setTargetVerse( $targetVerse ) {
-        $this->targetVerse = $targetVerse;
+    public function setTargetVerses( $targetVerses ) {
+        $this->targetVerses = $targetVerses;
         
         return $this;
     }

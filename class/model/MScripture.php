@@ -127,41 +127,48 @@ class MScripture
         return self::getVolumeRepo()->findOneBy( [ 'ldsUrl' => $ldsUrl ] );
     }
     
-    private $book;
-    private $chapter;
+    /**
+     * @param Book $book
+     * @param Chapter | int $chapter
+     * @param array $verseNums
+     *
+     * @return MScripture
+     */
+    public static function lookup( $book, $chapter, $verseNums = [] )
+    {
+        if ( !is_object( $book ) || !get_class( $book ) == 'model\orm\entity\Book' )
+            $book = self::findBook( $book );
+        if ( !is_object( $chapter ) || !get_class( $chapter ) == 'model\orm\entity\Chapter' )
+            $chapter = $book->findChapter( $chapter );
+    
+        if ( is_numeric( $verseNums ) )
+            $verses = [ $chapter->findVerse( $verseNums ) ];
+        else {
+            $verseNums = self::explodeRanges( $verseNums );
+            $allVerses = $chapter->getVerses();
+            /* @var Verse[] $verses */
+            if ( !empty( $verseNums ) ) {
+                foreach ( $allVerses as $verse )
+                    if ( in_array( $verse->getNumber(), $verseNums ) )
+                        $verses[] = $verse;
+            } else {
+                foreach ( $allVerses as $verse )
+                    $verses[] = $verse;
+            }
+        }
+        return new MScripture( $verses );
+    }
+    
     private $verses;
     
     /**
      * MScripture constructor.
      *
-     * @param string|Book  $book
-     * @param              $chapterNum
-     * @param array        $verseNums Array of verses, ranges are acceptable
+     * @param Verse[] $verses
      */
-    public function __construct( $book, $chapterNum, $verseNums = [] )
+    public function __construct( $verses )
     {
-        if ( is_object( $book ) && get_class( $book ) == 'model\orm\entity\Book' )
-            $this->book = $book;
-        else
-            $this->book = self::findBook( $book );
-        
-        $this->chapter = $book->findChapter( $chapterNum );
-        
-        if ( is_numeric( $verseNums ) )
-            $this->verses = [ $this->chapter->findVerse( $verseNums ) ];
-        else {
-            $verseNums = self::explodeRanges( $verseNums );
-            $verses = $this->chapter->getVerses();
-            /* @var Verse[] $verses */
-            if ( isset( $verseNums ) && sizeof( $verseNums ) > 0 ) {
-                foreach ( $verses as $verse )
-                    if ( in_array( $verse->getNumber(), $verseNums ) )
-                        $this->verses[$verse->getNumber()] = $verse;
-            } else {
-                foreach ( $verses as $verse )
-                    $this->verses[$verse->getNumber()] = $verse;
-            }
-        }
+        $this->verses = $verses;
     }
     
     /**
@@ -177,7 +184,7 @@ class MScripture
      */
     public function getBook()
     {
-        return $this->book;
+        return $this->verses[0]->getChapter()->getBook();
     }
     
     /**
@@ -185,6 +192,6 @@ class MScripture
      */
     public function getChapter()
     {
-        return $this->chapter;
+        return $this->verses[0]->getChapter();
     }
 }

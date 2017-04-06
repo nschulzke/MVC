@@ -130,7 +130,7 @@ class ScriptureAnalysis
                 $verses = null;
             
             $verseRepo = MScripture::getVerseRepo();
-            $scripture = new MScripture( $book, $chapter, $verses );
+            $scripture = MScripture::lookup( $book, $chapter, $verses );
             
             $references = [];
             foreach ( $scripture->getVerses() as $verse ) /* @var Verse $verse */ {

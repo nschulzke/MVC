@@ -27,7 +27,7 @@ class Scripture
             else
                 $verses = null;
             
-            $scripture = new MScripture( $book, $chapter, $verses );
+            $scripture = MScripture::lookup( $book, $chapter, $verses );
             
             $view->setVar( 'scripture', $scripture );
         }
@@ -51,11 +51,11 @@ class Scripture
             if ( isset( $params[1] ) ) {
                 if ( sizeof( $chapters ) == 1 && !isset( $params[2] ) ) {
                     $chapter = $chapters[0]->getNumber();
-                    $scripture = new MScripture( $book, $chapter );
+                    $scripture = MScripture::lookup( $book, $chapter );
                     $verses = MScripture::explodeVerses( $params[1] );
                 } else if ( $params[1] <= sizeof( $chapters ) && $params[1] > 0 ) {
                     $chapter = $params[1];
-                    $scripture = new MScripture( $book, $chapter );
+                    $scripture = MScripture::lookup( $book, $chapter );
                     $breadcrumb[] = [ 'name' => 'Chapter ' . $chapter, 'path' => url( [ self::ROOT, $book->getLdsUrl(), $chapter ] ) ];
                     if ( isset( $params[2] ) && $params[2] != '' ) {
                         $verses = MScripture::explodeVerses( $params[2] );
@@ -63,7 +63,7 @@ class Scripture
                 }
             } else if ( sizeof( $chapters ) == 1 ) {
                 $chapter = $chapters[0]->getNumber();
-                $scripture = new MScripture( $book, $chapter );
+                $scripture = MScripture::lookup( $book, $chapter );
             }
             if ( isset( $chapter ) ) {
                 $arrows = [];
