@@ -109,6 +109,7 @@ function initModals() {
         modal.find( '#dynamic-modal-title' ).html( title );
         modal.find( '#dynamic-modal-close-btn' ).html( closeBtn );
         modal.find( '#dynamic-modal-save-btn' ).html( saveBtn );
+        modal.find( '#dynamic-modal-body' ).html( '' );
 
         // Hide or show save-btn based on button data
         if ( saveBtn == false )
