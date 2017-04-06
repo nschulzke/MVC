@@ -120,7 +120,7 @@ class Scripture
         }
     }
     
-    public static function action_saveFootnote( $route, $params )
+    static public function action_saveFootnote( $route, $params )
     {
         $vars = [ 'verseId' => 'Verse', 'wordNumber' => 'Word', 'targetVerseId' => 'Target Verse' ];
         HTTP::requireVars( $vars );

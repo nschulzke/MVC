@@ -8,10 +8,10 @@ $volumeRepo = MScripture::getVolumeRepo();
 ?>
 
 
-<form class="form-inline">
+<form class="labels-inline">
     <div class="form-group">
-        <label for="book">Book:</label>
-        <select class="custom-select" id="book" name="book">
+        <label for="book" class="fixed-tiny">Book:</label>
+        <select class="custom-select fixed-small" id="book" name="book">
             <?php foreach ( $volumeRepo->findAll() as $volume ): /* @var Volume $volume */ ?>
                 <optgroup label="<?= $volume->getTitle() ?>">
                     <?php foreach ( $volume->getBooks() as $book ): /* @var Book $book */ ?>
@@ -20,10 +20,16 @@ $volumeRepo = MScripture::getVolumeRepo();
                 </optgroup>
             <?php endforeach; ?>
         </select>
-        <label for="chapter">Chapter:</label><input id="chapter" name="chapter" class="form-control positive integer" type="number" min="1">
-        <label for="verses">Verses:</label><input id="verses" name="verses" class="form-control positive integer" type="number-list">
     </div>
-
+    <div class="form-group">
+        <label for="chapter" class="fixed-tiny">Chapter:</label>
+        <input id="chapter" name="chapter" class="form-control positive integer fixed-small" type="number" min="1">
+    </div>
+    <div class="form-group">
+        <label for="verses" class="fixed-tiny">Verses:</label>
+        <input id="verses" name="verses" class="form-control positive integer fixed-small" type="number-list">
+    </div>
+    
     <script>
         $( function () {
             var book = $( '#book' );

@@ -2,6 +2,9 @@
 @import 'scss/scripture';
 
 body {
+  .hidden {
+    display: none;
+  }
   background-color: $background-0;
   color: $text-bright;
   a {
@@ -14,6 +17,19 @@ body {
       background-color: $background-2;
       color: $text-bright;
       border-color: $highlight-bg-1;
+    }
+  }
+  form {
+    &.labels-inline {
+      label, select, input {
+        display: inline-block;
+      }
+    }
+    .fixed-small {
+      width: 10em;
+    }
+    .fixed-tiny {
+      width: 5em;
     }
   }
   .btn {

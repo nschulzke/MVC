@@ -10,11 +10,14 @@ class HTTP
     const NOT_FOUND = 404;
     const INTERNAL_SERVER_ERROR = 500;
     
-    public static function json( $code = 200, $msg = '' )
+    public static function json( $code = 200, $msg = '', $data = [] )
     {
         http_response_code( $code );
         
-        return json_encode( [ 'code' => $code, 'msg' => $msg ] );
+        $array = [ 'code' => $code, 'msg' => $msg ];
+        $array += $data;
+        
+        return json_encode( $array );
     }
     
     public static function json_exit( $code = 400, $msg = '' )

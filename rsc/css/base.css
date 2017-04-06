@@ -50,6 +50,8 @@
 body {
   background-color: #222222;
   color: #CCCCCC; }
+  body .hidden {
+    display: none; }
   body a {
     color: #CCCCCC; }
   body .form-control, body .custom-select {
@@ -59,6 +61,12 @@ body {
       background-color: #444444;
       color: #CCCCCC;
       border-color: #1A1643; }
+  body form.labels-inline label, body form.labels-inline select, body form.labels-inline input {
+    display: inline-block; }
+  body form .fixed-small {
+    width: 10em; }
+  body form .fixed-tiny {
+    width: 5em; }
   body .btn {
     border-color: #555555;
     background-color: #555555;
