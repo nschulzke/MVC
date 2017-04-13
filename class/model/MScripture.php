@@ -204,4 +204,48 @@ class MScripture
     {
         return $this->verses[0]->getChapter();
     }
+    
+    /**
+     * @return string The reference string for the scripture
+     */
+    public function getReference()
+    {
+        $book = $this->getBook()->getShortTitle();
+        $chapter = $this->getChapter()->getNumber();
+        $versesArr = [];
+        foreach ( $this->getVerses() as $verse ) {
+            $versesArr[] = $verse->getNumber();
+        }
+        $rangesArr = [];
+        $start = -1;
+        $end = -1;
+        foreach ( $versesArr as $verse ) {
+            if ( $verse == ( $end + 1 ) ) {
+                $end = $verse;
+            } else if ( $start == -1 ) {
+                $start = $verse;
+                $end = $verse;
+            } else {
+                if ( $start != $end ) {
+                    $rangesArr[] = $start . '-' . $end;
+                } else {
+                    $rangesArr[] = $start;
+                }
+                $start = $verse;
+                $end = $verse;
+            }
+        }
+        if ( $start != -1 )
+        {
+            if ( $start != $end ) {
+                $rangesArr[] = $start . '-' . $end;
+            } else {
+                $rangesArr[] = $start;
+            }
+        }
+        
+        $verses = implode( ',', $rangesArr );
+        
+        return $book . ' ' . $chapter . ':' . $verses;
+    }
 }

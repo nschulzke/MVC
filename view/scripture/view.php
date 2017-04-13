@@ -14,6 +14,7 @@ include __DIR__ . '/../_components/breadcrumb.php'
             <input type="hidden" id="activeVerse" name="verse" value="<?= $scripture->getVerses()[0]->getId() ?>">
             <div class="card-block">
                 <a class="fa fa-link" data-toggle="modal" data-target="#dynamic-modal" data-url="<?= \config\Application::APP_PATH ?>/scripture/new-footnote" data-title="Scripture" data-params='["verse"]'></a>
+                <a class="fa fa-eye" data-toggle="modal" data-target="#dynamic-modal" data-url="<?= \config\Application::APP_PATH ?>/scripture/view-footnotes" data-params='["verse"]'></a>
                 <a class="fa fa-bookmark"></a>
             </div>
         </div>

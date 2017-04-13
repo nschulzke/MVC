@@ -108,6 +108,18 @@ class Scripture
         }
     }
     
+    static public function action_viewFootnotes( $route, $params )
+    {
+        // No source verse selected
+        if ( empty( $params[0] ) )
+            echo "No verse selected";
+        else {
+            $verse = MScripture::getVerseRepo()->find( $params[0] );
+            $view = new View( $route, 'none' );
+            $view->setVar( 'verse', $verse )->display();
+        }
+    }
+    
     static public function action_newFootnote( $route, $params )
     {
         // No source verse selected
